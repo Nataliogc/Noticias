@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Noticias | Hoteles de Calidad en Ciudad Real</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css" />
+  <meta name="color-scheme" content="light">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="brandline">
+        <div class="brand-text">
+          <h1 class="brand">Noticias</h1>
+          <div class="brand-sub">Hoteles de Calidad en Ciudad Real</div>
+          <div class="brand-sub2">Sercotel Guadiana &nbsp;•&nbsp; Cumbria Spa &amp; Hotel</div>
+          <div class="adornment"></div>
+        </div>
+        <div class="brand-logos">
+          <img class="brand-logo" src="./img/logo-guadiana.png" alt="Sercotel Hotel Guadiana">
+          <img class="brand-logo" src="./img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel">
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" autocomplete="off">
+        <select id="year" class="select" title="Filtrar por año">
+          <option value="">Año</option>
+        </select>
+        <select id="tag" class="select" title="Filtrar por etiqueta">
+          <option value="">Etiqueta</option>
+        </select>
+        <label class="toggle"><input id="onlyHeaders" type="checkbox"> Solo cabecera</label>
+        <button id="btnRss" class="btn secondary" title="Generar RSS">RSS</button>
+      </div>
+
+      <div id="chips" class="chips" aria-label="Categorías"></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="featured" class="featured" aria-label="Noticia destacada"></section>
+    <section id="grid" class="grid" aria-live="polite"></section>
+    <nav class="pager">
+      <button id="prev" class="btn" disabled>← Anterior</button>
+      <span id="pageInfo" class="page-info">Página 1/1</span>
+      <button id="next" class="btn" disabled>Siguiente →</button>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <hr class="doc-end-rule" />
+    <div class="doc-end-space"></div>
+  </footer>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Vista ampliada">
+    <img id="lightImg" alt="Imagen de noticia ampliada" />
+  </dialog>
+
+  <script>
+    /* Fallback local: datos embebidos si se abre por file:// */
+    window.NEWS_FALLBACK = [
+      {
+        "title": "COMUNICACIÓN INTERNA · Éxito en Murcia",
+        "place": "Murcia · Cuartel de Artillería",
+        "date": "2025-10-14",
+        "image": "./img/header-banner.png",
+        "tags": ["Comunicación interna","B2B","Murcia","Promoción"],
+        "text": "Acción institucional y comercial en Murcia con Sercotel Guadiana y Cumbria Spa & Hotel. Ciudad Real se posiciona como destino clave en el Levante.",
+        "url": "./posts/workshop-murcia.html"
+      },
+      {
+        "title": "Sabor Quijote: identidad, cultura y gastronomía",
+        "place": "Murcia",
+        "date": "2025-10-14",
+        "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop",
+        "tags": ["Cultura","Gastronomía","Murcia"],
+        "text": "Audiovisual ‘Ciudad Real, Patrimonio Vivo y Natural’, bombones Sabor Quijote (Jesús Quirós, SWCM 2025) y degustación manchega con música en directo.",
+        "url": "https://procedimientoshotelguadiana.blogspot.com/2025/10/workshop-profesional-murcia-2025.html"
+      },
+      {
+        "title": "Calendario de promoción: próximas citas",
+        "place": "Valladolid · Sevilla",
+        "date": "2025-11-14",
+        "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
+        "tags": ["Agenda","Promoción"],
+        "text": "14 de noviembre: Valladolid · 3 de diciembre: Sevilla. Seguimos impulsando el destino con acciones comerciales y de marca."
+      }
+    ];
+  </script>
+  <script src="./app.js"></script>
+</body>
+</html>
