@@ -1,28 +1,29 @@
-/* Profesional · sin chips, sin RSS, sin 'solo cabecera' */
+/* Pro con imágenes; logos dimensionados correctamente */
 :root{--c1:#004f6e;--c2:#0092c6;--c3:#0f3a77;--ink:#0f172a;--muted:#64748b;--bg:#f6f9fc;--card:#fff;--gold1:#cba135;--gold2:#f4d77c;--r:22px;--shadow:0 14px 44px rgba(2,32,71,.08)}
 *{box-sizing:border-box}html,body{margin:0;padding:0}
 body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);background:var(--bg)}
 .wrap{max-width:1100px;margin:0 auto;padding:0 16px}
-
-/* Hero con gradientes y logos */
 .hero{background:radial-gradient(1100px 420px at -10% -70%,#e6f6fb 0%,transparent 60%),radial-gradient(1000px 520px at 120% -70%,#e9eefc 0%,transparent 60%),linear-gradient(180deg,#ffffff 0%,#f7fbff 100%);border-bottom:1px solid #e9eef5}
-.hero-inner{display:grid;grid-template-columns:1fr auto;align-items:center;padding:26px 0 14px;gap:18px}
+.hero-inner{display:grid;grid-template-columns:1fr auto;align-items:center;padding:24px 0 12px;gap:18px}
 .eyebrow{color:var(--muted);margin:0 0 6px}
-.brand{font-family:Montserrat,sans-serif;font-weight:800;font-size:2.7rem;color:#0b3e60;letter-spacing:.2px;margin:0}
+.brand{font-family:Montserrat,sans-serif;font-weight:800;font-size:2.6rem;color:#0b3e60;letter-spacing:.2px;margin:0}
 .subbrand{margin:8px 0 0;color:#334155}
 .bar{width:240px;height:6px;border-radius:999px;background:linear-gradient(90deg,var(--c2),var(--c3));margin:14px 0 0}
-.hero-right{display:flex;gap:18px;align-items:center}
-.logo{height:64px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 4px rgba(0,0,0,.08))}
+.hero-right{display:flex;gap:16px;align-items:center}
+.logo{max-height:54px;width:auto;object-fit:contain;display:block}
+@media (max-width:980px){ .logo{max-height:42px} .brand{font-size:2.2rem} }
 
 /* Filtros */
 .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:16px 0}
 .search{flex:1 1 540px;padding:12px 14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff;box-shadow:var(--shadow)}
 .select{padding:12px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}
 
-/* Featured y cards sin imagen (contenido limpio) */
-.featured{margin:10px 0 14px}
-.feature-card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid #edf2f7}
-.feature-body{padding:22px}
+/* Featured con imagen 16:9 */
+.featured{margin:12px 0 14px}
+.feature-card{display:grid;grid-template-columns:5fr 7fr;gap:18px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);border:1px solid #edf2f7;overflow:hidden}
+.feature-media{position:relative;background:#eef2f7}
+.feature-media img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:16/9;cursor:zoom-in}
+.feature-body{padding:20px}
 .feature-title{font-family:Montserrat,sans-serif;font-weight:800;color:#0f3a77;margin:0 0 8px;font-size:1.9rem}
 .feature-meta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 10px}
 .badge{font-size:.82rem;color:#0b4459;background:#e6f6fb;border:1px solid #c8ecf7;padding:6px 10px;border-radius:999px}
@@ -31,8 +32,11 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
 .actions{margin-top:6px}
 .btn-share{border:1px solid #e5e7eb;border-radius:12px;background:#fff;padding:10px 12px;text-decoration:none}
 
+/* Grid de tarjetas */
 .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin:12px 0 26px}
-.card{grid-column:span 6;background:#fff;border-radius:18px;box-shadow:var(--shadow);border:1px solid #edf2f7}
+.card{grid-column:span 6;background:#fff;border-radius:18px;box-shadow:var(--shadow);border:1px solid #edf2f7;overflow:hidden}
+.card-media{background:#eef2f7}
+.card-media img{display:block;width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;cursor:zoom-in}
 .card-body{padding:16px 16px 14px}
 .card-title{font-family:Montserrat,sans-serif;font-weight:700;color:#0f3a77;margin:0 0 6px;font-size:1.2rem}
 .card-meta{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px}
@@ -48,4 +52,4 @@ body{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
 .site-footer .doc-end-rule{border:none;height:8px;width:100%;border-radius:6px;background:linear-gradient(90deg,var(--gold1),var(--gold2),var(--gold1));margin:32px auto 12px}
 .site-footer .doc-end-space{height:48px}
 
-@media (max-width:980px){ .card{grid-column:span 12} .logo{height:52px} .brand{font-size:2.2rem} }
+@media (max-width:980px){ .feature-card{grid-template-columns:1fr} .card{grid-column:span 12} }
