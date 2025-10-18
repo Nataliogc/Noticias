@@ -6,38 +6,30 @@
   <title>Noticias | Hoteles de Calidad en Ciudad Real</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css" />
-  <meta name="color-scheme" content="light">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <div class="brandline">
-        <div class="brand-text">
-          <h1 class="brand">Noticias</h1>
-          <div class="brand-sub">Hoteles de Calidad en Ciudad Real</div>
-          <div class="brand-sub2">Sercotel Guadiana &nbsp;•&nbsp; Cumbria Spa &amp; Hotel</div>
-          <div class="adornment"></div>
-        </div>
-        <div class="brand-logos">
-          <!-- Deja los logos comentados por ahora -->
-          <!-- <img class="brand-logo" src="./img/logo-guadiana.png" alt="Sercotel Hotel Guadiana">
-          <img class="brand-logo" src="./img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel"> -->
-        </div>
+  <header class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-left">
+        <p class="eyebrow">Hoteles de Calidad en Ciudad Real</p>
+        <h1 class="brand">Noticias</h1>
+        <p class="subbrand"><span>Sercotel Guadiana</span> · <span>Cumbria Spa &amp; Hotel</span></p>
+        <div class="bar"></div>
       </div>
-
-      <div class="toolbar">
-        <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" autocomplete="off">
-        <select id="year" class="select" title="Filtrar por año"><option value="">Año</option></select>
-        <select id="tag" class="select" title="Filtrar por etiqueta"><option value="">Etiqueta</option></select>
-        <label class="toggle"><input id="onlyHeaders" type="checkbox"> Solo cabecera</label>
-        <button id="btnRss" class="btn secondary" title="Generar RSS">RSS</button>
+      <div class="hero-right">
+        <img class="logo" src="./img/logo-guadiana.png" alt="Sercotel Hotel Guadiana">
+        <img class="logo" src="./img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel">
       </div>
-
-      <div id="chips" class="chips" aria-label="Categorías"></div>
     </div>
   </header>
+
+  <section class="toolbar wrap">
+    <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" autocomplete="off">
+    <select id="year" class="select" title="Filtrar por año"><option value="">Año</option></select>
+    <select id="tag" class="select" title="Filtrar por etiqueta"><option value="">Etiqueta</option></select>
+  </section>
 
   <main class="wrap">
     <section id="featured" class="featured" aria-label="Noticia destacada"></section>
