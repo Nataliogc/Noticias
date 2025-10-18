@@ -3,14 +3,44 @@
     "title": "COMUNICACIÓN INTERNA · Éxito en Murcia",
     "place": "Murcia · Cuartel de Artillería",
     "date": "2025-10-14",
-    "image": "./img/logo-guadiana.png",
     "tags": [
       "Comunicación interna",
       "B2B",
       "Murcia",
       "Promoción"
     ],
-    "text": "Acción institucional y comercial en Murcia con Sercotel Guadiana y Cumbria Spa & Hotel. Ciudad Real se posiciona como destino clave en el Levante.",
+    "text": "Acción institucional y comercial en Murcia. Ciudad Real se posiciona como destino clave en el Levante.",
     "url": "./posts/workshop-murcia.html"
+  },
+  {
+    "title": "Sabor Quijote: identidad, cultura y gastronomía",
+    "place": "Murcia",
+    "date": "2025-10-14",
+    "tags": [
+      "Cultura",
+      "Gastronomía",
+      "Murcia"
+    ],
+    "text": "Audiovisual ‘Ciudad Real, Patrimonio Vivo y Natural’, bombones Sabor Quijote y degustación manchega con música en directo."
+  },
+  {
+    "title": "Calendario de promoción: próximas citas",
+    "place": "Valladolid · Sevilla",
+    "date": "2025-11-14",
+    "tags": [
+      "Agenda",
+      "Promoción"
+    ],
+    "text": "14 de noviembre: Valladolid · 3 de diciembre: Sevilla. Seguimos impulsando el destino con acciones comerciales y de marca."
+  },
+  {
+    "title": "Equipo · ¡A por los próximos desafíos!",
+    "place": "Ciudad Real",
+    "date": "2025-10-20",
+    "tags": [
+      "Comunicación interna",
+      "Motivación"
+    ],
+    "text": "Gracias por vuestra implicación. Seguimos sumando hitos para la marca y el destino."
   }
 ]

@@ -21,19 +21,16 @@
           <div class="adornment"></div>
         </div>
         <div class="brand-logos">
-          <img class="brand-logo" src="./img/logo-guadiana.png" alt="Sercotel Hotel Guadiana">
-          <img class="brand-logo" src="./img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel">
+          <!-- Deja los logos comentados por ahora -->
+          <!-- <img class="brand-logo" src="./img/logo-guadiana.png" alt="Sercotel Hotel Guadiana">
+          <img class="brand-logo" src="./img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel"> -->
         </div>
       </div>
 
       <div class="toolbar">
         <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" autocomplete="off">
-        <select id="year" class="select" title="Filtrar por año">
-          <option value="">Año</option>
-        </select>
-        <select id="tag" class="select" title="Filtrar por etiqueta">
-          <option value="">Etiqueta</option>
-        </select>
+        <select id="year" class="select" title="Filtrar por año"><option value="">Año</option></select>
+        <select id="tag" class="select" title="Filtrar por etiqueta"><option value="">Etiqueta</option></select>
         <label class="toggle"><input id="onlyHeaders" type="checkbox"> Solo cabecera</label>
         <button id="btnRss" class="btn secondary" title="Generar RSS">RSS</button>
       </div>
@@ -57,20 +54,6 @@
     <div class="doc-end-space"></div>
   </footer>
 
-  <!-- Fallback embebido para que la portada nunca quede vacía -->
-  <script>
-    window.NEWS_FALLBACK = [
-      {
-        "title": "COMUNICACIÓN INTERNA · Éxito en Murcia",
-        "place": "Murcia · Cuartel de Artillería",
-        "date": "2025-10-14",
-        "image": "./img/logo-guadiana.png",
-        "tags": ["Comunicación interna","B2B","Murcia","Promoción"],
-        "text": "Acción institucional y comercial en Murcia con Sercotel Guadiana y Cumbria Spa & Hotel. Ciudad Real se posiciona como destino clave en el Levante.",
-        "url": "./posts/workshop-murcia.html"
-      }
-    ];
-  </script>
   <script src="./app.js"></script>
 </body>
 </html>
