@@ -6,10 +6,7 @@
     "url": "posts/escapada-navidad-spa.html",
     "img": "img/ph-spa.svg",
     "hotel": "Cumbria",
-    "tags": [
-      "Promoción",
-      "Spa"
-    ]
+    "tags": ["Promoción", "Spa"]
   },
   {
     "titulo": "🍷 Noche de Enogastronomía Manchega con música en directo",
@@ -18,23 +15,16 @@
     "url": "posts/noche-enogastronomia-manchega.html",
     "img": "img/ph-enogastro.svg",
     "hotel": "Cumbria",
-    "tags": [
-      "Gastronomía",
-      "Cultura"
-    ]
+    "tags": ["Gastronomía", "Cultura"]
   },
   {
     "titulo": "🗞️ Workshop Profesional Murcia 2025",
     "fecha": "2025-10-14",
     "texto": "Acción institucional y comercial con agencias del Levante. Posicionamiento de Ciudad Real como base de grupos, cultura y bienestar.",
-    "url": "posts\workshop-murcia.html",
+    "url": "posts/workshop-murcia.html",
     "img": "img/ph-workshop.svg",
-    "hotel": "Guadiana y Cumbria",
-    "tags": [
-      "B2B",
-      "Promoción",
-      "Murcia"
-    ]
+    "hotel": "Guadiana",
+    "tags": ["B2B", "Promoción", "Murcia"]
   },
   {
     "titulo": "🔐 Nuevo sistema de llaves en Guadiana",
@@ -43,9 +33,6 @@
     "url": "posts/nuevo-sistema-llaves-guadiana.html",
     "img": "img/ph-llaves.svg",
     "hotel": "Guadiana",
-    "tags": [
-      "Operaciones",
-      "Tecnología"
-    ]
+    "tags": ["Operaciones", "Tecnología"]
   }
 ]

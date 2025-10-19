@@ -55,16 +55,16 @@
     $$('.slide', slider).forEach((s,k)=> s.style.transform = `translateX(${k*100}%)`);
     btnPrev.onclick = ()=> show(idx-1);
     btnNext.onclick = ()=> show(idx+1);
-    let timer = setInterval(()=>show(idx+1), 6000);
+    let timer = setInterval(()=>show(idx+1), 6500);
     slider.addEventListener('pointerenter', ()=>clearInterval(timer));
-    slider.addEventListener('pointerleave', ()=> timer = setInterval(()=>show(idx+1), 6000));
+    slider.addEventListener('pointerleave', ()=> timer = setInterval(()=>show(idx+1), 6500));
   }
 
   function fillFilters(items){
     const years = Array.from(new Set(items.filter(n=>n.fecha).map(n=>String(new Date(n.fecha).getFullYear())))).sort((a,b)=>b.localeCompare(a));
-    yearSel.innerHTML = '<option value="">Año</option>'+years.map(y=>`<option>${y}</option>`).join('');
+    yearSel.innerHTML = '<option value=\"\">Año</option>'+years.map(y=>`<option>${y}</option>`).join('');
     const tags = Array.from(new Set(items.flatMap(n=>n.tags||[]))).sort();
-    tagSel.innerHTML = '<option value="">Etiqueta</option>'+tags.map(t=>`<option>${t}</option>`).join('');
+    tagSel.innerHTML = '<option value=\"\">Etiqueta</option>'+tags.map(t=>`<option>${t}</option>`).join('');
     tagcloud.innerHTML = tags.slice(0,10).map(t=>`<button class="t-pill" data-tag="${t}">${t}</button>`).join('');
     tagcloud.addEventListener('click', e=>{
       const b = e.target.closest('.t-pill'); if(!b) return;
@@ -113,16 +113,17 @@
       data = JSON.parse(clean);
       if(!Array.isArray(data)) throw new Error('JSON no es un array');
     }catch(e){
-      console.warn('Usando fallback:', e.message);
-      data = Array.isArray(window.NEWS_FALLBACK)?window.NEWS_FALLBACK:[];
+      console.warn('[Noticias] Fallback activado →', e.message);
+      data = Array.isArray(window.NEWS_FALLBACK) ? window.NEWS_FALLBACK : [];
     }
 
     fillFilters(data);
     q.addEventListener('input', ()=>apply(data));
     yearSel.addEventListener('change', ()=>apply(data));
     tagSel.addEventListener('change', ()=>apply(data));
-    window.addEventListener('keydown', (ev)=>{ if((ev.ctrlKey||ev.metaKey)&&ev.key==='/' ){ev.preventDefault(); q.focus();} });
-
+    window.addEventListener('keydown', ev=>{
+      if((ev.ctrlKey||ev.metaKey)&&ev.key==='/'){ ev.preventDefault(); q.focus(); }
+    });
     apply(data);
   }
 
