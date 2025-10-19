@@ -14,7 +14,9 @@
 
   const makeCard = n => `
     <article class="card">
-      <div class="card-media">${n.img ? `<img alt="" loading="lazy" src="${n.img}">` : ''}</div>
+      <div class="card-media">
+        ${n.img ? `<img alt="" loading="lazy" src="${n.img}" onerror="this.onerror=null; this.src='img/ph-workshop.svg'">` : ''}
+      </div>
       <div class="card-body">
         <h3 class="title">${n.titulo||'Sin título'}</h3>
         <div class="meta">
@@ -27,33 +29,46 @@
       </div>
     </article>`;
 
+  // === Slider con pista horizontal
   function buildSlider(items){
-    $$('.slide', slider).forEach(e=>e.remove()); dots.innerHTML='';
+    // limpiar y crear contenedores
+    slider.innerHTML = `
+      <div class="nav"><button id="prev" aria-label="Anterior">‹</button><button id="next" aria-label="Siguiente">›</button></div>
+      <div class="dots" id="dots"></div>`;
+    const dotsEl = slider.querySelector('#dots');
+    const track = document.createElement('div');
+    track.className = 'track';
+    slider.insertBefore(track, dotsEl);
+
     const slides = items.slice(0,3);
     slides.forEach((it,i)=>{
       const el = document.createElement('div');
       el.className = 'slide';
       el.innerHTML = `
-        <div class="slide-media">${it.img?`<img alt="" src="${it.img}">`:''}</div>
+        <div class="slide-media">
+          ${it.img?`<img alt="" src="${it.img}" onerror="this.onerror=null; this.src='img/ph-workshop.svg'">`:''}
+        </div>
         <div class="slide-body">
           <div class="h-eyebrow">Destacado</div>
           <h2 class="h-title">${it.titulo||''}</h2>
           <div class="h-meta">${it.fecha?`<span>${fmt(it.fecha)}</span>`:''} ${hb(it.hotel)}</div>
           ${it.texto?`<p class="h-text">${it.texto}</p>`:''}
-          <div class="actions">${it.url?`<a class="btn" href="${it.url}" target="_blank" rel="noopener">Leer completa ↗</a>`:''}</div>
+          ${it.url?`<div class="actions"><a class="btn" href="${it.url}" target="_blank" rel="noopener">Leer completa ↗</a></div>`:''}
         </div>`;
-      slider.insertBefore(el, slider.firstChild);
-      const d = document.createElement('div'); d.className = 'dot'+(i===0?' active':''); dots.appendChild(d);
+      track.appendChild(el);
+
+      const d = document.createElement('div');
+      d.className = 'dot'+(i===0?' active':'');
+      dotsEl.appendChild(d);
     });
+
+    // navegación
     let idx = 0, total = slides.length;
-    const show = i => {
-      idx = (i+total)%total;
-      $$('.slide', slider).forEach((s,k)=> s.style.transform = `translateX(${(k-idx)*100}%)`);
-      $$('.dot', dots).forEach((d,k)=> d.classList.toggle('active', k===idx));
-    };
-    $$('.slide', slider).forEach((s,k)=> s.style.transform = `translateX(${k*100}%)`);
-    btnPrev.onclick = ()=> show(idx-1);
-    btnNext.onclick = ()=> show(idx+1);
+    const setDots = () => [...dotsEl.children].forEach((d,k)=>d.classList.toggle('active',k===idx));
+    const show = i => { idx = (i+total)%total; track.style.transform = `translateX(-${idx*100}%)`; setDots(); };
+    setDots();
+    slider.querySelector('#prev').onclick = ()=> show(idx-1);
+    slider.querySelector('#next').onclick = ()=> show(idx+1);
     let timer = setInterval(()=>show(idx+1), 6500);
     slider.addEventListener('pointerenter', ()=>clearInterval(timer));
     slider.addEventListener('pointerleave', ()=> timer = setInterval(()=>show(idx+1), 6500));
@@ -74,6 +89,7 @@
   }
 
   function render(list){
+    if(!grid) return;
     if(!list.length){
       grid.innerHTML = '<div class="card" style="grid-column:span 12; padding:20px">No hay noticias para mostrar.</div>';
       return;
@@ -103,14 +119,12 @@
   async function load(){
     let data = [];
     try{
-      // news.json DEBE estar al lado de index.html en GitHub Pages
       const res = await fetch('./news.json?v='+Date.now(), {cache:'no-store'});
       if(!res.ok) throw new Error('HTTP '+res.status);
       const text = await res.text();
       data = JSON.parse(text.replace(/^\uFEFF/, '').trim());
       if(!Array.isArray(data)) throw new Error('JSON no es un array');
     }catch(e){
-      // sin mensajes visuales: usamos fallback en silencio
       console.warn('[Noticias] usando fallback:', e.message);
       data = Array.isArray(window.NEWS_FALLBACK) ? window.NEWS_FALLBACK : [];
     }
