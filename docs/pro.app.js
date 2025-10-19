@@ -3,10 +3,11 @@
   const $ = (s, c=document) => c.querySelector(s);
   const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
 
-  const grid = $('#grid'), q = $('#q'), yearSel = $('#year'), tagSel = $('#tag');
+  const grid = $('#grid');
+  const q = $('#q'), yearSel = $('#year'), tagSel = $('#tag');
   const slider = $('#slider'), dots = $('#dots');
   const btnPrev = $('#prev'), btnNext = $('#next');
-  const tagcloud = $('#tagcloud'), errorbox = $('#errorbox');
+  const tagcloud = $('#tagcloud');
 
   const fmt = (d) => new Intl.DateTimeFormat('es-ES',{day:'2-digit', month:'long', year:'numeric'}).format(new Date(d+'T12:00:00'));
   const hb = h => h ? `<span class="badge">${h}</span>` : '';
@@ -79,7 +80,8 @@
     }
     const frag = document.createDocumentFragment();
     list.forEach(n => {
-      const c = document.createElement('div'); c.innerHTML = makeCard(n);
+      const c = document.createElement('div');
+      c.innerHTML = makeCard(n);
       frag.appendChild(c.firstElementChild);
     });
     grid.innerHTML=''; grid.appendChild(frag);
@@ -100,31 +102,18 @@
 
   async function load(){
     let data = [];
-    let err = '';
     try{
-      const url = './news.json?v=' + Date.now(); // ruta relativa segura en GitHub Pages
-      const res = await fetch(url,{cache:'no-store'});
+      // news.json DEBE estar al lado de index.html en GitHub Pages
+      const res = await fetch('./news.json?v='+Date.now(), {cache:'no-store'});
       if(!res.ok) throw new Error('HTTP '+res.status);
       const text = await res.text();
-      const clean = text.replace(/^\uFEFF/, '').trim();
-      data = JSON.parse(clean);
+      data = JSON.parse(text.replace(/^\uFEFF/, '').trim());
       if(!Array.isArray(data)) throw new Error('JSON no es un array');
     }catch(e){
-      err = e.message;
+      // sin mensajes visuales: usamos fallback en silencio
+      console.warn('[Noticias] usando fallback:', e.message);
       data = Array.isArray(window.NEWS_FALLBACK) ? window.NEWS_FALLBACK : [];
     }
-
-    if (!data.length) {
-      // asegúrate de ver tarjetas aunque news.json esté vacío
-      data = Array.isArray(window.NEWS_FALLBACK) ? window.NEWS_FALLBACK : [];
-    }
-
-    if (err) {
-      errorbox.hidden = false;
-      errorbox.textContent = 'Nota: mostrando contenido alternativo (fallback). Detalle: ' + err;
-      console.warn('[Noticias] Fallback →', err);
-    }
-
     fillFilters(data);
     q.addEventListener('input', ()=>apply(data));
     yearSel.addEventListener('change', ()=>apply(data));
@@ -135,5 +124,7 @@
     apply(data);
   }
 
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', load); else load();
+  document.readyState==='loading'
+    ? document.addEventListener('DOMContentLoaded', load)
+    : load();
 })();

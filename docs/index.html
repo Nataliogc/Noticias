@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <!-- Masthead con eslogan + logos -->
+  <!-- Encabezado con eslogan + logos -->
   <header class="mast">
     <div class="wrap mast-inner">
       <div class="brand-side">
@@ -19,12 +19,12 @@
       </div>
       <div class="logos">
         <img class="logo" src="img/logo-guadiana.png" alt="Sercotel Guadiana">
-        <img class="logo" src="img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel">
+        <img class="logo" src="img/logo-cumbria.jpg"  alt="Cumbria Spa &amp; Hotel">
       </div>
     </div>
   </header>
 
-  <!-- Barra sticky -->
+  <!-- Filtros -->
   <div class="toolbar">
     <div class="wrap toolbar-inner">
       <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" aria-label="Buscar (Ctrl /)">
@@ -34,33 +34,31 @@
     </div>
   </div>
 
-  <!-- Hero Slider -->
+  <!-- Destacados (compacto) -->
   <section class="wrap hero">
-    <div id="slider" class="slider" aria-roledescription="Carrusel" aria-label="Noticias destacadas">
+    <div id="slider" class="slider compact" aria-roledescription="Carrusel" aria-label="Noticias destacadas">
       <div class="nav"><button id="prev" aria-label="Anterior">‹</button><button id="next" aria-label="Siguiente">›</button></div>
       <div class="dots" id="dots"></div>
     </div>
   </section>
 
-  <!-- Contenido -->
+  <!-- Listado -->
   <section class="wrap">
     <div class="section-head">
       <h2>Últimas noticias</h2>
       <div class="tag-cloud" id="tagcloud"></div>
     </div>
     <div id="grid" class="grid" aria-live="polite">
-      <!-- skeletons -->
       <div class="skel card"></div><div class="skel card"></div><div class="skel card"></div>
       <div class="skel card"></div><div class="skel card"></div><div class="skel card"></div>
     </div>
-    <div id="errorbox" class="errorbox" hidden></div>
   </section>
 
   <footer class="wrap site-footer">
     <hr class="doc-end-rule"><div class="doc-end-space"></div>
   </footer>
 
-  <!-- Fallback para abrir en file:// o si falla fetch -->
+  <!-- Fallback por si news.json no carga -->
   <script>
     window.NEWS_FALLBACK = [
       {"titulo":"🎄 Escapada Navidad & Spa · Cumbria","fecha":"2025-12-10","texto":"Alojamiento + circuito de spa + late check-out (según disponibilidad).","url":"posts/escapada-navidad-spa.html","img":"img/ph-spa.svg","hotel":"Cumbria","tags":["Promoción","Spa"]},
@@ -69,6 +67,6 @@
       {"titulo":"🔐 Nuevo sistema de llaves en Guadiana","fecha":"2025-07-28","texto":"Implantación del nuevo sistema de llaves electrónicas. Detalles operativos en breve.","url":"posts/nuevo-sistema-llaves-guadiana.html","img":"img/ph-llaves.svg","hotel":"Guadiana","tags":["Operaciones","Tecnología"]}
     ];
   </script>
-  <script defer src="./pro.app.js?v=9"></script>
+  <script defer src="./pro.app.js?v=10"></script>
 </body>
 </html>
