@@ -1,92 +1,75 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Noticias | Hoteles de Calidad en Ciudad Real</title>
-  <link rel="stylesheet" href="./styles.css" />
-  <meta name="description" content="Noticias y comunicados de Sercotel Guadiana y Cumbria Spa & Hotel en Ciudad Real."/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Noticias — Hoteles de Calidad en Ciudad Real</title>
+  <meta name="description" content="Noticias y comunicados de Sercotel Guadiana y Cumbria Spa & Hotel.">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap hero-inner">
+  <!-- Masthead -->
+  <header class="mast">
+    <div class="wrap mast-inner">
       <div>
-        <p class="eyebrow">Hoteles de Calidad en Ciudad Real</p>
         <h1 class="brand">Noticias</h1>
-        <p class="subbrand">Sercotel Guadiana · Cumbria Spa &amp; Hotel</p>
-        <div class="bar"></div>
+        <p class="sub">Sercotel Guadiana · Cumbria Spa &amp; Hotel</p>
+        <div class="brandbar"></div>
       </div>
-      <div class="hero-right">
-        <img class="logo" src="./img/logo-guadiana.png" alt="Hotel Sercotel Guadiana">
-        <img class="logo" src="./img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel">
+      <div class="logos">
+        <img class="logo" src="img/logo-guadiana.png" alt="Sercotel Guadiana">
+        <img class="logo" src="img/logo-cumbria.jpg" alt="Cumbria Spa &amp; Hotel">
       </div>
     </div>
   </header>
 
-  <section class="wrap toolbar">
-    <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" autocomplete="off" aria-label="Buscar">
-    <select id="year" class="select" title="Año"><option value="">Año</option></select>
-    <select id="tag" class="select" title="Etiqueta"><option value="">Etiqueta</option></select>
+  <!-- Toolbar sticky -->
+  <div class="toolbar">
+    <div class="wrap toolbar-inner">
+      <input id="q" class="search" type="search" placeholder="Buscar noticias, lugares o etiquetas…" aria-label="Buscar (Ctrl /)">
+      <select id="year" class="select" title="Año"><option value="">Año</option></select>
+      <select id="tag" class="select" title="Etiqueta"><option value="">Etiqueta</option></select>
+      <span class="kbd" title="Atajo de teclado">Ctrl /</span>
+    </div>
+  </div>
+
+  <!-- Hero Slider -->
+  <section class="wrap hero">
+    <div id="slider" class="slider" aria-roledescription="Carrusel" aria-label="Noticias destacadas">
+      <div class="nav">
+        <button id="prev" aria-label="Anterior">‹</button>
+        <button id="next" aria-label="Siguiente">›</button>
+      </div>
+      <div class="dots" id="dots"></div>
+    </div>
   </section>
 
-  <!-- FEATURED -->
-  <section class="wrap featured" id="featured"></section>
+  <!-- Contenido -->
+  <section class="wrap">
+    <div class="section-head">
+      <h2>Últimas noticias</h2>
+      <div class="tag-cloud" id="tagcloud"></div>
+    </div>
+    <div id="grid" class="grid" aria-live="polite">
+      <!-- skeletons -->
+      <div class="skel card"></div><div class="skel card"></div><div class="skel card"></div>
+      <div class="skel card"></div><div class="skel card"></div><div class="skel card"></div>
+    </div>
+  </section>
 
-  <!-- GRID -->
-  <main class="wrap">
-    <section id="grid" class="grid" aria-live="polite"></section>
-    <nav class="pager" id="pager" hidden>
-      <button class="btn" id="prev">Anterior</button>
-      <span class="page-info" id="pageInfo">1/1</span>
-      <button class="btn" id="next">Siguiente</button>
-    </nav>
-  </main>
-
-  <footer class="site-footer wrap">
+  <footer class="wrap site-footer">
     <hr class="doc-end-rule"><div class="doc-end-space"></div>
   </footer>
 
+  <!-- Fallback para abrir en file:// -->
   <script>
     window.NEWS_FALLBACK = [
-      {
-        "titulo": "🎄 Escapada Navidad & Spa · Cumbria",
-        "fecha": "2025-12-10",
-        "texto": "Alojamiento + circuito de spa + late check-out (según disponibilidad).",
-        "url": "posts/escapada-navidad-spa.html",
-        "img": "img/ph-spa.svg",
-        "hotel": "Cumbria",
-        "tags": ["Promoción","Spa"]
-      },
-      {
-        "titulo": "🍷 Noche de Enogastronomía Manchega con música en directo",
-        "fecha": "2025-11-22",
-        "texto": "Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas.",
-        "url": "posts/noche-enogastronomia-manchega.html",
-        "img": "img/ph-enogastro.svg",
-        "hotel": "Cumbria",
-        "tags": ["Gastronomía","Cultura"]
-      },
-      {
-        "titulo": "🗞️ Workshop Profesional Murcia 2025",
-        "fecha": "2025-10-14",
-        "texto": "Acción institucional y comercial con agencias del Levante. Posicionamiento de Ciudad Real como base de grupos, cultura y bienestar.",
-        "url": "posts/workshop-profesional-murcia-2025.html",
-        "img": "img/ph-workshop.svg",
-        "hotel": "Guadiana",
-        "tags": ["B2B","Promoción","Murcia"]
-      },
-      {
-        "titulo": "🔐 Nuevo sistema de llaves en Guadiana",
-        "fecha": "2025-07-28",
-        "texto": "Implantación del nuevo sistema de llaves electrónicas. Detalles operativos en breve.",
-        "url": "posts/nuevo-sistema-llaves-guadiana.html",
-        "img": "img/ph-llaves.svg",
-        "hotel": "Guadiana",
-        "tags": ["Operaciones","Tecnología"]
-      }
+      {"titulo":"🎄 Escapada Navidad & Spa · Cumbria","fecha":"2025-12-10","texto":"Alojamiento + circuito de spa + late check-out (según disponibilidad).","url":"posts/escapada-navidad-spa.html","img":"img/ph-1.svg","hotel":"Cumbria","tags":["Promoción","Spa"]},
+      {"titulo":"🍷 Noche de Enogastronomía Manchega con música en directo","fecha":"2025-11-22","texto":"Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas.","url":"posts/noche-enogastronomia-manchega.html","img":"img/ph-2.svg","hotel":"Cumbria","tags":["Gastronomía","Cultura"]},
+      {"titulo":"🗞️ Workshop Profesional Murcia 2025","fecha":"2025-10-14","texto":"Acción institucional y comercial con agencias del Levante. Posicionamiento de Ciudad Real como base de grupos, cultura y bienestar.","url":"posts/workshop-profesional-murcia-2025.html","img":"img/ph-3.svg","hotel":"Guadiana","tags":["B2B","Promoción","Murcia"]},
+      {"titulo":"🔐 Nuevo sistema de llaves en Guadiana","fecha":"2025-07-28","texto":"Implantación del nuevo sistema de llaves electrónicas. Detalles operativos en breve.","url":"posts/nuevo-sistema-llaves-guadiana.html","img":"img/ph-3.svg","hotel":"Guadiana","tags":["Operaciones","Tecnología"]}
     ];
   </script>
-
-  <script defer src="./app.js"></script>
+  <script defer src="./pro.app.js"></script>
 </body>
 </html>
