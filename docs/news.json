@@ -1,13 +1,13 @@
 [
   {
-    "titulo": "🎄 Escapada Navidad & Spa · Cumbria",
-    "fecha": "2025-12-10",
-    "texto": "Alojamiento + circuito de spa + late check-out (según disponibilidad).",
-    "url": "posts/escapada-navidad-spa.html",
-    "img": "img/ph-spa.jpg",
-    "hotel": "Cumbria",
-    "tags": ["Promoción", "Spa"]
-  },
+  "titulo": "🎄 Escapada Navidad & Spa · Cumbria",
+  "fecha": "2025-12-10",
+  "texto": "Alojamiento + circuito de spa + late check-out (según disponibilidad).",
+  "url": "posts/escapada-navidad-spa.html",
+  "img": "img/ph-spa.svg",
+  "hotel": "Cumbria",
+  "tags": ["Promoción", "Spa"]
+},
   {
     "titulo": "🍷 Noche de Enogastronomía Manchega con música en directo",
     "fecha": "2025-11-22",
