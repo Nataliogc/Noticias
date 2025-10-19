@@ -1,15 +1,26 @@
 [
   {
-    "titulo": "Workshop Profesional Murcia 2025",
+    "titulo": "🗞️ Workshop Profesional Murcia 2025",
     "fecha": "2025-10-14",
-    "texto": "El 14 de octubre participamos con Sercotel Guadiana y Cumbria Spa & Hotel en el Workshop Profesional Murcia 2025 (Hotel Nelva). Jornada muy productiva con agencias del Levante para posicionar Ciudad Real como base de grupos, cultura y bienestar. Gracias a todos por la colaboración y el gran trabajo de equipo.",
-    "etiqueta": "🗞️",
+    "texto": "Participamos con Sercotel Guadiana y Cumbria Spa & Hotel en el Workshop Profesional Murcia 2025 (Hotel Nelva). Jornada muy productiva con agencias del Levante para posicionar Ciudad Real como base de grupos, cultura y bienestar.",
     "url": "https://procedimientoshotelguadiana.blogspot.com/2025/10/workshop-profesional-murcia-2025.html"
   },
   {
-    "titulo": "Nuevo sistema de llaves en Guadiana: próxima implementación",
+    "titulo": "🔐 Nuevo sistema de llaves en Guadiana: próxima implementación",
     "fecha": "2025-07-28",
-    "texto": "La puesta en marcha del nuevo sistema de llaves en Guadiana está prevista para los próximos días. Compartiremos los detalles operativos en breve.",
-    "etiqueta": "🗞️"
+    "texto": "En los próximos días activamos el nuevo sistema de llaves electrónicas en Sercotel Guadiana. La mejora incrementa seguridad y agiliza el check-in. Compartiremos el plan de despliegue con recepción y mantenimiento.",
+    "url": "https://procedimientoshotelguadiana.blogspot.com/"
+  },
+  {
+    "titulo": "🎄 Escapada Navidad & Spa · Cumbria",
+    "fecha": "2025-12-10",
+    "texto": "Oferta especial Navidad: alojamiento + circuito de spa + late check-out (bajo disponibilidad). Ideal para relajarse y descubrir la gastronomía manchega. Reservas directas en web oficial.",
+    "url": "https://www.hotelcumbria.com"
+  },
+  {
+    "titulo": "🍷 Noche de Enogastronomía Manchega con música en directo",
+    "fecha": "2025-11-22",
+    "texto": "Maridaje de vinos DO La Mancha con platos locales en un evento único. Música en directo y plazas limitadas. Consulta disponibilidad y menú en nuestra recepción o web.",
+    "url": "https://www.sercotelhoteles.com/es/hotel-guadiana"
   }
 ]
