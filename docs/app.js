@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  const $ = (sel, ctx = document) => ctx.querySelector(sel);
+  const $ = (s, c = document) => c.querySelector(s);
   const list = $('#news-list');
 
   function showStatus(msg, isError = false) {
@@ -18,15 +18,12 @@
   }
 
   async function loadNews() {
-    if (!list) {
-      console.error('[Noticias] Falta #news-list en el DOM');
-      return;
-    }
+    if (!list) return console.error('Falta #news-list');
 
-    // URL inteligente: en local (file://) usa la URL pública; en Pages/servidor usa el JSON local
+    // Local (file://) usa la URL pública; en GitHub Pages/servidor usa el JSON local
     const jsonURL = (location.protocol === 'file:')
       ? 'https://Nataliogc.github.io/Noticias/news.json'
-      : 'news.json?v=' + Date.now(); // anti-caché en Pages
+      : 'news.json?v=' + Date.now();
 
     console.log('[Noticias] Fetch:', jsonURL);
 
@@ -34,23 +31,26 @@
     try {
       const res = await fetch(jsonURL, { cache: 'no-store' });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      data = await res.json();
+      const text = await res.text();
+
+      // Limpia BOM y espacios extra, luego parsea
+      const clean = text.replace(/^\uFEFF/, '').trim();
+      data = JSON.parse(clean);
     } catch (err) {
-      console.error('[Noticias] Error cargando news.json:', err);
-      showStatus('No se pudo cargar “news.json”. Verifica la ruta y el formato JSON.', true);
+      console.error('[Noticias] Error cargando o parseando news.json:', err);
+      showStatus('No se pudo cargar “news.json”. Revisa que no se incluya como <script> y que sea JSON válido.', true);
       return;
     }
 
     if (!Array.isArray(data) || data.length === 0) {
-      console.warn('[Noticias] news.json vacío o formato incorrecto:', data);
       showStatus('No hay noticias para mostrar (news.json vacío).', false);
       return;
     }
 
-    // Orden por fecha descendente
+    // Orden por fecha desc
     data.sort((a, b) => new Date(b.fecha) - new Date(a.fecha));
 
-    // Render
+    // Render muy simple (para comprobar carga)
     const frag = document.createDocumentFragment();
     data.forEach(n => {
       const fecha = n.fecha
@@ -59,7 +59,11 @@
         : '';
 
       const card = document.createElement('article');
-      card.className = 'card';
+      card.style.background = '#fff';
+      card.style.border = '1px solid rgba(0,0,0,.06)';
+      card.style.borderRadius = '12px';
+      card.style.boxShadow = '0 1px 0 rgba(0,0,0,.06)';
+      card.style.padding = '12px';
       card.style.marginBottom = '10px';
       card.innerHTML = `
         <h3 style="margin:0 0 .25rem; color:#0b3e59">${n.titulo || 'Sin título'}</h3>
@@ -70,7 +74,7 @@
       frag.appendChild(card);
     });
 
-    list.innerHTML = ''; // limpia placeholder
+    list.innerHTML = '';
     list.appendChild(frag);
     console.log(`[Noticias] Renderizadas ${data.length} noticia(s).`);
   }
