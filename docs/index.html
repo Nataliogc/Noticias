@@ -32,8 +32,13 @@
   </section>
 
   <main class="wrap">
+    <!-- lugar para una destacada (si tu app la usa) -->
     <section id="featured" class="featured" aria-label="Noticia destacada"></section>
+
+    <!-- grid/list de noticias -->
     <section id="grid" class="grid" aria-live="polite"></section>
+
+    <!-- paginador -->
     <nav class="pager">
       <button id="prev" class="btn" disabled>← Anterior</button>
       <span id="pageInfo" class="page-info">Página 1/1</span>
@@ -46,79 +51,45 @@
     <div class="doc-end-space"></div>
   </footer>
 
-  <!-- Fallback para que nunca quede vacío -->
+  <!-- Fallback limpio: por si news.json no carga -->
   <script>
-    window.NEWS_FALLBACK = [
-      {
-        "title": "Calendario de promoción: próximas citas",
-        "place": "Valladolid · Sevilla",
-        "date": "2025-11-14",
-        "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop",
-        "tags": ["Agenda","Promoción"],
-        "text": "14 de noviembre: Valladolid · 3 de diciembre: Sevilla. Seguimos impulsando el destino con acciones comerciales y de marca."
-      },
-      {
-        "title": "Equipo · ¡A por los próximos desafíos!",
-        "place": "Ciudad Real",
-        "date": "2025-10-20",
-        "image": "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1600&auto=format&fit=crop",
-        "tags": ["Comunicación interna","Motivación"],
-        "text": "Gracias por vuestra implicación. Seguimos sumando hitos para la marca y el destino."
-      },
-      {
-        "title": "COMUNICACIÓN INTERNA · Éxito en Murcia",
-        "place": "Murcia · Cuartel de Artillería",
-        "date": "2025-10-14",
-        "image": "https://images.unsplash.com/photo-1532635241-17e820acc59f?q=80&w=1600&auto=format&fit=crop",
-        "tags": ["Comunicación interna","B2B","Murcia","Promoción"],
-        "text": "Acción institucional y comercial en Murcia con Sercotel Guadiana y Cumbria Spa & Hotel. Ciudad Real se posiciona como destino clave en el Levante.",
-        "url": "./posts/workshop-murcia.html"
-      },
-      {
-        "title": "Sabor Quijote: identidad, cultura y gastronomía",
-        "place": "Murcia",
-        "date": "2025-10-14",
-        "image": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1600&auto=format&fit=crop",
-        "tags": ["Cultura","Gastronomía","Murcia"],
-        "text": "Audiovisual ‘Ciudad Real, Patrimonio Vivo y Natural’, bombones Sabor Quijote y degust<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Noticias · Hoteles</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    :root{ --ink:#004f6e; --muted:#667085; --panel:#f7fafd; }
-    *{box-sizing:border-box}
-    body{margin:0;font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial}
-    .wrap{max-width:900px;margin:24px auto;padding:0 16px}
-    h1{color:var(--ink);margin:0 0 12px}
-    .card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:12px;box-shadow:0 1px 0 rgba(0,0,0,.06);padding:12px}
-    #news-list{background:var(--panel);border-radius:12px;padding:12px}
-  </style>
-</head>
-<body>
-  <main class="wrap">
-    <h1>Noticias</h1>
-    <!-- Contenedor donde se renderizan las noticias -->
-    <section id="news-list"></section>
-  </main>
-
-  <!-- Importante: usar defer -->
-  <script defer src="app.js"></script>
-</body>
-</html>
-ación manchega con música en directo."
-      }
-    ];
+  window.NEWS_FALLBACK = [
+    {
+      "title": "🎄 Escapada Navidad & Spa · Cumbria",
+      "place": "Ciudad Real",
+      "date": "2025-12-10",
+      "tags": ["Promoción","Spa"],
+      "text": "Oferta especial: alojamiento + circuito de spa + late check-out (según disponibilidad).",
+      "url": "posts/escapada-navidad-spa.html"
+    },
+    {
+      "title": "🍷 Noche de Enogastronomía Manchega con música en directo",
+      "place": "Ciudad Real",
+      "date": "2025-11-22",
+      "tags": ["Gastronomía","Cultura"],
+      "text": "Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas.",
+      "url": "posts/noche-enogastronomia-manchega.html"
+    },
+    {
+      "title": "🗞️ Workshop Profesional Murcia 2025",
+      "place": "Murcia",
+      "date": "2025-10-14",
+      "tags": ["B2B","Promoción","Murcia"],
+      "text": "Acción institucional y comercial en Murcia con Sercotel Guadiana y Cumbria Spa & Hotel.",
+      "url": "posts/workshop-murcia.html"
+    },
+    {
+      "title": "🔐 Nuevo sistema de llaves en Guadiana",
+      "place": "Sercotel Guadiana",
+      "date": "2025-07-28",
+      "tags": ["Operaciones","Tecnología"],
+      "text": "Implantación progresiva del nuevo sistema de llaves electrónicas. Detalles operativos en breve.",
+      "url": "posts/nuevo-sistema-llaves-guadiana.html"
+    }
+  ];
   </script>
-  <script src="./app.js"></script>
-  <main class="wrap">
-    <h1>Noticias</h1>
-    <section id="news-list"></section>
-  </main>
 
-  <!-- Importante: solo tu JS -->
-  <script defer src="app.js"></script>
+  <!-- Tu lógica (debe hacer fetch('news.json') y, si falla, usar NEWS_FALLBACK) -->
+  <script defer src="./app.js"></script>
 </body>
 </html>
