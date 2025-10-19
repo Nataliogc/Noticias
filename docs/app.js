@@ -16,7 +16,7 @@ let NEWS=[], filtered=[], page=1;
 async function load(){
   try{
     try{
-      const res = await fetch('./news.json', {cache:'no-store'});
+      const res = await fetch('news.json', {cache:'no-store'});
       if(!res.ok) throw new Error('HTTP '+res.status);
       NEWS = await res.json();
     }catch(e){
