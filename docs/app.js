@@ -21,9 +21,11 @@
     if (!list) return console.error('Falta #news-list');
 
     // Local (file://) usa la URL pública; en GitHub Pages/servidor usa el JSON local
-    const jsonURL = (location.protocol === 'file:')
-      ? 'https://Nataliogc.github.io/Noticias/news.json'
-      : 'news.json?v=' + Date.now();
+   const jsonURL = (location.protocol === 'file:')
+  ? 'https://Nataliogc.github.io/Noticias/news.json'
+  : 'news.json?v=' + Date.now();
+const res = await fetch(jsonURL, { cache: 'no-store' });
+
 
     console.log('[Noticias] Fetch:', jsonURL);
 
