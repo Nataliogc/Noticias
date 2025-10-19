@@ -1,26 +1,51 @@
 [
   {
-    "titulo": "🗞️ Workshop Profesional Murcia 2025",
-    "fecha": "2025-10-14",
-    "texto": "Participamos con Sercotel Guadiana y Cumbria Spa & Hotel en el Workshop Profesional Murcia 2025 (Hotel Nelva). Jornada muy productiva con agencias del Levante para posicionar Ciudad Real como base de grupos, cultura y bienestar.",
-    "url": "posts/workshop-profesional-murcia-2025.html"
-  },
-  {
-    "titulo": "🔐 Nuevo sistema de llaves en Guadiana: próxima implementación",
-    "fecha": "2025-07-28",
-    "texto": "En los próximos días activamos el nuevo sistema de llaves electrónicas en Sercotel Guadiana. La mejora incrementa seguridad y agiliza el check-in. Compartiremos el plan de despliegue con recepción y mantenimiento.",
-    "url": "posts/nuevo-sistema-llaves-guadiana.html"
-  },
-  {
     "titulo": "🎄 Escapada Navidad & Spa · Cumbria",
     "fecha": "2025-12-10",
-    "texto": "Oferta especial: alojamiento + circuito de spa + late check-out (según disponibilidad). Ideal para relajarse y descubrir la gastronomía manchega. Reservas en la web oficial.",
-    "url": "posts/escapada-navidad-spa.html"
+    "texto": "Alojamiento + circuito de spa + late check-out (según disponibilidad).",
+    "url": "posts/escapada-navidad-spa.html",
+    "img": "img/ph-spa.svg",
+    "hotel": "Cumbria",
+    "tags": [
+      "Promoción",
+      "Spa"
+    ]
   },
   {
     "titulo": "🍷 Noche de Enogastronomía Manchega con música en directo",
     "fecha": "2025-11-22",
-    "texto": "Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas. Consulta disponibilidad y menú en recepción o en la web.",
-    "url": "posts/noche-enogastronomia-manchega.html"
+    "texto": "Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas.",
+    "url": "posts/noche-enogastronomia-manchega.html",
+    "img": "img/ph-enogastro.svg",
+    "hotel": "Cumbria",
+    "tags": [
+      "Gastronomía",
+      "Cultura"
+    ]
+  },
+  {
+    "titulo": "🗞️ Workshop Profesional Murcia 2025",
+    "fecha": "2025-10-14",
+    "texto": "Acción institucional y comercial con agencias del Levante. Posicionamiento de Ciudad Real como base de grupos, cultura y bienestar.",
+    "url": "posts/workshop-profesional-murcia-2025.html",
+    "img": "img/ph-workshop.svg",
+    "hotel": "Guadiana",
+    "tags": [
+      "B2B",
+      "Promoción",
+      "Murcia"
+    ]
+  },
+  {
+    "titulo": "🔐 Nuevo sistema de llaves en Guadiana",
+    "fecha": "2025-07-28",
+    "texto": "Implantación del nuevo sistema de llaves electrónicas. Detalles operativos en breve.",
+    "url": "posts/nuevo-sistema-llaves-guadiana.html",
+    "img": "img/ph-llaves.svg",
+    "hotel": "Guadiana",
+    "tags": [
+      "Operaciones",
+      "Tecnología"
+    ]
   }
 ]
