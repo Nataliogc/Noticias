@@ -13,7 +13,45 @@
     "fecha": "2025-11-22",
     "texto": "Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas.",
     "url": "posts/noche-enogastronomia-manchega.html",
+    "img": "img/ph-enogastro.svg",[
+  {
+    "titulo": "🎄 Escapada Navidad & Spa · Cumbria",
+    "fecha": "2025-12-10",
+    "texto": "Alojamiento + circuito de spa + late check-out (según disponibilidad).",
+    "url": "posts/escapada-navidad-spa.html",
+    "img": "img/ph-spa.jpg",
+    "hotel": "Cumbria",
+    "tags": ["Promoción", "Spa"]
+  },
+  {
+    "titulo": "🍷 Noche de Enogastronomía Manchega con música en directo",
+    "fecha": "2025-11-22",
+    "texto": "Maridaje de vinos DO La Mancha con platos locales. Música en directo y plazas limitadas.",
+    "url": "posts/noche-enogastronomia-manchega.html",
     "img": "img/ph-enogastro.svg",
+    "hotel": "Cumbria",
+    "tags": ["Gastronomía", "Cultura"]
+  },
+  {
+    "titulo": "🗞️ Workshop Profesional Murcia 2025",
+    "fecha": "2025-10-14",
+    "texto": "Acción institucional y comercial con agencias del Levante. Posicionamiento de Ciudad Real como base de grupos, cultura y bienestar.",
+    "url": "posts/workshop-murcia.html",
+    "img": "workshop-murcia.png",
+    "hotel": "Guadiana",
+    "tags": ["B2B", "Promoción", "Murcia"]
+  },
+  {
+    "titulo": "🔐 Nuevo sistema de llaves en Guadiana",
+    "fecha": "2025-07-28",
+    "texto": "Implantación del nuevo sistema de llaves electrónicas. Detalles operativos en breve.",
+    "url": "posts/nuevo-sistema-llaves-guadiana.html",
+    "img": "img/ph-llaves.svg",
+    "hotel": "Guadiana",
+    "tags": ["Operaciones", "Tecnología"]
+  }
+]
+
     "hotel": "Cumbria",
     "tags": ["Gastronomía", "Cultura"]
   },

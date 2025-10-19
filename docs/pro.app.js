@@ -5,11 +5,18 @@
 
   const grid = $('#grid');
   const q = $('#q'), yearSel = $('#year'), tagSel = $('#tag');
-  const slider = $('#slider'), dots = $('#dots');
-  const btnPrev = $('#prev'), btnNext = $('#next');
-  const tagcloud = $('#tagcloud');
+  const slider = $('#slider');
 
-  const fmt = (d) => new Intl.DateTimeFormat('es-ES',{day:'2-digit', month:'long', year:'numeric'}).format(new Date(d+'T12:00:00'));
+  // === Fechas robustas ===
+  const parseDate = (s) => {
+    if(!s) return new Date(0);
+    const [y,m,d] = String(s).split('-').map(Number);
+    return new Date(Date.UTC(y||1970,(m||1)-1,d||1,12,0,0));
+  };
+  const fmt = (s) =>
+    new Intl.DateTimeFormat('es-ES',{day:'2-digit', month:'long', year:'numeric'})
+      .format(parseDate(s));
+
   const hb = h => h ? `<span class="badge">${h}</span>` : '';
 
   const makeCard = n => `
@@ -29,9 +36,8 @@
       </div>
     </article>`;
 
-  // === Slider con pista horizontal
+  // === Slider (pista horizontal) ===
   function buildSlider(items){
-    // limpiar y crear contenedores
     slider.innerHTML = `
       <div class="nav"><button id="prev" aria-label="Anterior">‹</button><button id="next" aria-label="Siguiente">›</button></div>
       <div class="dots" id="dots"></div>`;
@@ -62,7 +68,6 @@
       dotsEl.appendChild(d);
     });
 
-    // navegación
     let idx = 0, total = slides.length;
     const setDots = () => [...dotsEl.children].forEach((d,k)=>d.classList.toggle('active',k===idx));
     const show = i => { idx = (i+total)%total; track.style.transform = `translateX(-${idx*100}%)`; setDots(); };
@@ -75,15 +80,19 @@
   }
 
   function fillFilters(items){
-    const years = Array.from(new Set(items.filter(n=>n.fecha).map(n=>String(new Date(n.fecha).getFullYear())))).sort((a,b)=>b.localeCompare(a));
+    const years = Array.from(new Set(
+      items.filter(n=>n.fecha).map(n=>String(parseDate(n.fecha).getUTCFullYear()))
+    )).sort((a,b)=>b.localeCompare(a));
     yearSel.innerHTML = '<option value=\"\">Año</option>'+years.map(y=>`<option>${y}</option>`).join('');
+
     const tags = Array.from(new Set(items.flatMap(n=>n.tags||[]))).sort();
+    const tagSel = $('#tag'), tagcloud = $('#tagcloud');
     tagSel.innerHTML = '<option value=\"\">Etiqueta</option>'+tags.map(t=>`<option>${t}</option>`).join('');
     tagcloud.innerHTML = tags.slice(0,10).map(t=>`<button class="t-pill" data-tag="${t}">${t}</button>`).join('');
     tagcloud.onclick = (e)=>{
       const b = e.target.closest('.t-pill'); if(!b) return;
       const t = b.dataset.tag; tagSel.value = tagSel.value===t ? '' : t;
-      Array.from(tagcloud.children).forEach(x=>x.classList.toggle('active', x.dataset.tag===tagSel.value));
+      [...tagcloud.children].forEach(x=>x.classList.toggle('active', x.dataset.tag===tagSel.value));
       apply(items);
     };
   }
@@ -104,14 +113,15 @@
   }
 
   function apply(items){
+    const tagSel = $('#tag');
     const term = (q.value||'').toLowerCase().trim();
     const y = yearSel.value; const t = tagSel.value;
     const out = items.filter(n=>{
       const okTerm = !term || JSON.stringify(n).toLowerCase().includes(term);
-      const okYear = !y || (n.fecha && String(new Date(n.fecha).getFullYear())===y);
+      const okYear = !y || (n.fecha && String(parseDate(n.fecha).getUTCFullYear())===y);
       const okTag = !t || (n.tags||[]).includes(t);
       return okTerm && okYear && okTag;
-    }).sort((a,b)=> new Date(b.fecha||0) - new Date(a.fecha||0));
+    }).sort((a,b)=> parseDate(b.fecha) - parseDate(a.fecha));
     buildSlider(out);
     render(out);
   }
@@ -131,14 +141,12 @@
     fillFilters(data);
     q.addEventListener('input', ()=>apply(data));
     yearSel.addEventListener('change', ()=>apply(data));
-    tagSel.addEventListener('change', ()=>apply(data));
+    $('#tag').addEventListener('change', ()=>apply(data));
     window.addEventListener('keydown', ev=>{
       if((ev.ctrlKey||ev.metaKey)&&ev.key==='/'){ ev.preventDefault(); q.focus(); }
     });
     apply(data);
   }
 
-  document.readyState==='loading'
-    ? document.addEventListener('DOMContentLoaded', load)
-    : load();
+  document.readyState==='loading' ? document.addEventListener('DOMContentLoaded', load) : load();
 })();
