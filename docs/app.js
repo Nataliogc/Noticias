@@ -3,11 +3,10 @@
   const $ = (s, c=document) => c.querySelector(s);
   const $$ = (s, c=document) => Array.from(c.querySelectorAll(s));
 
-  const grid = $('#grid');
-  const q = $('#q'), yearSel = $('#year'), tagSel = $('#tag');
+  const grid = $('#grid'), q = $('#q'), yearSel = $('#year'), tagSel = $('#tag');
   const slider = $('#slider'), dots = $('#dots');
   const btnPrev = $('#prev'), btnNext = $('#next');
-  const tagcloud = $('#tagcloud');
+  const tagcloud = $('#tagcloud'), errorbox = $('#errorbox');
 
   const fmt = (d) => new Intl.DateTimeFormat('es-ES',{day:'2-digit', month:'long', year:'numeric'}).format(new Date(d+'T12:00:00'));
   const hb = h => h ? `<span class="badge">${h}</span>` : '';
@@ -28,7 +27,6 @@
     </article>`;
 
   function buildSlider(items){
-    if(!slider) return;
     $$('.slide', slider).forEach(e=>e.remove()); dots.innerHTML='';
     const slides = items.slice(0,3);
     slides.forEach((it,i)=>{
@@ -66,24 +64,22 @@
     const tags = Array.from(new Set(items.flatMap(n=>n.tags||[]))).sort();
     tagSel.innerHTML = '<option value=\"\">Etiqueta</option>'+tags.map(t=>`<option>${t}</option>`).join('');
     tagcloud.innerHTML = tags.slice(0,10).map(t=>`<button class="t-pill" data-tag="${t}">${t}</button>`).join('');
-    tagcloud.addEventListener('click', e=>{
+    tagcloud.onclick = (e)=>{
       const b = e.target.closest('.t-pill'); if(!b) return;
       const t = b.dataset.tag; tagSel.value = tagSel.value===t ? '' : t;
       Array.from(tagcloud.children).forEach(x=>x.classList.toggle('active', x.dataset.tag===tagSel.value));
       apply(items);
-    });
+    };
   }
 
   function render(list){
-    if(!grid) return;
     if(!list.length){
       grid.innerHTML = '<div class="card" style="grid-column:span 12; padding:20px">No hay noticias para mostrar.</div>';
       return;
     }
     const frag = document.createDocumentFragment();
     list.forEach(n => {
-      const c = document.createElement('div');
-      c.innerHTML = makeCard(n);
+      const c = document.createElement('div'); c.innerHTML = makeCard(n);
       frag.appendChild(c.firstElementChild);
     });
     grid.innerHTML=''; grid.appendChild(frag);
@@ -104,8 +100,9 @@
 
   async function load(){
     let data = [];
+    let err = '';
     try{
-      const url = (location.protocol==='file:') ? 'news.json' : ('news.json?v='+Date.now());
+      const url = './news.json?v=' + Date.now(); // ruta relativa segura en GitHub Pages
       const res = await fetch(url,{cache:'no-store'});
       if(!res.ok) throw new Error('HTTP '+res.status);
       const text = await res.text();
@@ -113,8 +110,19 @@
       data = JSON.parse(clean);
       if(!Array.isArray(data)) throw new Error('JSON no es un array');
     }catch(e){
-      console.warn('[Noticias] Fallback activado →', e.message);
+      err = e.message;
       data = Array.isArray(window.NEWS_FALLBACK) ? window.NEWS_FALLBACK : [];
+    }
+
+    if (!data.length) {
+      // asegúrate de ver tarjetas aunque news.json esté vacío
+      data = Array.isArray(window.NEWS_FALLBACK) ? window.NEWS_FALLBACK : [];
+    }
+
+    if (err) {
+      errorbox.hidden = false;
+      errorbox.textContent = 'Nota: mostrando contenido alternativo (fallback). Detalle: ' + err;
+      console.warn('[Noticias] Fallback →', err);
     }
 
     fillFilters(data);
