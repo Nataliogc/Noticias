@@ -488,9 +488,8 @@
       let featured = posts.find(p => p.featured) || posts[0];
       renderHero(featured);
 
-      // 2) Tarjetas (todas menos la destacada)
-      const rest = posts.filter(p => p.slug !== featured.slug);
-      renderCards(rest);
+      // 2) Tarjetas (todas las noticias)
+      renderCards(posts);
 
       // 3) Chips de categorías
       renderChips(posts);
