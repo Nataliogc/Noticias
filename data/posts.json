@@ -1,1 +1,19 @@
-﻿
+﻿{
+    "title":  "Workshop Profesional Murcia 2025",
+    "date":  "2025-10-14",
+    "hotel":  "Guadiana",
+    "categories":  [
+                       "B2B",
+                       "PromociÃ³n"
+                   ],
+    "tags":  [
+                 "Workshop",
+                 "Murcia",
+                 "Agencias"
+             ],
+    "featured":  false,
+    "image":  "img/workshop-murcia.png",
+    "excerpt":  "AcciÃ³n institucional y comercial con agencias del Levante para posicionar Ciudad Real como base de grupos.",
+    "slug":  "workshop-profesional-murcia-2025",
+    "url":  "posts/workshop-profesional-murcia-2025.html"
+}
