@@ -1,586 +1,165 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8" />
   <title>Noticias · Hoteles de Calidad en Ciudad Real</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    :root {
-      --bg-page: #eef4fb;
-      --bg-card: #ffffff;
-      --bg-chip: #e7edf7;
-      --primary: #004a75;
-      --primary-soft: #f1f7ff;
-      --accent: #0f172a;
-      --text-main: #0f172a;
-      --text-soft: #6b7280;
-      --border-soft: #dde3f0;
-      --radius-lg: 22px;
-      --radius-md: 16px;
-      --shadow-soft: 0 10px 30px rgba(15,23,42,0.18);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #f6fbff 0, #e2ebf7 45%, #dde6f5 100%);
-      color: var(--text-main);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* CABECERA SIMPLE */
-
-    header {
-      padding: 14px 18px 4px;
-    }
-
-    .header-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 14px;
-      background: radial-gradient(circle at 30% 20%, #ffffff 0, #c9ddf3 40%, #9bb6da 100%);
-      box-shadow: 0 0 0 1px #cbd5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 18px;
-      color: var(--primary);
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.1;
-    }
-
-    .brand-text strong {
-      font-size: 14px;
-      color: var(--primary);
-    }
-
-    .brand-text span {
-      font-size: 11px;
-      color: var(--text-soft);
-    }
-
-    .header-tagline {
-      font-size: 12px;
-      color: var(--text-soft);
-      text-align: right;
-    }
-
-    @media (max-width: 720px) {
-      .header-inner {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .header-tagline {
-        text-align: left;
-      }
-    }
-
-    /* CONTENEDOR PRINCIPAL */
-
-    .page {
-      max-width: 1180px;
-      margin: 4px auto 28px;
-      padding: 0 18px 18px;
-    }
-
-    /* HERO DESTACADO */
-
-    .hero {
-      background: var(--bg-card);
-      border-radius: 26px;
-      box-shadow: var(--shadow-soft);
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 4fr);
-      overflow: hidden;
-      margin-bottom: 24px;
-      border: 1px solid rgba(255,255,255,0.8);
-    }
-
-    .hero-media {
-      position: relative;
-      min-height: 220px;
-      background: #000;
-    }
-
-    .hero-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-main {
-      padding: 24px 26px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: radial-gradient(circle at top left, #f4f9ff 0, #ffffff 55%);
-    }
-
-    .hero-pill-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: .14em;
-      color: #64748b;
-    }
-
-    .hero-pill {
-      background: var(--primary-soft);
-      border-radius: 999px;
-      padding: 4px 10px;
-      font-weight: 600;
-    }
-
-    .hero-title {
-      font-size: clamp(22px, 2.6vw, 30px);
-      margin: 0;
-      color: var(--accent);
-    }
-
-    .hero-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 10px;
-      font-size: 12px;
-      color: var(--text-soft);
-      align-items: center;
-    }
-
-    .badge-hotel {
-      display: inline-flex;
-      align-items: center;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      border: 1px solid #cbd5f5;
-      background: #e7f0ff;
-      color: #0f172a;
-    }
-
-    .hero-excerpt {
-      font-size: 14px;
-      color: #4b5563;
-      margin: 4px 0 0;
-      max-width: 46rem;
-    }
-
-    .hero-actions {
-      margin-top: 10px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .btn-primary {
-      border-radius: 999px;
-      padding: 8px 16px;
-      border: none;
-      background: #05192b;
-      color: #ffffff;
-      font-size: 13px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-    }
-
-    .btn-primary span.icon {
-      font-size: 14px;
-    }
-
-    .hero-dots {
-      font-size: 18px;
-      color: #cbd5f5;
-      margin-left: auto;
-    }
-
-    @media (max-width: 900px) {
-      .hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .hero-main {
-        padding: 18px 16px 18px;
-      }
-    }
-
-    /* FILA DE CATEGORÍAS */
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 0 0 10px;
-    }
-
-    .section-header h2 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .chips-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      font-size: 11px;
-    }
-
-    .chip {
-      border-radius: 999px;
-      padding: 4px 10px;
-      background: rgba(255,255,255,0.7);
-      border: 1px solid #dde4f0;
-      color: #4b5563;
-      cursor: default;
-    }
-
-    .chip.is-active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
-    }
-
-    /* GRID DE NOTICIAS */
-
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 10px;
-    }
-
-    @media (max-width: 960px) {
-      .news-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 640px) {
-      .news-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .news-card {
-      background: var(--bg-card);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      box-shadow: 0 6px 16px rgba(15,23,42,0.11);
-      border: 1px solid rgba(255,255,255,0.9);
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-
-    .news-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(15,23,42,0.18);
-    }
-
-    .news-card-media {
-      height: 150px;
-      overflow: hidden;
-      background: #000;
-    }
-
-    .news-card-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .news-card-body {
-      padding: 12px 14px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      background: linear-gradient(180deg, #f7f9ff 0, #ffffff 45%);
-    }
-
-    .news-card-meta-top {
-      font-size: 11px;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 6px;
-    }
-
-    .news-card-title {
-      font-size: 15px;
-      margin: 0;
-      color: #111827;
-    }
-
-    .news-card-excerpt {
-      font-size: 13px;
-      margin: 0;
-      color: #4b5563;
-      min-height: 2.6em;
-    }
-
-    .news-card-meta-bottom {
-      margin-top: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 11px;
-      color: #9ca3af;
-    }
-
-    .badge-hotel-small {
-      border-radius: 999px;
-      padding: 3px 9px;
-      background: rgba(255,255,255,0.9);
-      border: 1px solid #e5e7eb;
-      color: #374151;
-    }
-
-    /* ESTADO VACÍO */
-
-    .empty {
-      font-size: 13px;
-      color: #6b7280;
-      margin-top: 18px;
-    }
-
-    footer {
-      font-size: 11px;
-      color: #9ca3af;
-      text-align: center;
-      padding: 14px 10px 18px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  <header>
-    <div class="header-inner">
-      <div class="brand">
-        <div class="brand-logo">N</div>
-        <div class="brand-text">
-          <strong>Noticias · Hoteles de Calidad</strong>
-          <span>Sercotel Guadiana · Cumbria Spa&Hotel · Ciudad Real</span>
-        </div>
-      </div>
-      <div class="header-tagline">
-        Actualizaciones internas, eventos y promociones para equipos y colaboradores.
-      </div>
+  <header class="site-header">
+    <div class="site-header__title">
+      <span class="badge">Intranet</span>
+      <h1>Noticias · Hoteles de Calidad</h1>
+      <p>Sercotel Guadiana · Cumbria Spa&amp;Hotel · Ciudad Real</p>
+    </div>
+    <div class="site-header__meta">
+      <span>Actualizaciones internas, eventos y promociones para el equipo.</span>
     </div>
   </header>
 
-  <main class="page">
-
-    <!-- HERO DESTACADO -->
-    <section class="hero" id="hero" style="display:none;">
-      <div class="hero-media">
-        <a id="hero-link" href="#">
-          <img id="hero-image" src="" alt="">
-        </a>
-      </div>
-      <div class="hero-main">
-        <div class="hero-pill-row">
-          <div class="hero-pill">DESTACADO</div>
-          <div class="hero-dots">● ● ●</div>
-        </div>
-        <a id="hero-link-title" href="#">
-          <h1 class="hero-title" id="hero-title"></h1>
-        </a>
-        <div class="hero-meta">
-          <span id="hero-date"></span>
-          <span class="badge-hotel" id="hero-hotel"></span>
-        </div>
-        <p class="hero-excerpt" id="hero-excerpt"></p>
-        <div class="hero-actions">
-          <a id="hero-readmore" href="#" class="btn-primary">
-            <span>Leer completa</span>
-            <span class="icon">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- TÍTULO + CHIPS -->
-    <section>
-      <div class="section-header">
-        <h2>Últimas noticias</h2>
-        <div class="chips-row" id="chips-row">
-          <!-- chips de categorías -->
-        </div>
-      </div>
-
-      <div class="news-grid" id="news-grid">
-        <!-- tarjetas de noticias -->
-      </div>
-      <p class="empty" id="empty-msg" style="display:none;">
-        No hay noticias publicadas todavía. Añade archivos HTML en <code>/Posts</code> y ejecuta <code>tools/generate_posts.ps1</code>.
-      </p>
+  <main class="layout" id="app">
+    <!-- Contenido generado por JS -->
+    <section class="loading">
+      Cargando noticias…
     </section>
   </main>
 
-  <footer>
-    Hoteles de Calidad en Ciudad Real · Sercotel Guadiana · Cumbria Spa&Hotel · Uso interno
+  <footer class="site-footer">
+    Hoteles de Calidad en Ciudad Real · Sercotel Guadiana · Cumbria Spa&amp;Hotel · Uso interno
   </footer>
 
   <script>
     async function loadPosts() {
+      const app = document.getElementById("app");
+
       try {
-        const res = await fetch('data/posts.json?_=' + Date.now());
-        if (!res.ok) throw new Error('No se puede cargar data/posts.json');
-        const posts = await res.json();
-        renderPage(posts);
+        const res = await fetch("data/posts.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("No se pudo cargar data/posts.json");
+
+        let posts = await res.json();
+        if (!Array.isArray(posts) || posts.length === 0) {
+          app.innerHTML = `
+            <section class="empty-state">
+              <h2>Últimas noticias</h2>
+              <p>No hay noticias publicadas todavía.</p>
+              <p class="hint">
+                Añade archivos HTML en <code>/posts</code> con su bloque de metadatos
+                y ejecuta <code>tools/generate_posts.ps1</code>.
+              </p>
+            </section>`;
+          return;
+        }
+
+        // Aseguramos orden por fecha descendente por si el JSON no viene ya ordenado
+        posts = posts.slice().sort((a, b) => {
+          const da = new Date(a.date || "1900-01-01");
+          const db = new Date(b.date || "1900-01-01");
+          return db - da;
+        });
+
+        const featured = posts[0];
+        const others = posts.slice(1);
+
+        // Construimos el HTML de la página
+        const html = [];
+
+        // --- Destacado ---
+        html.push('<section class="featured">');
+        html.push('<div class="featured__image">');
+        if (featured.image) {
+          html.push(
+            `<a href="${featured.path}" class="card-link">` +
+            `<img src="${featured.image}" alt="${featured.title || ""}">` +
+            "</a>"
+          );
+        } else {
+          html.push(
+            `<a href="${featured.path}" class="card-link featured__image--placeholder">` +
+            `<span>Noticia destacada</span>` +
+            "</a>"
+          );
+        }
+        html.push("</div>");
+
+        html.push('<div class="featured__body">');
+        html.push('<span class="tag tag-featured">Destacado</span>');
+        if (featured.hotel) {
+          html.push(`<span class="tag tag-hotel">${featured.hotel}</span>`);
+        }
+
+        html.push(
+          `<h2 class="featured__title"><a href="${featured.path}">${featured.title || "Noticia"}</a></h2>`
+        );
+
+        if (featured.date) {
+          html.push(`<p class="featured__date">${featured.date}</p>`);
+        }
+
+        if (featured.excerpt) {
+          html.push(`<p class="featured__excerpt">${featured.excerpt}</p>`);
+        }
+
+        html.push(
+          `<a class="btn-primary" href="${featured.path}">Leer completa</a>`
+        );
+        html.push("</div>");
+        html.push("</section>");
+
+        // --- Últimas noticias (rejilla) ---
+        html.push('<section class="latest">');
+        html.push('<div class="latest__header">');
+        html.push("<h2>Últimas noticias</h2>");
+        html.push("</div>");
+        html.push('<div class="latest__grid">');
+
+        others.forEach((post) => {
+          const url = post.path; // 🔴 IMPORTANTE: enlace RELATIVO, sin barra inicial
+
+          html.push('<article class="card">');
+
+          if (post.image) {
+            html.push(
+              `<a href="${url}" class="card__image-wrapper">` +
+              `<img src="${post.image}" alt="${post.title || ""}" />` +
+              "</a>"
+            );
+          }
+
+          html.push('<div class="card__body">');
+
+          if (post.date) {
+            html.push(`<p class="card__date">${post.date}</p>`);
+          }
+
+          html.push(
+            `<h3 class="card__title"><a href="${url}">${post.title || "Noticia"}</a></h3>`
+          );
+
+          if (post.hotel) {
+            html.push(`<span class="tag tag-hotel">${post.hotel}</span>`);
+          }
+
+          html.push("</div>"); // card__body
+          html.push("</article>");
+        });
+
+        html.push("</div>"); // latest__grid
+        html.push("</section>");
+
+        app.innerHTML = html.join("");
       } catch (err) {
         console.error(err);
-        document.getElementById('empty-msg').style.display = 'block';
+        app.innerHTML = `
+          <section class="error-state">
+            <h2>Error al cargar las noticias</h2>
+            <p>Revisa que exista <code>data/posts.json</code> y que el sitio esté servido correctamente.</p>
+            <p class="hint">${err.message}</p>
+          </section>`;
       }
     }
 
-    function formatDate(isoStr) {
-      // Espera formato YYYY-MM-DD
-      const [y, m, d] = isoStr.split('-').map(Number);
-      if (!y || !m || !d) return isoStr;
-      const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-      return `${d} de ${meses[m-1]} de ${y}`;
-    }
-
-    function renderPage(posts) {
-      if (!Array.isArray(posts) || posts.length === 0) {
-        document.getElementById('empty-msg').style.display = 'block';
-        return;
-      }
-
-      // 1) HERO
-      let featured = posts.find(p => p.featured) || posts[0];
-      renderHero(featured);
-
-      // 2) Tarjetas (todas las noticias)
-      renderCards(posts);
-
-      // 3) Chips de categorías
-      renderChips(posts);
-    }
-
-    function renderHero(post) {
-      const hero = document.getElementById('hero');
-      const img = document.getElementById('hero-image');
-      const title = document.getElementById('hero-title');
-      const date = document.getElementById('hero-date');
-      const hotel = document.getElementById('hero-hotel');
-      const excerpt = document.getElementById('hero-excerpt');
-      const link = document.getElementById('hero-link');
-      const linkTitle = document.getElementById('hero-link-title');
-      const btn = document.getElementById('hero-readmore');
-
-      img.src = post.image || '';
-      img.alt = post.title || '';
-      title.textContent = post.title || '';
-      date.textContent = formatDate(post.date || '');
-      hotel.textContent = post.hotel || '';
-      excerpt.textContent = post.excerpt || '';
-      link.href = post.url;
-      linkTitle.href = post.url;
-      btn.href = post.url;
-
-      hero.style.display = 'grid';
-    }
-
-    function renderCards(posts) {
-      const grid = document.getElementById('news-grid');
-      grid.innerHTML = '';
-
-      if (!posts || posts.length === 0) {
-        document.getElementById('empty-msg').style.display = 'block';
-        return;
-      }
-
-      for (const post of posts) {
-        const card = document.createElement('a');
-        card.className = 'news-card';
-        card.href = post.url;
-
-        card.innerHTML = `
-          <div class="news-card-media">
-            <img src="${post.image || ''}" alt="${post.title || ''}">
-          </div>
-          <div class="news-card-body">
-            <div class="news-card-meta-top">
-              <span>${formatDate(post.date || '')}</span>
-              <span class="badge-hotel-small">${post.hotel || ''}</span>
-            </div>
-            <h3 class="news-card-title">${post.title || ''}</h3>
-            <p class="news-card-excerpt">${post.excerpt || ''}</p>
-            <div class="news-card-meta-bottom">
-              <span>${(post.categories && post.categories[0]) ? post.categories[0] : ''}</span>
-              <span>Leer más ›</span>
-            </div>
-          </div>
-        `;
-
-        grid.appendChild(card);
-      }
-    }
-
-    function renderChips(posts) {
-      const chipsRow = document.getElementById('chips-row');
-      chipsRow.innerHTML = '';
-
-      const set = new Set();
-      posts.forEach(p => {
-        (p.categories || []).forEach(c => set.add(c));
-      });
-
-      if (set.size === 0) return;
-
-      // Chip "Todos"
-      const allChip = document.createElement('div');
-      allChip.className = 'chip is-active';
-      allChip.textContent = 'Todos';
-      chipsRow.appendChild(allChip);
-
-      for (const cat of set) {
-        const chip = document.createElement('div');
-        chip.className = 'chip';
-        chip.textContent = cat;
-        chipsRow.appendChild(chip);
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadPosts);
+    document.addEventListener("DOMContentLoaded", loadPosts);
   </script>
 </body>
-</html
+</html>
