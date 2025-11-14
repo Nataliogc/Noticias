@@ -7,147 +7,268 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="site-header">
-    <div class="site-header__title">
-      <span class="badge">Intranet</span>
-      <h1>Noticias · Hoteles de Calidad</h1>
-      <p>Sercotel Guadiana · Cumbria Spa&amp;Hotel · Ciudad Real</p>
+
+  <!-- ======= CABECERA PRINCIPAL ======= -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <p class="topbar-eyebrow">Hoteles de Calidad en Ciudad Real</p>
+      <h1 class="topbar-title">Noticias</h1>
+      <p class="topbar-subtitle">Sercotel Guadiana · Cumbria Spa&amp;Hotel</p>
+      <div class="topbar-progress"></div>
     </div>
-    <div class="site-header__meta">
-      <span>Actualizaciones internas, eventos y promociones para el equipo.</span>
+
+    <div class="topbar-right">
+      <div class="logo-pill">
+        <img src="img/logo-guadiana.svg" alt="Hotel Guadiana" class="hotel-logo">
+      </div>
+      <div class="logo-pill">
+        <img src="img/logo-cumbria.svg" alt="Cumbria Spa&Hotel" class="hotel-logo">
+      </div>
     </div>
   </header>
 
-  <main class="layout" id="app">
-    <section class="loading">
+  <!-- ======= BARRA BUSCADOR PRINCIPAL ======= -->
+  <section class="search-toolbar">
+    <input
+      id="search-main"
+      class="search-main"
+      type="search"
+      placeholder="Buscar noticias, lugares o etiquetas..."
+    />
+
+    <div class="search-toolbar-right">
+      <button class="pill-button" type="button">Año</button>
+      <button class="pill-button" type="button">Etiqueta</button>
+    </div>
+  </section>
+
+  <!-- ======= CONTENIDO ======= -->
+  <main id="app" class="page-main">
+    <section class="loading-state">
       Cargando noticias…
     </section>
   </main>
 
-  <footer class="site-footer">
+  <footer class="page-footer">
     Hoteles de Calidad en Ciudad Real · Sercotel Guadiana · Cumbria Spa&amp;Hotel · Uso interno
   </footer>
 
-  <!-- Datos de noticias generados por PowerShell -->
+  <!-- Datos generados por PowerShell -->
   <script src="data/posts.js"></script>
 
   <script>
-    function renderNews() {
+    document.addEventListener("DOMContentLoaded", () => {
       const app = document.getElementById("app");
-      const posts = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
+      const postsRaw = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
 
-      if (!posts.length) {
+      if (!postsRaw.length) {
         app.innerHTML = `
-          <section class="empty-state">
+          <section class="loading-state">
             <h2>Últimas noticias</h2>
             <p>No hay noticias publicadas todavía.</p>
-            <p class="hint">
-              Añade archivos HTML en <code>/posts</code> con su bloque de metadatos
-              y ejecuta <code>tools/generate_posts.ps1</code>.
-            </p>
           </section>`;
         return;
       }
 
-      // Orden por fecha descendente por si acaso
-      posts.sort((a, b) => {
-        const da = new Date(a.date || "1900-01-01");
-        const db = new Date(b.date || "1900-01-01");
-        return db - da;
+      // Ordenar por fecha (descendente)
+      postsRaw.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      const heroPosts = postsRaw.slice(0, 3);
+      const otherPosts = postsRaw.slice(3);
+
+      app.innerHTML = renderLayout(heroPosts, otherPosts);
+
+      setupHeroSlider();
+      setupSearch();
+    });
+
+    function renderLayout(heroPosts, otherPosts) {
+      let heroHtml = "";
+
+      // === Carrusel de las últimas noticias ===
+      if (heroPosts.length) {
+        heroHtml += `
+          <section class="hero">
+            <div class="hero-slides">
+        `;
+
+        heroPosts.forEach((post, index) => {
+          const activeClass = index === 0 ? " hero-slide--active" : "";
+          heroHtml += `
+            <article class="hero-slide${activeClass}" data-index="${index}">
+              <div class="hero-slide-left">
+                ${
+                  post.image
+                    ? `<img src="${post.image}" alt="${escapeHtml(post.title || "")}" class="hero-image">`
+                    : `<h2 class="hero-slide-title">${escapeHtml(post.title || "")}</h2>`
+                }
+              </div>
+              <div class="hero-slide-right">
+                <p class="hero-badge">DESTACADO</p>
+                <h3 class="hero-headline">${escapeHtml(post.title || "")}</h3>
+                <p class="hero-meta">
+                  <span class="hero-date">${formatDate(post.date)}</span>
+                  ${
+                    post.hotel
+                      ? `<span class="hero-hotel">${escapeHtml(post.hotel)}</span>`
+                      : ""
+                  }
+                </p>
+                <p class="hero-excerpt">${escapeHtml(post.excerpt || "")}</p>
+                <a class="hero-button" href="${post.path}">Leer completa ↗</a>
+                <button class="hero-next-btn" type="button" aria-label="Siguiente noticia">
+                  &#x25B6;
+                </button>
+              </div>
+            </article>
+          `;
+        });
+
+        heroHtml += `
+            </div>
+            <div class="hero-dots">
+        `;
+
+        heroPosts.forEach((_, index) => {
+          const activeClass = index === 0 ? " hero-dot--active" : "";
+          heroHtml += `
+            <button class="hero-dot${activeClass}" data-index="${index}"
+                    aria-label="Ver noticia ${index + 1}"></button>
+          `;
+        });
+
+        heroHtml += `
+            </div>
+          </section>
+        `;
+      }
+
+      // === Rejilla 2×N con el resto de noticias ===
+      let gridHtml = `
+        <section class="news-grid-section">
+          <h2 class="section-title">Todas las noticias</h2>
+          <div class="news-grid">
+      `;
+
+      otherPosts.forEach((post) => {
+        const searchText = (
+          (post.title || "") + " " +
+          (post.excerpt || "") + " " +
+          (post.tags || "") + " " +
+          (post.hotel || "")
+        ).toLowerCase();
+
+        gridHtml += `
+          <article class="news-card" data-search="${escapeAttr(searchText)}">
+            ${
+              post.image
+                ? `<a class="news-card-thumb" href="${post.path}">
+                     <img src="${post.image}" alt="${escapeHtml(post.title || "")}">
+                   </a>`
+                : ""
+            }
+            <div class="news-card-body">
+              <header class="news-card-header">
+                <p class="news-card-date">${formatDate(post.date)}</p>
+                ${
+                  post.hotel
+                    ? `<span class="news-card-hotel">${escapeHtml(post.hotel)}</span>`
+                    : ""
+                }
+              </header>
+              <h3 class="news-card-title">
+                <a href="${post.path}">${escapeHtml(post.title || "")}</a>
+              </h3>
+              <p class="news-card-excerpt">${escapeHtml(post.excerpt || "")}</p>
+              <a class="news-card-link" href="${post.path}">Leer más</a>
+            </div>
+          </article>
+        `;
       });
 
-      const featured = posts[0];
-      const others = posts.slice(1);
-      const html = [];
+      gridHtml += `
+          </div>
+        </section>
+      `;
 
-      // --- Destacado ---
-      html.push('<section class="featured">');
-
-      html.push('<div class="featured__image">');
-      if (featured.image) {
-        html.push(
-          `<a href="${featured.path}" class="card-link">` +
-          `<img src="${featured.image}" alt="${featured.title || ""}">` +
-          "</a>"
-        );
-      } else {
-        html.push(
-          `<a href="${featured.path}" class="card-link featured__image--placeholder">` +
-          `<span>Noticia destacada</span>` +
-          "</a>"
-        );
-      }
-      html.push("</div>");
-
-      html.push('<div class="featured__body">');
-      html.push('<span class="tag tag-featured">Destacado</span>');
-      if (featured.hotel) {
-        html.push(`<span class="tag tag-hotel">${featured.hotel}</span>`);
-      }
-
-      html.push(
-        `<h2 class="featured__title"><a href="${featured.path}">${featured.title || "Noticia"}</a></h2>`
-      );
-
-      if (featured.date) {
-        html.push(`<p class="featured__date">${featured.date}</p>`);
-      }
-
-      if (featured.excerpt) {
-        html.push(`<p class="featured__excerpt">${featured.excerpt}</p>`);
-      }
-
-      html.push(
-        `<a class="btn-primary" href="${featured.path}">Leer completa</a>`
-      );
-      html.push("</div>");
-      html.push("</section>");
-
-      // --- Últimas noticias en rejilla ---
-      html.push('<section class="latest">');
-      html.push('<div class="latest__header">');
-      html.push("<h2>Últimas noticias</h2>");
-      html.push("</div>");
-      html.push('<div class="latest__grid">');
-
-      others.forEach((post) => {
-        const url = post.path; // relativo: posts/lo-que-sea.html
-
-        html.push('<article class="card">');
-
-        if (post.image) {
-          html.push(
-            `<a href="${url}" class="card__image-wrapper">` +
-            `<img src="${post.image}" alt="${post.title || ""}" />` +
-            "</a>"
-          );
-        }
-
-        html.push('<div class="card__body">');
-
-        if (post.date) {
-          html.push(`<p class="card__date">${post.date}</p>`);
-        }
-
-        html.push(
-          `<h3 class="card__title"><a href="${url}">${post.title || "Noticia"}</a></h3>`
-        );
-
-        if (post.hotel) {
-          html.push(`<span class="tag tag-hotel">${post.hotel}</span>`);
-        }
-
-        html.push("</div>"); // card__body
-        html.push("</article>");
-      });
-
-      html.push("</div>"); // latest__grid
-      html.push("</section>");
-
-      app.innerHTML = html.join("");
+      return heroHtml + gridHtml;
     }
 
-    document.addEventListener("DOMContentLoaded", renderNews);
+    function setupHeroSlider() {
+      const slides = Array.from(document.querySelectorAll(".hero-slide"));
+      const dots = Array.from(document.querySelectorAll(".hero-dot"));
+      const nextButtons = Array.from(document.querySelectorAll(".hero-next-btn"));
+      if (!slides.length) return;
+
+      let current = 0;
+
+      const goTo = (index) => {
+        current = (index + slides.length) % slides.length;
+        slides.forEach((s, i) => s.classList.toggle("hero-slide--active", i === current));
+        dots.forEach((d, i) => d.classList.toggle("hero-dot--active", i === current));
+      };
+
+      dots.forEach(dot => {
+        dot.addEventListener("click", () => {
+          const idx = parseInt(dot.dataset.index, 10) || 0;
+          goTo(idx);
+        });
+      });
+
+      nextButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          goTo(current + 1);
+        });
+      });
+
+      setInterval(() => goTo(current + 1), 8000);
+    }
+
+    function setupSearch() {
+      const input = document.getElementById("search-main");
+      if (!input) return;
+
+      input.addEventListener("input", () => {
+        const query = input.value.trim().toLowerCase();
+        const cards = document.querySelectorAll(".news-card");
+
+        cards.forEach(card => {
+          const haystack = (card.getAttribute("data-search") || "").toLowerCase();
+          const visible = !query || haystack.includes(query);
+          card.style.display = visible ? "" : "none";
+        });
+      });
+
+      document.addEventListener("keydown", (ev) => {
+        if ((ev.ctrlKey || ev.metaKey) && ev.key === "/") {
+          ev.preventDefault();
+          input.focus();
+        }
+      });
+    }
+
+    function formatDate(iso) {
+      if (!iso) return "";
+      const d = new Date(iso);
+      if (isNaN(d)) return iso;
+      const meses = [
+        "enero","febrero","marzo","abril","mayo","junio",
+        "julio","agosto","septiembre","octubre","noviembre","diciembre"
+      ];
+      return `${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    function escapeAttr(str) {
+      return escapeHtml(str).replace(/'/g, "&#39;");
+    }
   </script>
 </body>
 </html>

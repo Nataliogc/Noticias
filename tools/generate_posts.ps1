@@ -69,9 +69,16 @@ Get-ChildItem -Path $postsFolder -Filter "*.html" | ForEach-Object {
 
     # Limpiar HTML para generar un pequeño resumen
     $plain = $content
+
+    # 1) Quitamos comentarios <!-- ... -->
+    $plain = [regex]::Replace($plain, "<!--.*?-->", " ", "Singleline")
+
+    # 2) Quitamos scripts, estilos y etiquetas HTML
     $plain = [regex]::Replace($plain, "<script.*?</script>", "", "Singleline, IgnoreCase")
     $plain = [regex]::Replace($plain, "<style.*?</style>", "", "Singleline, IgnoreCase")
     $plain = [regex]::Replace($plain, "<.*?>", " ")
+
+    # 3) Normalizamos texto
     $plain = [System.Web.HttpUtility]::HtmlDecode($plain)
     $plain = ($plain -replace "\s+", " ").Trim()
 
