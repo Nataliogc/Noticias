@@ -1,131 +1,116 @@
-<# 
-  generate_posts.ps1
-  Lee /posts/*.html, extrae los metadatos del comentario inicial y genera /data/posts.json
-#>
+# generate_posts.ps1
+# Genera data\posts.json a partir de los HTML de /posts
 
-Param(
-  # Ruta raíz del proyecto (por defecto, la carpeta padre de /tools)
-  [string]$Root = (Split-Path $PSScriptRoot -Parent)
-)
+Set-StrictMode -Version Latest
+$ErrorActionPreference = "Stop"
 
-# Rutas basadas en la raíz del proyecto
-$PostsFolder = Join-Path $Root "posts"
-$OutputFile  = Join-Path $Root "data\posts.json"
+# --- Rutas base ---
+$rootFolder   = Split-Path $PSScriptRoot -Parent
+$postsFolder  = Join-Path $rootFolder "posts"
+$dataFolder   = Join-Path $rootFolder "data"
+$outputFile   = Join-Path $dataFolder "posts.json"
 
-Write-Host "Raíz del proyecto: $Root"
-Write-Host "Carpeta de posts:  $PostsFolder"
-Write-Host "Salida JSON:       $OutputFile"
-
-if (-not (Test-Path $PostsFolder)) {
-  throw "No se encuentra la carpeta de posts: $PostsFolder"
+if (-not (Test-Path $postsFolder)) {
+    Write-Error "No se encuentra la carpeta de posts: $postsFolder"
+    exit 1
 }
+
+if (-not (Test-Path $dataFolder)) {
+    New-Item -ItemType Directory -Path $dataFolder | Out-Null
+}
+
+# Para poder hacer HtmlDecode
+Add-Type -AssemblyName System.Web
 
 $posts = @()
 
-Get-ChildItem -Path $PostsFolder -Filter "*.html" | ForEach-Object {
-  $file = $_
-  $content = Get-Content $file.FullName -Raw
+Write-Host "Leyendo posts desde: $postsFolder"
+Get-ChildItem -Path $postsFolder -Filter "*.html" | ForEach-Object {
+    $file = $_
+    Write-Host "Procesando $($file.Name)..."
 
-  # Buscar el primer bloque de comentario <!-- ... -->
-  if ($content -notmatch "<!--(.*?)->") {
-    Write-Warning "El archivo '$($file.Name)' no tiene bloque de metadatos <!-- ... -->"
-    return
-  }
+    $content = Get-Content -Path $file.FullName -Raw
 
-  $metaBlock = ($content -split "-->")[0]
-  $metaLines = $metaBlock -split "`n"
-
-  $meta = @{
-    title      = ""
-    date       = ""
-    hotel      = ""
-    categories = @()
-    tags       = @()
-    featured   = $false
-    image      = ""
-    excerpt    = ""
-    slug       = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
-    url        = "posts/" + $file.Name
-  }
-
-  foreach ($line in $metaLines) {
-    $clean = $line.Trim("`r","`n"," ","-","#","/","<",">")
-    if ($clean -match "^\s*([A-Z]+)\s*:\s*(.+)$") {
-      $key = $matches[1].ToUpper()
-      $value = $matches[2].Trim()
-
-      switch ($key) {
-        "TITLE" {
-          $meta.title = $value
-        }
-        "DATE" {
-          $meta.date = $value
-        }
-        "HOTEL" {
-          $meta.hotel = $value
-        }
-        "CATEGORIES" {
-          if ($value) {
-            $meta.categories = $value.Split(",") | ForEach-Object { $_.Trim() } | Where-Object {$_}
-          }
-        }
-        "TAGS" {
-          if ($value) {
-            $meta.tags = $value.Split(",") | ForEach-Object { $_.Trim() } | Where-Object {$_}
-          }
-        }
-        "FEATURED" {
-          $meta.featured = $value.ToLower() -eq "true"
-        }
-        "IMAGE" {
-          $meta.image = $value
-        }
-        "EXCERPT" {
-          $meta.excerpt = $value
-        }
-      }
+    # --- Bloque de metadatos: primer <!-- ... --> del archivo ---
+    $metaMatch = [regex]::Match($content, "<!--(.*?)-->", "Singleline")
+    if (-not $metaMatch.Success) {
+        Write-Warning "El archivo '$($file.Name)' no tiene bloque de metadatos <!-- ... -->"
+        return
     }
-  }
 
-  if (-not $meta.title)  { Write-Warning "El archivo '$($file.Name)' no tiene TITLE";  return }
-  if (-not $meta.date)   { Write-Warning "El archivo '$($file.Name)' no tiene DATE";   return }
+    $metaBlock = $metaMatch.Groups[1].Value
+    $meta = @{}
 
-  try {
-    $meta.dateObj = [datetime]::Parse($meta.date)
-  } catch {
-    Write-Warning "Fecha no válida en '$($file.Name)': $($meta.date)"
-    return
-  }
+    foreach ($line in ($metaBlock -split "(`r`n|`n|`r)")) {
+        $trim = $line.Trim()
+        if ([string]::IsNullOrWhiteSpace($trim)) { continue }
+        if ($trim -notmatch ":") { continue }
 
-  $posts += $meta
+        $parts = $trim.Split(":", 2)
+        $key   = $parts[0].Trim().ToLower()
+        $value = $parts[1].Trim()
+
+        # Quitar comillas envolventes si las hubiera
+        if ($value.StartsWith('"') -and $value.EndsWith('"')) {
+            $value = $value.Trim('"')
+        }
+
+        $meta[$key] = $value
+    }
+
+    if (-not $meta.ContainsKey("title") -or -not $meta.ContainsKey("date")) {
+        Write-Warning "El archivo '$($file.Name)' tiene metadatos incompletos (falta 'title' o 'date')."
+        return
+    }
+
+    # --- Crear objeto post ---
+    $slug = [System.IO.Path]::GetFileNameWithoutExtension($file.Name)
+
+    # Limpiar HTML para generar un pequeño resumen
+    $plain = $content
+    $plain = [regex]::Replace($plain, "<script.*?</script>", "", "Singleline, IgnoreCase")
+    $plain = [regex]::Replace($plain, "<style.*?</style>", "", "Singleline, IgnoreCase")
+    $plain = [regex]::Replace($plain, "<.*?>", " ")
+    $plain = [System.Web.HttpUtility]::HtmlDecode($plain)
+    $plain = ($plain -replace "\s+", " ").Trim()
+
+    if ($plain.Length -gt 220) {
+        $excerpt = $plain.Substring(0, 220) + "…"
+    } else {
+        $excerpt = $plain
+    }
+
+    $post = [ordered]@{
+        title   = $meta["title"]
+        date    = $meta["date"]
+        slug    = $slug
+        path    = "posts/$($file.Name)"
+        excerpt = $excerpt
+    }
+
+    foreach ($k in @("image","hotel","category","tags","featured")) {
+        if ($meta.ContainsKey($k)) {
+            $post[$k] = $meta[$k]
+        }
+    }
+
+    $posts += [pscustomobject]$post
 }
 
-# Ordenar de más reciente a más antigua
-$posts = $posts | Sort-Object -Property dateObj -Descending
+if ($posts.Count -eq 0) {
+    Write-Warning "No se ha procesado ningún post. Revisa los bloques <!-- ... --> de los archivos en '$postsFolder'."
+} else {
+    # Ordenar por fecha (descendente)
+    $postsSorted = $posts | Sort-Object {
+        try {
+            [datetime]::Parse($_.date)
+        } catch {
+            Get-Date "1900-01-01"
+        }
+    } -Descending
 
-# Limpiar la propiedad auxiliar dateObj
-$cleanPosts = $posts | ForEach-Object {
-  [PSCustomObject]@{
-    title      = $_.title
-    date       = $_.date
-    hotel      = $_.hotel
-    categories = $_.categories
-    tags       = $_.tags
-    featured   = $_.featured
-    image      = $_.image
-    excerpt    = $_.excerpt
-    slug       = $_.slug
-    url        = $_.url
-  }
+    $json = $postsSorted | ConvertTo-Json -Depth 5
+    Set-Content -Path $outputFile -Value $json -Encoding UTF8
+
+    Write-Host "Generado $outputFile con $($postsSorted.Count) posts."
 }
-
-# Asegurar carpeta /data
-$dir = Split-Path -Parent $OutputFile
-if (-not (Test-Path $dir)) {
-  New-Item -ItemType Directory -Path $dir | Out-Null
-}
-
-$json = $cleanPosts | ConvertTo-Json -Depth 5
-Set-Content -Path $OutputFile -Value $json -Encoding UTF8
-
-Write-Host "Generado $OutputFile con $($cleanPosts.Count) posts."

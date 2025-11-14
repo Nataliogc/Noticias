@@ -1,19 +1,68 @@
-﻿{
-    "title":  "Workshop Profesional Murcia 2025",
-    "date":  "2025-10-14",
-    "hotel":  "Guadiana",
-    "categories":  [
-                       "B2B",
-                       "PromociÃ³n"
-                   ],
-    "tags":  [
-                 "Workshop",
-                 "Murcia",
-                 "Agencias"
-             ],
-    "featured":  false,
-    "image":  "img/workshop-murcia.png",
-    "excerpt":  "AcciÃ³n institucional y comercial con agencias del Levante para posicionar Ciudad Real como base de grupos.",
-    "slug":  "workshop-profesional-murcia-2025",
-    "url":  "posts/workshop-profesional-murcia-2025.html"
-}
+﻿[
+    {
+        "title":  "CotillÃ³n de Nochevieja Â· Hotel Sercotel Guadiana",
+        "date":  "2025-12-31",
+        "slug":  "nochevieja-guadiana",
+        "path":  "posts/nochevieja-guadiana.html",
+        "excerpt":  "\u003c!-- TITLE: CotillÃ³n de Nochevieja Â· Hotel Sercotel Guadiana DATE: 2025-12-31 HOTEL: Guadiana CATEGORIES: Eventos,Navidad TAGS: Nochevieja,Cena de gala,CotillÃ³n FEATURED: false IMAGE: img/news/2025/nochevieja-guadianaâ€¦",
+        "image":  "img/news/2025/nochevieja-guadiana/banner.png",
+        "hotel":  "Guadiana",
+        "tags":  "Nochevieja,Cena de gala,CotillÃ³n",
+        "featured":  "false"
+    },
+    {
+        "title":  "Escapada Navidad \u0026 Spa Â· Cumbria",
+        "date":  "2025-12-10",
+        "slug":  "escapada-navidad-spa",
+        "path":  "posts/escapada-navidad-spa.html",
+        "excerpt":  "\u003c!-- TITLE: Escapada Navidad \u0026 Spa Â· Cumbria DATE: 2025-12-10 HOTEL: Cumbria CATEGORIES: Spa,GastronomÃ­a,PromociÃ³n TAGS: Navidad,Spa FEATURED: true IMAGE: img/ph-spa.jpg EXCERPT: Alojamiento + circuito de spa + late câ€¦",
+        "image":  "img/ph-spa.jpg",
+        "hotel":  "Cumbria",
+        "tags":  "Navidad,Spa",
+        "featured":  "true"
+    },
+    {
+        "title":  "Noche de EnogastronomÃ­a Manchega con mÃºsica en directo",
+        "date":  "2025-11-22",
+        "slug":  "noche-enogastronomia-manchega",
+        "path":  "posts/noche-enogastronomia-manchega.html",
+        "excerpt":  "\u003c!-- TITLE: Noche de EnogastronomÃ­a Manchega con mÃºsica en directo DATE: 2025-11-22 HOTEL: Cumbria CATEGORIES: GastronomÃ­a,Cultura TAGS: EnogastronomÃ­a,Vinos,MÃºsica en directo FEATURED: false IMAGE: img/ph-enogastroâ€¦",
+        "image":  "img/ph-enogastro.svg",
+        "hotel":  "Cumbria",
+        "tags":  "EnogastronomÃ­a,Vinos,MÃºsica en directo",
+        "featured":  "false"
+    },
+    {
+        "title":  "Nuevo sistema de llaves electrÃ³nicas Â· Hotel Guadiana",
+        "date":  "2025-11-05",
+        "slug":  "nuevo-sistema-llaves-guadiana",
+        "path":  "posts/nuevo-sistema-llaves-guadiana.html",
+        "excerpt":  "\u003c!-- TITLE: Nuevo sistema de llaves electrÃ³nicas Â· Hotel Guadiana DATE: 2025-11-05 HOTEL: Guadiana CATEGORIES: Operaciones,TecnologÃ­a TAGS: Llaves,Seguridad,Onity FEATURED: false IMAGE: img/ph-llaves.svg EXCERPT: Renoâ€¦",
+        "image":  "img/ph-llaves.svg",
+        "hotel":  "Guadiana",
+        "tags":  "Llaves,Seguridad,Onity",
+        "featured":  "false"
+    },
+    {
+        "title":  "Nueva app para la gestiÃ³n de turnos de recepciÃ³n",
+        "date":  "2025-10-15",
+        "slug":  "Nueva app para la gestión de turnos de recepción",
+        "path":  "posts/Nueva app para la gestión de turnos de recepción.html",
+        "excerpt":  "\u003c!-- TITLE: Nueva app para la gestiÃ³n de turnos de recepciÃ³n DATE: 2025-10-15 HOTEL: Ambos hoteles CATEGORIES: Operaciones,TecnologÃ­a TAGS: Turnos,FormaciÃ³n,App interna FEATURED: false IMAGE: img/ph-app-turnos.svg EXâ€¦",
+        "image":  "img/ph-app-turnos.svg",
+        "hotel":  "Ambos hoteles",
+        "tags":  "Turnos,FormaciÃ³n,App interna",
+        "featured":  "false"
+    },
+    {
+        "title":  "Workshop Profesional Murcia 2025",
+        "date":  "2025-10-14",
+        "slug":  "workshop-profesional-murcia-2025",
+        "path":  "posts/workshop-profesional-murcia-2025.html",
+        "excerpt":  "\u003c!-- TITLE: Workshop Profesional Murcia 2025 DATE: 2025-10-14 HOTEL: Guadiana CATEGORIES: B2B,PromociÃ³n TAGS: Workshop,Murcia,Agencias FEATURED: false IMAGE: img/workshop-murcia.png EXCERPT: AcciÃ³n institucional y comeâ€¦",
+        "image":  "img/workshop-murcia.png",
+        "hotel":  "Guadiana",
+        "tags":  "Workshop,Murcia,Agencias",
+        "featured":  "false"
+    }
+]
