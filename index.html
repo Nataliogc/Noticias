@@ -19,7 +19,6 @@
   </header>
 
   <main class="layout" id="app">
-    <!-- Contenido generado por JS -->
     <section class="loading">
       Cargando noticias…
     </section>
@@ -29,137 +28,126 @@
     Hoteles de Calidad en Ciudad Real · Sercotel Guadiana · Cumbria Spa&amp;Hotel · Uso interno
   </footer>
 
+  <!-- Datos de noticias generados por PowerShell -->
+  <script src="data/posts.js"></script>
+
   <script>
-    async function loadPosts() {
+    function renderNews() {
       const app = document.getElementById("app");
+      const posts = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
 
-      try {
-        const res = await fetch("data/posts.json", { cache: "no-store" });
-        if (!res.ok) throw new Error("No se pudo cargar data/posts.json");
-
-        let posts = await res.json();
-        if (!Array.isArray(posts) || posts.length === 0) {
-          app.innerHTML = `
-            <section class="empty-state">
-              <h2>Últimas noticias</h2>
-              <p>No hay noticias publicadas todavía.</p>
-              <p class="hint">
-                Añade archivos HTML en <code>/posts</code> con su bloque de metadatos
-                y ejecuta <code>tools/generate_posts.ps1</code>.
-              </p>
-            </section>`;
-          return;
-        }
-
-        // Aseguramos orden por fecha descendente por si el JSON no viene ya ordenado
-        posts = posts.slice().sort((a, b) => {
-          const da = new Date(a.date || "1900-01-01");
-          const db = new Date(b.date || "1900-01-01");
-          return db - da;
-        });
-
-        const featured = posts[0];
-        const others = posts.slice(1);
-
-        // Construimos el HTML de la página
-        const html = [];
-
-        // --- Destacado ---
-        html.push('<section class="featured">');
-        html.push('<div class="featured__image">');
-        if (featured.image) {
-          html.push(
-            `<a href="${featured.path}" class="card-link">` +
-            `<img src="${featured.image}" alt="${featured.title || ""}">` +
-            "</a>"
-          );
-        } else {
-          html.push(
-            `<a href="${featured.path}" class="card-link featured__image--placeholder">` +
-            `<span>Noticia destacada</span>` +
-            "</a>"
-          );
-        }
-        html.push("</div>");
-
-        html.push('<div class="featured__body">');
-        html.push('<span class="tag tag-featured">Destacado</span>');
-        if (featured.hotel) {
-          html.push(`<span class="tag tag-hotel">${featured.hotel}</span>`);
-        }
-
-        html.push(
-          `<h2 class="featured__title"><a href="${featured.path}">${featured.title || "Noticia"}</a></h2>`
-        );
-
-        if (featured.date) {
-          html.push(`<p class="featured__date">${featured.date}</p>`);
-        }
-
-        if (featured.excerpt) {
-          html.push(`<p class="featured__excerpt">${featured.excerpt}</p>`);
-        }
-
-        html.push(
-          `<a class="btn-primary" href="${featured.path}">Leer completa</a>`
-        );
-        html.push("</div>");
-        html.push("</section>");
-
-        // --- Últimas noticias (rejilla) ---
-        html.push('<section class="latest">');
-        html.push('<div class="latest__header">');
-        html.push("<h2>Últimas noticias</h2>");
-        html.push("</div>");
-        html.push('<div class="latest__grid">');
-
-        others.forEach((post) => {
-          const url = post.path; // 🔴 IMPORTANTE: enlace RELATIVO, sin barra inicial
-
-          html.push('<article class="card">');
-
-          if (post.image) {
-            html.push(
-              `<a href="${url}" class="card__image-wrapper">` +
-              `<img src="${post.image}" alt="${post.title || ""}" />` +
-              "</a>"
-            );
-          }
-
-          html.push('<div class="card__body">');
-
-          if (post.date) {
-            html.push(`<p class="card__date">${post.date}</p>`);
-          }
-
-          html.push(
-            `<h3 class="card__title"><a href="${url}">${post.title || "Noticia"}</a></h3>`
-          );
-
-          if (post.hotel) {
-            html.push(`<span class="tag tag-hotel">${post.hotel}</span>`);
-          }
-
-          html.push("</div>"); // card__body
-          html.push("</article>");
-        });
-
-        html.push("</div>"); // latest__grid
-        html.push("</section>");
-
-        app.innerHTML = html.join("");
-      } catch (err) {
-        console.error(err);
+      if (!posts.length) {
         app.innerHTML = `
-          <section class="error-state">
-            <h2>Error al cargar las noticias</h2>
-            <p>Revisa que exista <code>data/posts.json</code> y que el sitio esté servido correctamente.</p>
-            <p class="hint">${err.message}</p>
+          <section class="empty-state">
+            <h2>Últimas noticias</h2>
+            <p>No hay noticias publicadas todavía.</p>
+            <p class="hint">
+              Añade archivos HTML en <code>/posts</code> con su bloque de metadatos
+              y ejecuta <code>tools/generate_posts.ps1</code>.
+            </p>
           </section>`;
+        return;
       }
+
+      // Orden por fecha descendente por si acaso
+      posts.sort((a, b) => {
+        const da = new Date(a.date || "1900-01-01");
+        const db = new Date(b.date || "1900-01-01");
+        return db - da;
+      });
+
+      const featured = posts[0];
+      const others = posts.slice(1);
+      const html = [];
+
+      // --- Destacado ---
+      html.push('<section class="featured">');
+
+      html.push('<div class="featured__image">');
+      if (featured.image) {
+        html.push(
+          `<a href="${featured.path}" class="card-link">` +
+          `<img src="${featured.image}" alt="${featured.title || ""}">` +
+          "</a>"
+        );
+      } else {
+        html.push(
+          `<a href="${featured.path}" class="card-link featured__image--placeholder">` +
+          `<span>Noticia destacada</span>` +
+          "</a>"
+        );
+      }
+      html.push("</div>");
+
+      html.push('<div class="featured__body">');
+      html.push('<span class="tag tag-featured">Destacado</span>');
+      if (featured.hotel) {
+        html.push(`<span class="tag tag-hotel">${featured.hotel}</span>`);
+      }
+
+      html.push(
+        `<h2 class="featured__title"><a href="${featured.path}">${featured.title || "Noticia"}</a></h2>`
+      );
+
+      if (featured.date) {
+        html.push(`<p class="featured__date">${featured.date}</p>`);
+      }
+
+      if (featured.excerpt) {
+        html.push(`<p class="featured__excerpt">${featured.excerpt}</p>`);
+      }
+
+      html.push(
+        `<a class="btn-primary" href="${featured.path}">Leer completa</a>`
+      );
+      html.push("</div>");
+      html.push("</section>");
+
+      // --- Últimas noticias en rejilla ---
+      html.push('<section class="latest">');
+      html.push('<div class="latest__header">');
+      html.push("<h2>Últimas noticias</h2>");
+      html.push("</div>");
+      html.push('<div class="latest__grid">');
+
+      others.forEach((post) => {
+        const url = post.path; // relativo: posts/lo-que-sea.html
+
+        html.push('<article class="card">');
+
+        if (post.image) {
+          html.push(
+            `<a href="${url}" class="card__image-wrapper">` +
+            `<img src="${post.image}" alt="${post.title || ""}" />` +
+            "</a>"
+          );
+        }
+
+        html.push('<div class="card__body">');
+
+        if (post.date) {
+          html.push(`<p class="card__date">${post.date}</p>`);
+        }
+
+        html.push(
+          `<h3 class="card__title"><a href="${url}">${post.title || "Noticia"}</a></h3>`
+        );
+
+        if (post.hotel) {
+          html.push(`<span class="tag tag-hotel">${post.hotel}</span>`);
+        }
+
+        html.push("</div>"); // card__body
+        html.push("</article>");
+      });
+
+      html.push("</div>"); // latest__grid
+      html.push("</section>");
+
+      app.innerHTML = html.join("");
     }
 
-    document.addEventListener("DOMContentLoaded", loadPosts);
+    document.addEventListener("DOMContentLoaded", renderNews);
   </script>
 </body>
 </html>
