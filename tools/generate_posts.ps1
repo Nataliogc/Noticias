@@ -1,5 +1,5 @@
 # generate_posts.ps1
-# Genera data\posts.json a partir de los HTML de /posts
+# Genera data\posts.json y data\posts.js a partir de los HTML de /posts
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
@@ -8,7 +8,8 @@ $ErrorActionPreference = "Stop"
 $rootFolder   = Split-Path $PSScriptRoot -Parent
 $postsFolder  = Join-Path $rootFolder "posts"
 $dataFolder   = Join-Path $rootFolder "data"
-$outputFile   = Join-Path $dataFolder "posts.json"
+$jsonFile     = Join-Path $dataFolder "posts.json"
+$jsFile       = Join-Path $dataFolder "posts.js"
 
 if (-not (Test-Path $postsFolder)) {
     Write-Error "No se encuentra la carpeta de posts: $postsFolder"
@@ -109,8 +110,13 @@ if ($posts.Count -eq 0) {
         }
     } -Descending
 
+    # JSON
     $json = $postsSorted | ConvertTo-Json -Depth 5
-    Set-Content -Path $outputFile -Value $json -Encoding UTF8
+    Set-Content -Path $jsonFile -Value $json -Encoding UTF8
 
-    Write-Host "Generado $outputFile con $($postsSorted.Count) posts."
+    # JS: variable global accesible desde index.html
+    $js = "window.POSTS_DATA = " + $json + ";"
+    Set-Content -Path $jsFile -Value $js -Encoding UTF8
+
+    Write-Host "Generado $jsonFile y $jsFile con $($postsSorted.Count) posts."
 }
