@@ -198,17 +198,19 @@ foreach ($file in $files) {
     $excerpt = Get-Excerpt -meta $meta -content $content
 
     # Crear objeto de salida
-    $postObj = [PSCustomObject]@{
-        title      = $title
-        date       = $date
-        hotel      = $hotel
-        categories = $categories
-        tags       = $tags
-        featured   = $featured
-        image      = $image
-        slug       = $slug
-        excerpt    = $excerpt
-    }
+   $postObj = [PSCustomObject]@{
+    title      = $title
+    date       = $date
+    hotel      = $hotel
+    categories = $categories
+    tags       = $tags
+    featured   = $featured
+    image      = $image
+    slug       = $slug
+    url        = "posts/$slug"   # 👈 ruta al HTML de la noticia
+    excerpt    = $excerpt
+}
+
 
     $posts += $postObj
 }

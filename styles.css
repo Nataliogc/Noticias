@@ -415,4 +415,14 @@ body {
   .news-grid {
     grid-template-columns: 1fr;
   }
+/* Ajuste de la imagen en el slider de noticias destacadas */
+.hero-media img,
+.hero-slide img,
+.news-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;  /* llena el cuadro recortando si hace falta */
+  display: block;
+
+
 }

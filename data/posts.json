@@ -1,23 +1,5 @@
 ﻿[
     {
-        "title":  "Cotillón de Nochevieja · Hotel Sercotel Guadiana",
-        "date":  "2025-12-31",
-        "hotel":  "Guadiana",
-        "categories":  [
-                           "Eventos",
-                           "Navidad"
-                       ],
-        "tags":  [
-                     "Nochevieja",
-                     "Cena de gala",
-                     "Cotillón"
-                 ],
-        "featured":  false,
-        "image":  "img/news/2025/nochevieja-guadiana/banner.png",
-        "slug":  "nochevieja-guadiana.html",
-        "excerpt":  "Cena especial de Fin de Año, uvas de la suerte y cotillón con DJ tras las uvas."
-    },
-    {
         "title":  "Escapada Navidad \u0026 Spa · Cumbria",
         "date":  "2025-12-10",
         "hotel":  "Cumbria",
@@ -33,6 +15,7 @@
         "featured":  true,
         "image":  "img/ph-spa.jpg",
         "slug":  "escapada-navidad-spa.html",
+        "url":  "posts/escapada-navidad-spa.html",
         "excerpt":  "Alojamiento + circuito de spa + late check-out (según disponibilidad)."
     },
     {
@@ -51,6 +34,7 @@
         "featured":  false,
         "image":  "img/ph-enogastro.svg",
         "slug":  "noche-enogastronomia-manchega.html",
+        "url":  "posts/noche-enogastronomia-manchega.html",
         "excerpt":  "Maridaje de vinos DO La Mancha con platos locales y música en directo, plazas limitadas."
     },
     {
@@ -69,6 +53,7 @@
         "featured":  true,
         "image":  "img/turnos_app.png",
         "slug":  "instalar-app-turnos-recepcion.html",
+        "url":  "posts/instalar-app-turnos-recepcion.html",
         "excerpt":  "Instala la nueva app de turnos en tu móvil Android o iPhone en solo 3 pasos."
     },
     {
@@ -87,6 +72,7 @@
         "featured":  false,
         "image":  "img/ph-llaves.svg",
         "slug":  "nuevo-sistema-llaves-guadiana.html",
+        "url":  "posts/nuevo-sistema-llaves-guadiana.html",
         "excerpt":  "Renovación del sistema de cerraduras electrónicas para mejorar la seguridad y la experiencia del huésped."
     },
     {
@@ -105,6 +91,7 @@
         "featured":  false,
         "image":  "img/workshop-murcia.png",
         "slug":  "workshop-profesional-murcia-2025.html",
+        "url":  "posts/workshop-profesional-murcia-2025.html",
         "excerpt":  "Acción institucional y comercial con agencias del Levante para posicionar Ciudad Real como base de grupos."
     }
 ]
