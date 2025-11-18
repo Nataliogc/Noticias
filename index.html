@@ -58,29 +58,31 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const app = document.getElementById("app");
-      const postsRaw = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
+  const app = document.getElementById("app");
+  const postsRaw = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
 
-      if (!postsRaw.length) {
-        app.innerHTML = `
-          <section class="loading-state">
-            <h2>Últimas noticias</h2>
-            <p>No hay noticias publicadas todavía.</p>
-          </section>`;
-        return;
-      }
+  if (!postsRaw.length) {
+    app.innerHTML = `
+      <section class="loading-state">
+        <h2>Últimas noticias</h2>
+        <p>No hay noticias publicadas todavía.</p>
+      </section>`;
+    return;
+  }
 
-      // Ordenar por fecha (descendente)
-      postsRaw.sort((a, b) => new Date(b.date) - new Date(a.date));
+  // Ordenar por fecha (descendente)
+  postsRaw.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-      const heroPosts = postsRaw.slice(0, 3);
-      const otherPosts = postsRaw.slice(3);
+  // 👇 AQUÍ SE ELIGEN LAS DESTACADAS
+  const heroPosts  = postsRaw.slice(0, 3);  // 3 últimas noticias
+  const otherPosts = postsRaw.slice(3);     // el resto para el grid
 
-      app.innerHTML = renderLayout(heroPosts, otherPosts);
+  app.innerHTML = renderLayout(heroPosts, otherPosts);
 
-      setupHeroSlider();
-      setupSearch();
-    });
+  setupHeroSlider();
+  setupSearch();
+});
+
 
     function renderLayout(heroPosts, otherPosts) {
       let heroHtml = "";

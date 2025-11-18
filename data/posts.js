@@ -1,68 +1,112 @@
-﻿window.POSTS_DATA = [
+﻿window.POSTS = [
     {
-        "title":  "CotillÃ³n de Nochevieja Â· Hotel Sercotel Guadiana",
+        "title":  "Cotillón de Nochevieja · Hotel Sercotel Guadiana",
         "date":  "2025-12-31",
-        "slug":  "nochevieja-guadiana",
-        "path":  "posts/nochevieja-guadiana.html",
-        "excerpt":  "MenÃº Fin de AÃ±o 2025 â€” Sercotel Guadiana Hoteles de Calidad en Ciudad Real Sercotel Guadiana Â· Cumbria Spa \u0026 Hotel â† Volver a noticias MenÃº Fin de AÃ±o 2025 â€” Sercotel Guadiana 2025-12-31 Â· Guadiana Cena de gaâ€¦",
+        "hotel":  "Guadiana",
+        "categories":  [
+                           "Eventos",
+                           "Navidad"
+                       ],
+        "tags":  [
+                     "Nochevieja",
+                     "Cena de gala",
+                     "Cotillón"
+                 ],
+        "featured":  false,
         "image":  "img/news/2025/nochevieja-guadiana/banner.png",
-        "hotel":  "Guadiana",
-        "tags":  "Nochevieja,Cena de gala,CotillÃ³n",
-        "featured":  "false"
+        "slug":  "nochevieja-guadiana.html",
+        "excerpt":  "Cena especial de Fin de Año, uvas de la suerte y cotillón con DJ tras las uvas."
     },
     {
-        "title":  "Escapada Navidad \u0026 Spa Â· Cumbria",
+        "title":  "Escapada Navidad \u0026 Spa · Cumbria",
         "date":  "2025-12-10",
-        "slug":  "escapada-navidad-spa",
-        "path":  "posts/escapada-navidad-spa.html",
-        "excerpt":  "...",
+        "hotel":  "Cumbria",
+        "categories":  [
+                           "Spa",
+                           "Gastronomía",
+                           "Promoción"
+                       ],
+        "tags":  [
+                     "Navidad",
+                     "Spa"
+                 ],
+        "featured":  true,
         "image":  "img/ph-spa.jpg",
-        "hotel":  "Cumbria",
-        "tags":  "Navidad,Spa",
-        "featured":  "true"
+        "slug":  "escapada-navidad-spa.html",
+        "excerpt":  "Alojamiento + circuito de spa + late check-out (según disponibilidad)."
     },
     {
-        "title":  "Noche de EnogastronomÃ­a Manchega con mÃºsica en directo",
+        "title":  "Noche de Enogastronomía Manchega con música en directo",
         "date":  "2025-11-22",
-        "slug":  "noche-enogastronomia-manchega",
-        "path":  "posts/noche-enogastronomia-manchega.html",
-        "excerpt":  "Noche de EnogastronomÃ­a Manchega â† Volver Noche de EnogastronomÃ­a Manchega con mÃºsica en directo Fecha: 22 de noviembre de 2025 Maridaje de vinos DO La Mancha con platos locales. MÃºsica en directo y plazas limitadaâ€¦",
-        "image":  "img/ph-enogastro.svg",
         "hotel":  "Cumbria",
-        "tags":  "EnogastronomÃ­a,Vinos,MÃºsica en directo",
-        "featured":  "false"
+        "categories":  [
+                           "Gastronomía",
+                           "Cultura"
+                       ],
+        "tags":  [
+                     "Enogastronomía",
+                     "Vinos",
+                     "Música en directo"
+                 ],
+        "featured":  false,
+        "image":  "img/ph-enogastro.svg",
+        "slug":  "noche-enogastronomia-manchega.html",
+        "excerpt":  "Maridaje de vinos DO La Mancha con platos locales y música en directo, plazas limitadas."
     },
     {
-        "title":  "Nuevo sistema de llaves electrÃ³nicas Â· Hotel Guadiana",
+        "title":  "Nueva app para la gestión de turnos de recepción",
+        "date":  "2025-11-18",
+        "hotel":  "Guadiana \u0026 Cumbria",
+        "categories":  [
+                           "Turnos",
+                           "Operativa interna"
+                       ],
+        "tags":  [
+                     "App",
+                     "Turnos",
+                     "Recepción"
+                 ],
+        "featured":  true,
+        "image":  "img/turnos_app.png",
+        "slug":  "instalar-app-turnos-recepcion.html",
+        "excerpt":  "Instala la nueva app de turnos en tu móvil Android o iPhone en solo 3 pasos."
+    },
+    {
+        "title":  "Nuevo sistema de llaves electrónicas · Hotel Guadiana",
         "date":  "2025-11-05",
-        "slug":  "nuevo-sistema-llaves-guadiana",
-        "path":  "posts/nuevo-sistema-llaves-guadiana.html",
-        "excerpt":  "Nuevo sistema de llaves en Guadiana â† Volver Nuevo sistema de llaves en Guadiana Fecha: 28 de julio de 2025 En los prÃ³ximos dÃ­as activamos el nuevo sistema de llaves electrÃ³nicas. Incrementa la seguridad y agiliza eâ€¦",
-        "image":  "img/ph-llaves.svg",
         "hotel":  "Guadiana",
-        "tags":  "Llaves,Seguridad,Onity",
-        "featured":  "false"
-    },
-    {
-        "title":  "Nueva app para la gestiÃ³n de turnos de recepciÃ³n",
-        "date":  "2025-10-15",
-        "slug":  "Nueva app para la gestión de turnos de recepción",
-        "path":  "posts/Nueva app para la gestión de turnos de recepción.html",
-        "excerpt":  "Nueva App para Turnos de RecepciÃ³n â€“ SERCOTEL Guadiana \u0026 Cumbria Spa\u0026Hotel Â¡Presentamos la nueva app para la gestiÃ³n de turnos de recepciÃ³n! Exclusiva para SERCOTEL Guadiana y Cumbria Spa\u0026Hotel 29 de octubre de 202â€¦",
-        "image":  "img/ph-app-turnos.svg",
-        "hotel":  "Ambos hoteles",
-        "tags":  "Turnos,FormaciÃ³n,App interna",
-        "featured":  "false"
+        "categories":  [
+                           "Operaciones",
+                           "Tecnología"
+                       ],
+        "tags":  [
+                     "Llaves",
+                     "Seguridad",
+                     "Onity"
+                 ],
+        "featured":  false,
+        "image":  "img/ph-llaves.svg",
+        "slug":  "nuevo-sistema-llaves-guadiana.html",
+        "excerpt":  "Renovación del sistema de cerraduras electrónicas para mejorar la seguridad y la experiencia del huésped."
     },
     {
         "title":  "Workshop Profesional Murcia 2025",
         "date":  "2025-10-14",
-        "slug":  "workshop-profesional-murcia-2025",
-        "path":  "posts/workshop-profesional-murcia-2025.html",
-        "excerpt":  "COMUNICACIÃ“N INTERNA Ã‰xito en Murcia Â· Ciudad Real se posiciona como destino clave Murcia, 14 de octubre de 2025 Â· Uso interno (Equipo) \u003cimg alt=\"Workshop Profesional Murcia 2025 y Sabor Quijote\" decoding=\"async\" loaâ€¦",
-        "image":  "img/workshop-murcia.png",
         "hotel":  "Guadiana",
-        "tags":  "Workshop,Murcia,Agencias",
-        "featured":  "false"
+        "categories":  [
+                           "B2B",
+                           "Promoción"
+                       ],
+        "tags":  [
+                     "Workshop",
+                     "Murcia",
+                     "Agencias"
+                 ],
+        "featured":  false,
+        "image":  "img/workshop-murcia.png",
+        "slug":  "workshop-profesional-murcia-2025.html",
+        "excerpt":  "Acción institucional y comercial con agencias del Levante para posicionar Ciudad Real como base de grupos."
     }
 ];
+window.POSTS_DATA = window.POSTS;
+
