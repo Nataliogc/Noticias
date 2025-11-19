@@ -12,16 +12,17 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 <style>
 /* ================== LAYOUT GENERAL ================== */
 .turnos-app-install {
-  max-width: 880px;
+  width: 100%;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 16px 12px 40px 12px;
+  padding: 16px 12px 32px 12px;
   box-sizing: border-box;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   color: #243043;
   background: linear-gradient(135deg, #f5f7fb 0%, #f9fbff 40%, #ffffff 100%);
   border-radius: 18px;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 /* ================== CABECERA ================== */
@@ -76,7 +77,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 }
 
 .app-subtitle {
-  font-size: 0.92rem;
+  font-size: 0.96rem;
   color: #64748b;
   margin: 0 0 10px 0;
 }
@@ -92,7 +93,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 }
 
 .app-video-label {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: #64748b;
   margin-bottom: 6px;
   display: flex;
@@ -102,7 +103,6 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 
 .app-video-wrapper {
   width: 100%;
-  max-width: 520px;
   margin: 0 auto;
   aspect-ratio: 16 / 9;
   border-radius: 10px;
@@ -115,13 +115,9 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   border: none;
 }
 
-/* ================== GRID PRINCIPAL BLOQUES ================== */
-.app-main-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 16px;
-  padding: 0 16px 14px 16px;
-  box-sizing: border-box;
+/* ================== BLOQUES PRINCIPALES ================== */
+.app-main {
+  padding: 0 16px 10px 16px;
 }
 
 /* Tarjetas base */
@@ -131,6 +127,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   padding: 16px 18px;
   border: 1px solid #e5e9f2;
   box-shadow: 0 8px 24px rgba(15,23,42,0.06);
+  margin-bottom: 14px;
 }
 
 .app-card h3 {
@@ -176,31 +173,31 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
   flex-shrink: 0;
   margin-top: 2px;
 }
 
 .app-step-title {
-  font-size: 0.97rem;
+  font-size: 0.98rem;
   font-weight: 600;
   color: #03658c;
 }
 
 .app-step p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #475569;
 }
 
 /* Listas */
 .app-card ul {
   margin: 6px 0 0 0;
-  padding-left: 18px;
+  padding-left: 20px;
 }
 .app-card li {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   margin-bottom: 4px;
 }
 
@@ -217,7 +214,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 
 /* ================== BLOQUES DE USO (ABAJO) ================== */
 .app-usage-section {
-  padding: 0 16px 8px 16px;
+  padding: 4px 16px 8px 16px;
 }
 
 .app-usage-title {
@@ -230,10 +227,11 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   gap: 8px;
 }
 
-.app-usage-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+/* AHORA SIEMPRE UNA COLUMNA, SIN GRID */
+.app-usage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .app-usage-card {
@@ -242,7 +240,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   padding: 10px 12px;
   border: 1px solid #e5e9f2;
   box-shadow: 0 4px 16px rgba(15,23,42,0.04);
-  font-size: 0.88rem;
+  font-size: 0.96rem;
 }
 
 .app-usage-card-title {
@@ -258,12 +256,12 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 .app-usage-card ul {
   margin: 0;
   padding: 0;
-  font-size: 0.86rem;
+  font-size: 0.95rem;
   color: #4b5563;
 }
 
 .app-usage-card ul {
-  padding-left: 16px;
+  padding-left: 18px;
   margin-top: 3px;
 }
 .app-usage-card li {
@@ -274,32 +272,30 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 .app-footer-note {
   text-align: center;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #475569;
   padding: 10px 18px 4px 18px;
 }
 
-/* ================== RESPONSIVE MÓVIL ================== */
-/* Forzamos vista cómoda en móviles */
-@media screen and (max-width: 768px) {
-
+/* ================== AJUSTE EXTRA PARA MÓVIL PEQUEÑO ================== */
+@media screen and (max-width: 600px) {
   .turnos-app-install {
-    width: 100%;
-    max-width: 100%;
-    padding: 10px 6px 22px 6px;
+    padding: 12px 6px 24px 6px;
     border-radius: 0;
     box-shadow: none;
-    font-size: 1rem; /* todo un pelín más grande en móvil */
+    font-size: 1.02rem;
   }
 
   .app-header {
-    padding: 10px 8px 4px 8px;
+    padding: 12px 12px 8px 12px;
   }
 
-  .app-title-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 4px;
+  .app-video-card,
+  .app-main,
+  .app-usage-section {
+    padding-left: 10px;
+    padding-right: 10px;
+    margin: 0;
   }
 
   .app-title-row h2 {
@@ -310,53 +306,8 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
     font-size: 1rem;
   }
 
-  .app-main-grid {
-    display: block;          /* una columna */
-    padding: 0 8px 8px 8px;
-  }
-
   .app-card {
     padding: 14px 12px;
-    margin-bottom: 10px;
-  }
-
-  .app-video-card {
-    margin: 0 8px 12px 8px;
-    padding: 10px 10px 12px 10px;
-  }
-
-  .app-video-wrapper {
-    max-width: 100%;
-    border-radius: 10px;
-    aspect-ratio: 16/9;
-    box-shadow: 0 4px 14px rgba(15,23,42,0.18);
-  }
-
-  .app-step p,
-  .app-card li {
-    font-size: 0.98rem;
-  }
-
-  .app-usage-section {
-    padding: 0 8px 6px 8px;
-  }
-
-  .app-usage-grid {
-    display: block;          /* todas las tarjetas una debajo de otra */
-  }
-
-  .app-usage-card {
-    margin-bottom: 10px;
-    font-size: 0.96rem;
-  }
-
-  .app-usage-card p,
-  .app-usage-card li {
-    font-size: 0.96rem;
-  }
-
-  .app-footer-note {
-    font-size: 0.95rem;
   }
 }
 </style>
@@ -397,8 +348,8 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
     </div>
   </div>
 
-  <!-- GRID PRINCIPAL: INSTALACIÓN + RESUMEN USO -->
-  <div class="app-main-grid">
+  <!-- BLOQUES PRINCIPALES EN COLUMNA -->
+  <div class="app-main">
 
     <!-- ANDROID / IPHONE -->
     <div class="app-card">
@@ -497,16 +448,24 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   <!-- SECCIÓN DETALLE DE USO -->
   <div class="app-usage-section">
     <div class="app-usage-title">
-      <span class="app-icon-circle"ℹ️</span>
+      <span class="app-icon-circle">ℹ️</span>
       Detalle de lo que ves en la app
     </div>
 
-    <div class="app-usage-grid">
+    <div class="app-usage-list">
       <div class="app-usage-card">
         <div class="app-usage-card-title">📅 Semana y fechas</div>
         <p>
           En la cabecera se muestra el rango de la semana (de lunes a domingo) y la fecha seleccionada.
           Siempre corresponde con el cuadrante generado.
+        </p>
+      </div>
+
+      <div class="app-usage-card">
+        <div class="app-usage-card-title">📊 Mismo orden que el cuadrante</div>
+        <p>
+          El orden de personas es exactamente el mismo que en la versión web de turnos,
+          tanto en Guadiana como en Cumbria, para que lo reconozcáis de un vistazo.
         </p>
       </div>
 
@@ -530,14 +489,6 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
       </div>
 
       <div class="app-usage-card">
-        <div class="app-usage-card-title">📊 Mismo orden que el cuadrante</div>
-        <p>
-          El orden de personas es exactamente el mismo que en la versión web de turnos,
-          tanto en Guadiana como en Cumbria, para que lo reconozcáis de un vistazo.
-        </p>
-      </div>
-
-      <div class="app-usage-card">
         <div class="app-usage-card-title">🆕 Actualizaciones automáticas</div>
         <p>
           Cada vez que se genera un nuevo cuadrante, la app mostrará los datos actualizados
@@ -551,7 +502,6 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
           Si notáis que algo falla o veis algún turno raro, avisadme sin miedo; lo reviso encantado y lo dejamos bien.
         </p>
       </div>
-
     </div>
   </div>
 
