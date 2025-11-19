@@ -1,4 +1,15 @@
-<!DOCTYPE html>
+<!--
+TITLE: Nueva app para la gestión de turnos de recepción
+DATE: 2025-11-18
+HOTEL: Guadiana & Cumbria
+CATEGORIES: Turnos,Operativa interna
+TAGS: App,Turnos,Recepción
+FEATURED: true
+IMAGE: img/turnos_app.png
+EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para Android e iPhone.
+-->
+
+<<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -34,6 +45,17 @@
         sans-serif;
       background: var(--bg-page);
       color: var(--text-main);
+      font-size: 18px; /* 🔎 Letra general algo más grande */
+    }
+
+    a {
+      color: var(--accent-blue);
+    }
+
+    .tap-link {
+      color: var(--accent-blue);
+      text-decoration: underline;
+      word-break: break-all;
     }
 
     .turnos-app-page {
@@ -65,7 +87,7 @@
       flex-wrap: wrap;
       gap: 6px;
       margin-bottom: 10px;
-      font-size: 0.78rem;
+      font-size: 0.9rem;
     }
 
     .tap-pill {
@@ -99,13 +121,13 @@
     }
 
     .tap-title {
-      font-size: 1.5rem;
+      font-size: 1.7rem;
       margin: 4px 0 4px;
       line-height: 1.2;
     }
 
     .tap-subtitle {
-      font-size: 0.9rem;
+      font-size: 1.05rem;
       color: var(--text-muted);
       margin-bottom: 14px;
     }
@@ -118,7 +140,7 @@
     }
 
     .tap-section-title {
-      font-size: 1.02rem;
+      font-size: 1.15rem;
       font-weight: 600;
       margin: 0 0 8px;
       display: flex;
@@ -127,18 +149,18 @@
     }
 
     .tap-section-title span.emoji {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
     }
 
     .tap-video-card {
       border-radius: 14px;
       border: 1px solid var(--border-soft);
       background: #f9fafb;
-      padding: 10px;
+      padding: 11px;
     }
 
     .tap-video-caption {
-      font-size: 0.85rem;
+      font-size: 1rem;
       color: var(--text-muted);
       margin-bottom: 8px;
     }
@@ -167,7 +189,7 @@
     .tap-block {
       border-radius: 14px;
       border: 1px solid var(--border-soft);
-      padding: 12px;
+      padding: 13px;
       margin-bottom: 12px;
       background: #f9fafb;
     }
@@ -178,7 +200,7 @@
       gap: 6px;
       margin-bottom: 8px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
     }
 
     .tap-block-badge {
@@ -188,19 +210,19 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       background: var(--accent-blue-soft);
       color: var(--accent-blue);
       flex-shrink: 0;
     }
 
     .tap-block-title {
-      font-size: 0.96rem;
+      font-size: 1.05rem;
     }
 
     .tap-block p {
       margin: 6px 0;
-      font-size: 0.9rem;
+      font-size: 1.02rem;
       color: var(--text-main);
     }
 
@@ -208,16 +230,16 @@
     .tap-block ol {
       margin: 6px 0 4px;
       padding-left: 20px;
-      font-size: 0.9rem;
+      font-size: 1.02rem;
       color: var(--text-main);
     }
 
     .tap-block li + li {
-      margin-top: 2px;
+      margin-top: 3px;
     }
 
     .tap-note {
-      font-size: 0.82rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
       margin-top: 4px;
     }
@@ -236,7 +258,7 @@
       align-items: flex-start;
       gap: 8px;
       margin-bottom: 6px;
-      font-size: 0.9rem;
+      font-size: 1.02rem;
     }
 
     .tap-step-number {
@@ -248,7 +270,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       flex-shrink: 0;
       margin-top: 2px;
     }
@@ -260,16 +282,16 @@
       display: flex;
       align-items: flex-start;
       gap: 8px;
-      padding: 10px;
+      padding: 11px;
       border-radius: 12px;
       border: 1px solid var(--border-soft);
       background: #f9fafb;
-      font-size: 0.9rem;
+      font-size: 1.02rem;
       margin-bottom: 8px;
     }
 
     .tap-detail-icon {
-      font-size: 1.1rem;
+      font-size: 1.25rem;
       flex-shrink: 0;
       margin-top: 1px;
     }
@@ -280,7 +302,7 @@
     }
 
     /* ==========================
-       CARD "SI ALGO NO CUADRA"
+       CARD "SI ALGO NO ENCAJA"
        ========================== */
     .app-usage-card {
       margin-top: 10px;
@@ -288,12 +310,13 @@
       border-radius: 14px;
       border: 1px dashed #fecaca;
       background: #fef2f2;
-      font-size: 0.9rem;
+      font-size: 1.02rem;
     }
 
     .app-usage-card-title {
       font-weight: 600;
       margin-bottom: 4px;
+      font-size: 1.08rem;
     }
 
     /* ==========================
@@ -301,7 +324,7 @@
        ========================== */
     .tap-footer-note {
       margin-top: 14px;
-      font-size: 0.8rem;
+      font-size: 0.98rem;
       color: var(--text-muted);
       text-align: center;
     }
@@ -316,23 +339,23 @@
       }
 
       .tap-title {
-        font-size: 1.35rem;
+        font-size: 1.6rem;
       }
 
       .tap-subtitle {
-        font-size: 0.88rem;
+        font-size: 1.05rem;
       }
 
       .tap-block,
       .tap-detail-item,
       .tap-video-card {
-        padding: 10px;
+        padding: 11px;
       }
 
       .tap-block p,
       .tap-block li,
       .tap-detail-item {
-        font-size: 0.88rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -393,7 +416,12 @@
             <p>
               1. Abre Chrome en tu móvil y entra en:
               <br>
-              <strong>https://nataliogc.github.io/turnosweb/live.mobile.html</strong>
+              <a class="tap-link"
+                 href="https://nataliogc.github.io/turnosweb/live.mobile.html"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                https://nataliogc.github.io/turnosweb/live.mobile.html
+              </a>
             </p>
             <ol class="tap-steps-list">
               <li>
@@ -424,7 +452,12 @@
             <p>
               1. Abre Safari y entra en:
               <br>
-              <strong>https://nataliogc.github.io/turnosweb/live.mobile.html</strong>
+              <a class="tap-link"
+                 href="https://nataliogc.github.io/turnosweb/live.mobile.html"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                https://nataliogc.github.io/turnosweb/live.mobile.html
+              </a>
             </p>
             <ol class="tap-steps-list">
               <li>
@@ -551,17 +584,14 @@
             </div>
           </div>
 
-         <div class="app-usage-card" style="font-size: 1rem;">
-  <div class="app-usage-card-title" style="font-size: 1.05rem;">
-    🛠 Si algo no encaja
-  </div>
-  <p style="margin-top: 6px;">
-    Si ves algún turno raro, notas algo diferente al cuadrante o
-    simplemente hay algo que no te cuadra, avísame sin problema.
-    Lo reviso contigo y lo dejamos perfecto.
-  </p>
-</div>
-
+          <div class="app-usage-card">
+            <div class="app-usage-card-title">🛠 Si algo no encaja</div>
+            <p>
+              Si ves algún turno raro, notas algo diferente al cuadrante
+              o simplemente hay algo que no te cuadra, avísame sin problema.
+              Lo reviso contigo y lo dejamos perfecto.
+            </p>
+          </div>
         </section>
 
         <!-- PIE -->
@@ -574,3 +604,4 @@
   </main>
 </body>
 </html>
+
