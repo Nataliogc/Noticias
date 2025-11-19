@@ -6,190 +6,525 @@ CATEGORIES: Turnos,Operativa interna
 TAGS: App,Turnos,Recepción
 FEATURED: true
 IMAGE: img/turnos_app.png
-EXCERPT: Instala la nueva app de turnos en tu móvil Android o iPhone en solo 3 pasos.
+EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para Android y iPhone.
 -->
+
 <style>
+/* ================== LAYOUT GENERAL ================== */
 .turnos-app-install {
-  max-width: 800px;
-  margin: auto;
-  font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.55;
-  color: #333;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 16px 12px 40px 12px;
+  box-sizing: border-box;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  color: #243043;
+  background: linear-gradient(135deg, #f5f7fb 0%, #f9fbff 40%, #ffffff 100%);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
 }
 
-/* VIDEO HERO */
-.video-hero {
-  width: 100%;
-  aspect-ratio: 16/9;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.15);
-  margin-bottom: 20px;
+/* ================== CABECERA ================== */
+.app-header {
+  text-align: left;
+  padding: 18px 18px 10px 18px;
+  border-radius: 14px 14px 0 0;
 }
-.video-hero iframe {
+
+.app-kicker {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.app-kicker strong {
+  color: #03658c;
+}
+
+.app-title-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.app-title-row h2 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #022640;
+}
+
+.app-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.app-badge {
+  font-size: 0.78rem;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: rgba(0,146,198,0.08);
+  color: #03658c;
+  border: 1px solid rgba(0,146,198,0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.app-subtitle {
+  font-size: 0.92rem;
+  color: #64748b;
+  margin: 0 0 10px 0;
+}
+
+/* ================== VIDEO ================== */
+.app-video-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 14px 16px 16px 16px;
+  border: 1px solid #e5e9f2;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+  margin: 0 16px 18px 16px;
+}
+
+.app-video-label {
+  font-size: 0.85rem;
+  color: #64748b;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.app-video-wrapper {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.22);
+}
+.app-video-wrapper iframe {
   width: 100%;
   height: 100%;
   border: none;
 }
 
-/* TITULAR */
-.install-header {
-  text-align: center;
-  margin-bottom: 28px;
-}
-.install-header h2 {
-  font-size: 1.8rem;
-  margin: 0;
-}
-.install-header p {
-  font-size: 1rem;
-  color: #666;
+/* ================== GRID PRINCIPAL BLOQUES ================== */
+.app-main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 16px;
+  padding: 0 16px 14px 16px;
+  box-sizing: border-box;
 }
 
-/* BLOQUES */
-.install-block {
-  background: #f7f7f7;
-  padding: 20px 24px;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+/* Tarjetas base */
+.app-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 16px 18px;
+  border: 1px solid #e5e9f2;
+  box-shadow: 0 8px 24px rgba(15,23,42,0.06);
 }
-.install-block h3 {
+
+.app-card h3 {
   margin-top: 0;
-  color: #004f6e;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #022640;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.step {
+/* Iconos en círculos */
+.app-icon-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e0f4ff 0%, #c4ecff 100%);
+  font-size: 17px;
+}
+
+/* Pasos / stepper */
+.app-step {
   margin-bottom: 14px;
 }
 
-.step h4 {
-  margin-bottom: 6px;
-  color: #0092c6;
+.app-step-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 
-/* LISTAS */
-.install-block ul {
+.app-step-number {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  background: #0092c6;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.app-step-title {
+  font-size: 0.97rem;
+  font-weight: 600;
+  color: #03658c;
+}
+
+.app-step p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+/* Listas */
+.app-card ul {
+  margin: 6px 0 0 0;
   padding-left: 18px;
-  margin-top: 4px;
+}
+.app-card li {
+  font-size: 0.9rem;
+  margin-bottom: 4px;
 }
 
-/* LINK */
+/* Enlaces */
 .turnos-app-install a {
   color: #0092c6;
   font-weight: 600;
-  word-break: break-all;
+  word-break: break-word;
   text-decoration: none;
 }
 .turnos-app-install a:hover {
   text-decoration: underline;
 }
 
-/* NOTA FINAL */
-.final-note {
-  margin-top: 25px;
-  text-align: center;
-  font-weight: 600;
-  color: #444;
+/* ================== BLOQUES DE USO (ABAJO) ================== */
+.app-usage-section {
+  padding: 0 16px 8px 16px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 600px) {
-  .install-block {
-    padding: 16px 18px;
+.app-usage-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #022640;
+  margin: 4px 0 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.app-usage-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid #e5e9f2;
+  box-shadow: 0 4px 16px rgba(15,23,42,0.04);
+  font-size: 0.88rem;
+}
+
+.app-usage-card-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  color: #03658c;
+  margin-bottom: 4px;
+}
+
+.app-usage-card p,
+.app-usage-card ul {
+  margin: 0;
+  padding: 0;
+  font-size: 0.86rem;
+  color: #4b5563;
+}
+
+.app-usage-card ul {
+  padding-left: 16px;
+  margin-top: 3px;
+}
+.app-usage-card li {
+  margin-bottom: 3px;
+}
+
+/* Nota final */
+.app-footer-note {
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #475569;
+  padding: 10px 18px 4px 18px;
+}
+
+/* ================== RESPONSIVE MÓVIL ================== */
+@media (max-width: 720px) {
+  .turnos-app-install {
+    padding: 12px 8px 26px 8px;
+    border-radius: 0;
+    box-shadow: none;
   }
-  .install-header h2 {
-    font-size: 1.5rem;
+
+  .app-header {
+    padding: 12px 10px 4px 10px;
+  }
+
+  .app-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .app-title-row h2 {
+    font-size: 1.45rem;
+  }
+
+  .app-main-grid {
+    grid-template-columns: 1fr;
+    padding: 0 10px 10px 10px;
+    gap: 10px;
+  }
+
+  .app-video-card {
+    margin: 0 10px 14px 10px;
+    padding: 10px 12px 12px 12px;
+  }
+
+  .app-video-wrapper {
+    max-width: 100%;
+    box-shadow: 0 4px 14px rgba(15,23,42,0.18);
+  }
+
+  .app-card {
+    padding: 12px 12px;
+  }
+
+  .app-usage-section {
+    padding: 0 10px 6px 10px;
+  }
+
+  .app-usage-grid {
+    grid-template-columns: 1fr;
   }
 }
 </style>
 
 <section class="turnos-app-install">
-  
-  <!-- ==================== VIDEO HERO ==================== -->
-  <div class="video-hero">
-    <iframe 
-      src="https://drive.google.com/file/d/1WY4KGxWuBth8sayw_9xBKmb7Bc0rbZRk/preview"
-      allow="autoplay"
-      allowfullscreen>
-    </iframe>
-  </div>
 
-  <!-- ==================== TITULAR ==================== -->
-  <header class="install-header">
-    <h2>📱 Instalar la App de Turnos en el Móvil</h2>
-    <p>Hoteles Sercotel Guadiana &amp; Cumbria Spa&amp;Hotel</p>
+  <!-- CABECERA -->
+  <header class="app-header">
+    <div class="app-kicker">
+      <strong>🆕 Novedad</strong> · Guía rápida para el equipo
+    </div>
+
+    <div class="app-title-row">
+      <h2>📱 App de Turnos de Recepción</h2>
+      <div class="app-badges">
+        <span class="app-badge">🏨 Guadiana &amp; Cumbria</span>
+        <span class="app-badge">📲 Android &amp; iPhone</span>
+        <span class="app-badge">✅ Instalación &amp; uso</span>
+      </div>
+    </div>
+
+    <p class="app-subtitle">
+      <strong>Os damos la bienvenida a la nueva App de Turnos</strong>, un paso más para trabajar con más comodidad y tener siempre a mano los horarios actualizados. A continuación tenéis la guía completa de instalación y uso.
+    </p>
   </header>
 
-  <!-- ==================== BLOQUE ANDROID ==================== -->
-  <div class="install-block">
-    <h3>✅ Instalación en Android</h3>
-
-    <p>Funciona en Samsung, Xiaomi, Oppo, Pixel y cualquier móvil Android.</p>
-
-    <div class="step">
-      <h4>1. Entra en la app</h4>
-      <p>
-        Abre <strong>Chrome</strong> o <strong>Edge</strong> en tu móvil y accede a:
-        <br>
-        <a href="https://nataliogc.github.io/turnosweb/live.mobile.html" target="_blank" rel="noopener noreferrer">
-          https://nataliogc.github.io/turnosweb/live.mobile.html
-        </a>
-      </p>
+  <!-- VIDEO -->
+  <div class="app-video-card">
+    <div class="app-video-label">
+      🎬 <strong>Vídeo corto</strong> · Vista general de cómo instalar y usar la app.
     </div>
-
-    <div class="step">
-      <h4>2. Instalar</h4>
-      <ul>
-        <li>Pulsa el menú <strong>⋮</strong> (arriba a la derecha).</li>
-        <li>Selecciona <strong>“Instalar aplicación”</strong> o <strong>“Añadir a pantalla principal”</strong>.</li>
-        <li>Confirma la instalación.</li>
-      </ul>
-    </div>
-
-    <div class="step">
-      <h4>3. Listo</h4>
-      <p>
-        El icono <strong>Turnos Recepción</strong> aparecerá en tu pantalla de inicio.
-        Se abre como una app normal a pantalla completa.
-      </p>
+    <div class="app-video-wrapper">
+      <iframe 
+        src="https://drive.google.com/file/d/1WY4KGxWuBth8sayw_9xBKmb7Bc0rbZRk/preview"
+        allow="autoplay"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 
-  <!-- ==================== BLOQUE IPHONE ==================== -->
-  <div class="install-block">
-    <h3>🍏 Instalación en iPhone (iOS)</h3>
+  <!-- GRID PRINCIPAL: INSTALACIÓN + RESUMEN USO -->
+  <div class="app-main-grid">
 
-    <div class="step">
-      <h4>1. Entra en la app</h4>
-      <p>
-        Abre <strong>Safari</strong> y entra en:
-        <br>
-        <a href="https://nataliogc.github.io/turnosweb/live.mobile.html" target="_blank" rel="noopener noreferrer">
-          https://nataliogc.github.io/turnosweb/live.mobile.html
-        </a>
-      </p>
+    <!-- ANDROID / IPHONE -->
+    <div class="app-card">
+      <h3>
+        <span class="app-icon-circle">📲</span>
+        Instalación en Android e iPhone
+      </h3>
+
+      <!-- ANDROID -->
+      <div class="app-step">
+        <div class="app-step-header">
+          <span class="app-step-number">A</span>
+          <div class="app-step-title">Instalar en Android (Chrome)</div>
+        </div>
+        <p>
+          1. Abre <strong>Chrome</strong> en tu móvil y entra en:<br>
+          <a href="https://nataliogc.github.io/turnosweb/live.mobile.html" target="_blank">
+            https://nataliogc.github.io/turnosweb/live.mobile.html
+          </a>
+        </p>
+        <ul>
+          <li>Pulsa el menú <strong>⋮</strong> (arriba a la derecha).</li>
+          <li>Toca <strong>“Instalar aplicación”</strong> o <strong>“Añadir a pantalla principal”</strong>.</li>
+          <li>Confirma la instalación cuando lo pida.</li>
+        </ul>
+      </div>
+
+      <!-- IPHONE -->
+      <div class="app-step">
+        <div class="app-step-header">
+          <span class="app-step-number">B</span>
+          <div class="app-step-title">Instalar en iPhone (Safari)</div>
+        </div>
+        <p>
+          1. Abre <strong>Safari</strong> y entra en:<br>
+          <a href="https://nataliogc.github.io/turnosweb/live.mobile.html" target="_blank">
+            https://nataliogc.github.io/turnosweb/live.mobile.html
+          </a>
+        </p>
+        <ul>
+          <li>Pulsa el icono de <strong>Compartir</strong> (cuadrado con flecha).</li>
+          <li>Elige <strong>“Añadir a pantalla de inicio”</strong>.</li>
+          <li>Pulsa <strong>Añadir</strong> para confirmar.</li>
+        </ul>
+      </div>
+
+      <div class="app-step">
+        <div class="app-step-header">
+          <span class="app-step-number">✔</span>
+          <div class="app-step-title">Icono listo</div>
+        </div>
+        <p>Verás el icono <strong>Turnos Recepción</strong> en el móvil y se abrirá a pantalla completa como una app normal.</p>
+      </div>
     </div>
 
-    <div class="step">
-      <h4>2. Añadir al inicio</h4>
-      <ul>
-        <li>Pulsa el icono de <strong>Compartir</strong> (cuadrado con flecha hacia arriba).</li>
-        <li>Selecciona <strong>“Añadir a pantalla de inicio”</strong>.</li>
-        <li>Confirma pulsando <strong>Añadir</strong>.</li>
-      </ul>
-    </div>
+    <!-- RESUMEN USO RÁPIDO -->
+    <div class="app-card">
+      <h3>
+        <span class="app-icon-circle">👀</span>
+        Cómo usar la app en el día a día
+      </h3>
 
-    <div class="step">
-      <h4>3. Listo</h4>
-      <p>
-        El icono aparecerá en la pantalla del iPhone y la app se abrirá a pantalla completa.
-      </p>
+      <div class="app-step">
+        <div class="app-step-header">
+          <span class="app-step-number">1</span>
+          <div class="app-step-title">Semana actual al abrir</div>
+        </div>
+        <p>Al abrir la app se carga automáticamente la <strong>semana en curso</strong> con tus turnos, igual que en el cuadrante oficial.</p>
+      </div>
+
+      <div class="app-step">
+        <div class="app-step-header">
+          <span class="app-step-number">2</span>
+          <div class="app-step-title">Moverte entre semanas</div>
+        </div>
+        <ul>
+          <li><strong>Semana anterior</strong> ⟶ ver la semana anterior.</li>
+          <li><strong>Semana siguiente</strong> ⟶ ver la siguiente.</li>
+          <li>Selector de fecha para saltar a cualquier semana concreta.</li>
+        </ul>
+      </div>
+
+      <div class="app-step">
+        <div class="app-step-header">
+          <span class="app-step-number">3</span>
+          <div class="app-step-title">Guadiana &amp; Cumbria</div>
+        </div>
+        <p>
+          Los turnos de <strong>Sercotel Guadiana</strong> y <strong>Cumbria Spa&amp;Hotel</strong> aparecen en bloques separados,
+          manteniendo el mismo <strong>orden de empleados</strong> que en la versión de escritorio.
+        </p>
+      </div>
     </div>
   </div>
 
-  <p class="final-note">
-    Si tenéis cualquier problema con la instalación, comentadlo en recepción o con jefatura para revisarlo.
+  <!-- SECCIÓN DETALLE DE USO -->
+  <div class="app-usage-section">
+    <div class="app-usage-title">
+      <span class="app-icon-circle">ℹ️</span>
+      Detalle de lo que ves en la app
+    </div>
+
+    <div class="app-usage-grid">
+      <div class="app-usage-card">
+        <div class="app-usage-card-title">📅 Semana y fechas</div>
+        <p>
+          En la cabecera se muestra el rango de la semana (de lunes a domingo) y la fecha seleccionada.
+          Siempre corresponde con el cuadrante generado.
+        </p>
+      </div>
+
+      <div class="app-usage-card">
+        <div class="app-usage-card-title">🔄 Sustituciones y bajas</div>
+        <ul>
+          <li>Las <strong>bajas</strong> aparecen con el texto del tipo de ausencia.</li>
+          <li>Las <strong>sustituciones</strong> se marcan con <strong>↔</strong> entre titulares y sustitutos.</li>
+          <li>Los <strong>cambios de turno</strong> se muestran con el icono <strong>🔄</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="app-usage-card">
+        <div class="app-usage-card-title">🎨 Colores de turnos</div>
+        <ul>
+          <li><strong>Mañana:</strong> cápsula clara.</li>
+          <li><strong>Tarde:</strong> cápsula algo más oscura.</li>
+          <li><strong>Noche:</strong> fondo gris con icono 🌙.</li>
+          <li><strong>Descanso:</strong> fondo rojo para que destaque.</li>
+        </ul>
+      </div>
+
+      <div class="app-usage-card">
+        <div class="app-usage-card-title">📊 Mismo orden que el cuadrante</div>
+        <p>
+          El orden de personas es exactamente el mismo que en la versión web de turnos,
+          tanto en Guadiana como en Cumbria, para que lo reconozcáis de un vistazo.
+        </p>
+      </div>
+
+      <div class="app-usage-card">
+        <div class="app-usage-card-title">🆕 Actualizaciones automáticas</div>
+        <p>
+          Cada vez que se genera un nuevo cuadrante, la app mostrará los datos actualizados
+          al volver a abrirla o refrescar la página.
+        </p>
+      </div>
+
+      <div class="app-usage-card">
+  <div class="app-usage-card-title">🛠 Si algo no cuadra</div>
+  <p>
+    Si notáis que algo falla o veis algún turno raro, avisadme sin miedo; lo reviso encantado y lo dejamos bien.
   </p>
+</div>
+
+    </div>
+  </div>
+
+  <div class="app-footer-note">
+    App interna de turnos · Uso exclusivo del equipo de recepción de Sercotel Guadiana y Cumbria Spa&amp;Hotel.
+  </div>
 
 </section>

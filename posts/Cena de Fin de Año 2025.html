@@ -1,0 +1,719 @@
+<!--
+TITLE: Cena de Fin de Año 2025 en el Hotel Sercotel Guadiana
+DATE: 2025-12-31
+YEAR: 2025
+TAGS: Nochevieja, Cena de gala, Guadiana
+IMAGE: img/news/2025/nochevieja-guadiana/banner.png
+-->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500&display=swap');
+
+  :root {
+    --finano-font-body: "Lora", Georgia, "Times New Roman", serif;
+    --finano-font-heading: "Playfair Display", "Times New Roman", serif;
+    --finano-gold: #c59b47;
+    --finano-ink: #111827;
+  }
+
+  /* ===== CONTENEDOR NOTICIA ===== */
+  .finano-wrapper {
+    max-width: 980px;
+    margin: 0 auto 40px auto;
+    padding: 24px 18px 32px;
+    background: radial-gradient(circle at top left, #fff7e6 0, #ffffff 42%, #f5f7fb 100%);
+    border-radius: 26px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: var(--finano-ink);
+  }
+
+  /* ===== HERO CON BANNER ===== */
+  .finano-hero {
+    margin: -6px -6px 22px -6px;
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    background: #020617;
+  }
+
+  .finano-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("img/news/2025/nochevieja-guadiana/banner.png");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.55);
+    transform: scale(1.03);
+    transform-origin: center;
+  }
+
+  .finano-hero-inner {
+    position: relative;
+    padding: 30px 26px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+    color: #f9fafb;
+    min-height: 190px;
+  }
+
+  @media (max-width: 720px) {
+    .finano-hero-inner {
+      padding: 24px 18px 26px;
+    }
+  }
+
+  .finano-hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: rgba(255, 237, 213, 0.14);
+    color: #fef3c7;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    backdrop-filter: blur(4px);
+  }
+
+  .finano-hero-tag span { font-size: 14px; }
+
+  .finano-hero-title {
+    font-family: var(--finano-font-heading);
+    font-size: clamp(27px, 3.1vw, 33px);
+    line-height: 1.15;
+    margin: 0 0 4px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 10px 25px rgba(15,23,42,0.9);
+  }
+
+  .finano-hero-subtitle {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #e5e7eb;
+    text-shadow: 0 8px 20px rgba(15,23,42,0.9);
+  }
+
+  .finano-hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    font-size: 13px;
+    color: #e5e7eb;
+  }
+
+  .finano-hero-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(15, 23, 42, 0.7);
+    box-shadow: 0 8px 18px rgba(15,23,42,0.7);
+  }
+
+  /* ===== RESTO NOTICIA ===== */
+  .finano-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 26px;
+    margin-top: 18px;
+  }
+
+  @media (max-width: 768px) {
+    .finano-grid { grid-template-columns: 1fr; }
+  }
+
+  .finano-intro {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #374151;
+  }
+
+  .finano-intro p { margin: 0 0 10px; }
+
+  .finano-highlight-box {
+    border-radius: 18px;
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(184, 138, 59, 0.06), rgba(30, 64, 175, 0.03));
+    font-size: 14px;
+    color: #4b5563;
+    border: 1px solid rgba(209, 213, 219, 0.7);
+  }
+
+  .finano-highlight-box strong { color: var(--finano-ink); }
+
+  .finano-aside { align-self: flex-start; }
+
+  .finano-card {
+    border-radius: 20px;
+    padding: 16px 18px 18px;
+    border: 1px solid rgba(209, 213, 219, 0.9);
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    font-size: 14px;
+    color: #4b5563;
+  }
+
+  .finano-card-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .finano-card-title h3 {
+    margin: 0;
+    font-family: var(--finano-font-heading);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--finano-ink);
+  }
+
+  .finano-price-pill {
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: var(--finano-ink);
+    color: #f9fafb;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .finano-card-sub {
+    margin: 0 0 10px;
+    font-size: 13px;
+    color: #6b7280;
+  }
+
+  .finano-footer-note {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .finano-chip {
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(30, 64, 175, 0.06);
+    color: #1f2937;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ===== NIEVE + CARTA DEL MENÚ ===== */
+
+  .gala-snow-shell {
+    position: relative;
+    max-width: 740px;
+    margin: 36px auto 0 auto;
+  }
+
+  .gala-snow-layer {
+    position: absolute;
+    inset: -20px;
+    pointer-events: none;
+    background-image:
+      radial-gradient(3px 3px at 20px 20px, rgba(255,255,255,0.9) 0, transparent 55%),
+      radial-gradient(2px 2px at 80px 10px, rgba(255,255,255,0.8) 0, transparent 55%),
+      radial-gradient(2px 2px at 150px 40px, rgba(255,255,255,0.85) 0, transparent 55%);
+    background-repeat: repeat;
+    background-size: 180px 180px;
+    opacity: 0.8;
+    z-index: 0;
+  }
+
+  .gala-snow-layer--back {
+    animation: snowFallBack 40s linear infinite;
+    opacity: 0.5;
+  }
+
+  .gala-snow-layer--front {
+    animation: snowFallFront 22s linear infinite;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes snowFallBack {
+    from { transform: translate3d(0, -60px, 0); }
+    to   { transform: translate3d(-40px, 80px, 0); }
+  }
+
+  @keyframes snowFallFront {
+    from { transform: translate3d(0, -80px, 0); }
+    to   { transform: translate3d(40px, 120px, 0); }
+  }
+
+  .gala-menu-wrapper {
+    position: relative;
+    margin: 0;
+    padding: 40px 46px 38px;
+    background: #fffdf9;
+    border-radius: 18px;
+    border: 1px solid rgba(229, 231, 235, 0.95);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
+    font-family: var(--finano-font-body);
+    color: var(--finano-ink);
+    z-index: 1;
+  }
+
+  @media (max-width: 720px) {
+    .gala-menu-wrapper { padding: 26px 18px 26px; }
+  }
+
+  .gala-menu-header {
+    text-align: center;
+    margin-bottom: 26px;
+  }
+
+  .gala-menu-logo {
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6px;
+  }
+
+  .gala-menu-logo img {
+    max-height: 100%;
+    width: auto;
+    display: block;
+  }
+
+  .gala-menu-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .gala-menu-title {
+    font-family: var(--finano-font-heading);
+    font-size: 24px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    margin: 0 0 4px;
+  }
+
+  .gala-menu-subtitle {
+    font-family: var(--finano-font-heading);
+    font-size: 14px;
+    letter-spacing: 0.23em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin: 0;
+  }
+
+  .gala-top-divider {
+    margin: 18px auto 0;
+    width: 80px;
+    border: none;
+    border-top: 2px solid var(--finano-gold);
+  }
+
+  .gala-section-title {
+    font-family: var(--finano-font-heading);
+    font-size: 13px;
+    letter-spacing: 0.30em;
+    text-transform: uppercase;
+    color: var(--finano-gold);
+    margin: 26px 0 8px;
+    text-align: center;
+  }
+
+  .gala-dish {
+    padding: 10px 0 12px;
+    border-bottom: 1px dashed rgba(229, 231, 235, 0.98);
+    text-align: left;
+  }
+
+  .gala-dish:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .gala-dish-name {
+    font-family: var(--finano-font-heading);
+    font-size: 16px;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .gala-dish-desc {
+    font-size: 14px;
+    font-style: italic;
+    color: #4b5563;
+    line-height: 1.6;
+  }
+
+  /* Etiquetas de alérgenos por plato */
+  .gala-allergen-tags {
+    margin-top: 4px;
+    font-size: 11px;
+    color: #4b5563;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .gala-allergen-label {
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    font-size: 10px;
+    color: #9ca3af;
+    margin-right: 4px;
+  }
+
+  .gala-allergen-pill {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(197, 155, 71, 0.8);
+    background: rgba(253, 244, 215, 0.6);
+    color: #92400e;
+    font-size: 11px;
+  }
+
+  .gala-allergen-help {
+    font-style: italic;
+    margin-left: 4px;
+  }
+
+  .gala-menu-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: #6b7280;
+    font-style: italic;
+    text-align: center;
+  }
+
+  .gala-menu-price {
+    margin-top: 6px;
+    font-size: 14px;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .gala-divider {
+    margin: 26px auto 20px;
+    border: none;
+    border-top: 1px solid rgba(209, 213, 219, 0.9);
+    max-width: 420px;
+  }
+
+  /* Bloque menú infantil diferenciado */
+  .gala-child-block {
+    margin-top: 18px;
+    padding: 18px 18px 20px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(219, 234, 254, 0.6), rgba(239, 246, 255, 0.9));
+    border: 1px solid rgba(191, 219, 254, 0.9);
+  }
+
+  .gala-child-title {
+    text-align: center;
+    font-family: var(--finano-font-heading);
+    font-size: 15px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    color: #1d4ed8;
+  }
+
+  .gala-child-note {
+    text-align: center;
+    font-size: 13px;
+    color: #1f2937;
+    font-style: italic;
+    margin: 0 0 12px;
+  }
+
+  .gala-allergens {
+    margin-top: 18px;
+    text-align: left;
+    font-size: 12px;
+    color: #4b5563;
+  }
+
+  .gala-allergens p {
+    font-size: 12px;
+    color: #6b7280;
+    font-style: italic;
+    margin: 0;
+  }
+</style>
+
+<section class="finano-wrapper">
+  <!-- Cabecera noticia con banner -->
+  <div class="finano-hero">
+    <div class="finano-hero-inner">
+      <div class="finano-hero-tag">
+        <span>🎆</span> Cena de Fin de Año · 2025
+      </div>
+      <h1 class="finano-hero-title">Noche de Fin de Año en el Hotel Sercotel Guadiana</h1>
+      <p class="finano-hero-subtitle">
+        Cena de gala, cotillón y DJ para despedir 2025 con una experiencia gastronómica y festiva inolvidable.
+      </p>
+      <div class="finano-hero-meta">
+        <div class="finano-hero-meta-item">🏨 Hotel Sercotel Guadiana · Ciudad Real</div>
+        <div class="finano-hero-meta-item">📅 31 de diciembre de 2025</div>
+        <div class="finano-hero-meta-item">🎉 Cena de gala · Uvas · Cotillón · DJ</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intro + ficha -->
+  <div class="finano-grid">
+    <div class="finano-intro">
+      <p>
+        El Hotel <strong>Sercotel Guadiana</strong> presenta su
+        <strong>Cena de Fin de Año 2025</strong>, una propuesta creada para celebrar
+        la última noche del año con cocina de autor, ambiente de gala y música hasta la madrugada.
+      </p>
+      <p>
+        Tras las uvas, la celebración continúa con <strong>cotillón y DJ</strong>, para dar la bienvenida a 2026
+        en un entorno elegante y festivo.
+      </p>
+
+      <div class="finano-highlight-box">
+        <p style="margin: 0 0 6px;">
+          <strong>Incluido en el precio del menú de gala:</strong>
+        </p>
+        <p style="margin: 0;">
+          Vino blanco y tinto de nuestra región, agua mineral, cervezas, refrescos, café y espumoso.
+        </p>
+      </div>
+    </div>
+
+    <aside class="finano-aside">
+      <div class="finano-card">
+        <div class="finano-card-title">
+          <h3>Menú de Gala Fin de Año</h3>
+          <div class="finano-price-pill">120 € IVA incluido</div>
+        </div>
+        <p class="finano-card-sub">
+          Cena de gala con servicio en mesa, bebidas incluidas durante la comida y fiesta con cotillón y DJ tras las uvas.
+        </p>
+        <div class="finano-footer-note">
+          <span class="finano-chip">🎟 Plazas limitadas</span>
+          <span>Recomendable reserva previa.</span>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- CARTA DEL MENÚ CON NIEVE -->
+  <div class="gala-snow-shell">
+    <div class="gala-snow-layer gala-snow-layer--back"></div>
+    <div class="gala-snow-layer gala-snow-layer--front"></div>
+
+    <div class="gala-menu-wrapper">
+      <header class="gala-menu-header">
+        <div class="gala-menu-logo">
+          <img src="img/logo-guadiana.png" alt="Hotel Sercotel Guadiana">
+        </div>
+        <div class="gala-menu-icon">❄️</div>
+        <h2 class="gala-menu-title">Menú de gala fin de año 2025</h2>
+        <p class="gala-menu-subtitle">Hotel Sercotel Guadiana</p>
+        <hr class="gala-top-divider">
+      </header>
+
+      <!-- Menú de gala adultos -->
+      <div>
+        <h3 class="gala-section-title">Entrantes al centro</h3>
+
+        <div class="gala-dish">
+          <div class="gala-dish-name">Surtido de bolitas navideñas</div>
+          <div class="gala-dish-desc">
+            Panipuri de mejillón, bolita de foie y oporto y mini croqueta de pollo al curry.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">3</span>
+            <span class="gala-allergen-pill">4</span>
+            <span class="gala-allergen-pill">5</span>
+            <span class="gala-allergen-pill">7</span>
+            <span class="gala-allergen-pill">14</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <div class="gala-dish">
+          <div class="gala-dish-name">Crema navideña</div>
+          <div class="gala-dish-desc">
+            Con zamburiña, mejillón y colita de cigala.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">3</span>
+            <span class="gala-allergen-pill">4</span>
+            <span class="gala-allergen-pill">6</span>
+            <span class="gala-allergen-pill">14</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <h3 class="gala-section-title">Ensalada</h3>
+
+        <div class="gala-dish">
+          <div class="gala-dish-name">Ensalada de bogavante</div>
+          <div class="gala-dish-desc">
+            Con verduritas y jugo de su coral.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">6</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <h3 class="gala-section-title">Pescado</h3>
+
+        <div class="gala-dish">
+          <div class="gala-dish-name">Merluza rellena de changurro</div>
+          <div class="gala-dish-desc">
+            Con salteado de verduras thai, gambita roja y velouté de almejas.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">1</span>
+            <span class="gala-allergen-pill">3</span>
+            <span class="gala-allergen-pill">4</span>
+            <span class="gala-allergen-pill">6</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <h3 class="gala-section-title">Carne</h3>
+
+        <div class="gala-dish">
+          <div class="gala-dish-name">Lingote de cochinillo crujiente</div>
+          <div class="gala-dish-desc">
+            Demi glace con infusión cítrica, patatas al romero y cremoso de castañas.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">3</span>
+            <span class="gala-allergen-pill">14</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <h3 class="gala-section-title">Postre</h3>
+
+        <div class="gala-dish">
+          <div class="gala-dish-name">Lingote dorado de avellanas</div>
+          <div class="gala-dish-desc">
+            Con helado de frambuesa, bombón de chocolate blanco y gelatina de café bombón.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">3</span>
+            <span class="gala-allergen-pill">5</span>
+            <span class="gala-allergen-pill">7</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <p class="gala-menu-note">
+          Bebidas incluidas: vino blanco y tinto de nuestra región, agua mineral, cervezas, refrescos, café y espumoso.
+        </p>
+        <p class="gala-menu-price">
+          Precio menú de gala: <strong>120 € (IVA incluido)</strong>
+        </p>
+      </div>
+
+      <hr class="gala-divider">
+
+      <!-- Menú infantil -->
+      <div class="gala-child-block">
+        <h3 class="gala-child-title">Menú infantil 🎈</h3>
+        <p class="gala-child-note">
+          Precio: 30 € (IVA incluido). Incluye agua mineral, refrescos y copita de champín.
+        </p>
+
+        <h3 class="gala-section-title">Primero</h3>
+        <div class="gala-dish">
+          <div class="gala-dish-name">Selección especial para niños</div>
+          <div class="gala-dish-desc">
+            Jamón ibérico, queso manchego, dos langostinos, dos gambas, hojaldre de salmón,
+            croquetas de jamón y tosta de la casa.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">1</span>
+            <span class="gala-allergen-pill">3</span>
+            <span class="gala-allergen-pill">5</span>
+            <span class="gala-allergen-pill">6</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <h3 class="gala-section-title">Segundo</h3>
+        <div class="gala-dish">
+          <div class="gala-dish-name">Escalope de ternera</div>
+          <div class="gala-dish-desc">
+            Con patatas crujientes.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">5</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <h3 class="gala-section-title">Postre</h3>
+        <div class="gala-dish">
+          <div class="gala-dish-name">Bomba de chocolate caliente</div>
+          <div class="gala-dish-desc">
+            Con helado de canela.
+          </div>
+          <div class="gala-allergen-tags">
+            <span class="gala-allergen-label">Alérgenos</span>
+            <span class="gala-allergen-pill">5</span>
+            <span class="gala-allergen-help">Ver leyenda al final</span>
+          </div>
+        </div>
+
+        <p class="gala-menu-note">
+          Tras la cena, cotillón y DJ para recibir el Año Nuevo.
+        </p>
+      </div>
+
+      <!-- Leyenda de alérgenos -->
+      <div class="gala-allergens">
+        <strong>Leyenda de alérgenos (resumen numérico):</strong><br>
+        1. Pescado ·
+        2. Frutos secos ·
+        3. Lácteos ·
+        4. Moluscos ·
+        5. Cereales con gluten ·
+        6. Crustáceos ·
+        7. Huevos ·
+        8. Cacahuetes ·
+        9. Soja ·
+        10. Apio ·
+        11. Mostaza ·
+        12. Sésamo ·
+        13. Altramuz ·
+        14. Sulfitos.
+        <p>
+          Si tiene alguna alergia o intolerancia, rogamos lo comunique a nuestro personal antes de realizar el pedido.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

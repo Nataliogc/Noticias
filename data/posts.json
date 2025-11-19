@@ -1,5 +1,23 @@
 ﻿[
     {
+        "title":  "Cena de Fin de Año 2025 en el Hotel Sercotel Guadiana",
+        "date":  "2025-12-31",
+        "hotel":  null,
+        "categories":  {
+
+                       },
+        "tags":  [
+                     "Nochevieja",
+                     "Cena de gala",
+                     "Guadiana"
+                 ],
+        "featured":  false,
+        "image":  "img/news/2025/nochevieja-guadiana/banner.png",
+        "slug":  "Cena de Fin de Año 2025.html",
+        "url":  "posts/Cena de Fin de Año 2025.html",
+        "excerpt":  "🎆 Cena de Fin de Año · 2025\n    \n    Noche de Fin de Año en el Hotel Sercotel Guadiana\n    \n      Cena de gala, cotillón y DJ para despedir 2025 con una experiencia gastronómica yâ€¦"
+    },
+    {
         "title":  "Escapada Navidad \u0026 Spa · Cumbria",
         "date":  "2025-12-10",
         "hotel":  "Cumbria",
@@ -19,25 +37,6 @@
         "excerpt":  "Alojamiento + circuito de spa + late check-out (según disponibilidad)."
     },
     {
-        "title":  "Noche de Enogastronomía Manchega con música en directo",
-        "date":  "2025-11-22",
-        "hotel":  "Cumbria",
-        "categories":  [
-                           "Gastronomía",
-                           "Cultura"
-                       ],
-        "tags":  [
-                     "Enogastronomía",
-                     "Vinos",
-                     "Música en directo"
-                 ],
-        "featured":  false,
-        "image":  "img/ph-enogastro.svg",
-        "slug":  "noche-enogastronomia-manchega.html",
-        "url":  "posts/noche-enogastronomia-manchega.html",
-        "excerpt":  "Maridaje de vinos DO La Mancha con platos locales y música en directo, plazas limitadas."
-    },
-    {
         "title":  "Nueva app para la gestión de turnos de recepción",
         "date":  "2025-11-18",
         "hotel":  "Guadiana \u0026 Cumbria",
@@ -54,7 +53,7 @@
         "image":  "img/turnos_app.png",
         "slug":  "instalar-app-turnos-recepcion.html",
         "url":  "posts/instalar-app-turnos-recepcion.html",
-        "excerpt":  "Instala la nueva app de turnos en tu móvil Android o iPhone en solo 3 pasos."
+        "excerpt":  "Instala y utiliza la app de turnos de forma fácil: guía rápida para Android y iPhone."
     },
     {
         "title":  "Nuevo sistema de llaves electrónicas · Hotel Guadiana",

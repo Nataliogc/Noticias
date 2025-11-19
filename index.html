@@ -117,7 +117,8 @@
                   }
                 </p>
                 <p class="hero-excerpt">${escapeHtml(post.excerpt || "")}</p>
-                <a class="hero-button" href="${post.path}">Leer completa ↗</a>
+                <a class="hero-button" href="${post.url || ('posts/' + post.slug)}">Leer completa ↗</a>
+
                 <button class="hero-next-btn" type="button" aria-label="Siguiente noticia">
                   &#x25B6;
                 </button>
@@ -164,7 +165,8 @@
           <article class="news-card" data-search="${escapeAttr(searchText)}">
             ${
               post.image
-                ? `<a class="news-card-thumb" href="${post.path}">
+                ? `<a class="news-card-thumb" href="${post.url || ('posts/' + post.slug)}">
+
                      <img src="${post.image}" alt="${escapeHtml(post.title || "")}">
                    </a>`
                 : ""
@@ -179,10 +181,12 @@
                 }
               </header>
               <h3 class="news-card-title">
-                <a href="${post.path}">${escapeHtml(post.title || "")}</a>
+                <a href="${post.url || ('posts/' + post.slug)}">${escapeHtml(post.title || "")}</a>
+
               </h3>
               <p class="news-card-excerpt">${escapeHtml(post.excerpt || "")}</p>
-              <a class="news-card-link" href="${post.path}">Leer más</a>
+              <a class="news-card-link" href="${post.url || ('posts/' + post.slug)}">Leer más</a>
+
             </div>
           </article>
         `;
