@@ -23,6 +23,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   border-radius: 18px;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
   font-size: 1rem;
+  line-height: 1.5;
 }
 
 /* ================== CABECERA ================== */
@@ -227,7 +228,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   gap: 8px;
 }
 
-/* Siempre en columna (más legible en móvil y escritorio) */
+/* Una sola columna (también en escritorio, para máxima legibilidad) */
 .app-usage-list {
   display: flex;
   flex-direction: column;
@@ -277,13 +278,20 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   padding: 10px 18px 4px 18px;
 }
 
-/* ================== AJUSTE EXTRA PARA MÓVIL PEQUEÑO ================== */
-@media screen and (max-width: 600px) {
+/* ================== MODO MÓVIL (≤900px) ================== */
+/* Aquí forzamos letras grandes y menos márgenes */
+@media screen and (max-width: 900px) {
   .turnos-app-install {
     padding: 10px 0 20px 0;
     border-radius: 0;
     box-shadow: none;
-    font-size: 1.05rem; /* texto un poco más grande en móvil */
+    font-size: 1.2rem;         /* ⬅️ sube tamaño base en móvil */
+    line-height: 1.6;
+  }
+
+  .turnos-app-install p,
+  .turnos-app-install li {
+    font-size: 1.05rem;
   }
 
   .app-header {
@@ -299,26 +307,19 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   }
 
   .app-title-row h2 {
-    font-size: 1.7rem;   /* título más grande en móvil */
+    font-size: 2rem;
   }
 
   .app-subtitle {
-    font-size: 1.02rem;
+    font-size: 1.05rem;
   }
 
   .app-card {
     padding: 14px 12px;
   }
 
-  .app-step p,
-  .app-card li,
-  .app-usage-card p,
-  .app-usage-card li {
-    font-size: 1.02rem;
-  }
-
   .app-footer-note {
-    font-size: 1rem;
+    font-size: 1.02rem;
   }
 }
 </style>
