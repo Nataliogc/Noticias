@@ -25,6 +25,7 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: var(--finano-ink);
+    box-sizing: border-box;
   }
 
   /* ===== HERO CON BANNER ===== */
@@ -57,12 +58,6 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     align-items: flex-start;
     color: #f9fafb;
     min-height: 190px;
-  }
-
-  @media (max-width: 720px) {
-    .finano-hero-inner {
-      padding: 24px 18px 26px;
-    }
   }
 
   .finano-hero-tag {
@@ -124,10 +119,6 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
     gap: 26px;
     margin-top: 18px;
-  }
-
-  @media (max-width: 768px) {
-    .finano-grid { grid-template-columns: 1fr; }
   }
 
   .finano-intro {
@@ -220,6 +211,7 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     position: relative;
     max-width: 740px;
     margin: 36px auto 0 auto;
+    overflow: hidden;
   }
 
   .gala-snow-layer {
@@ -267,10 +259,7 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     font-family: var(--finano-font-body);
     color: var(--finano-ink);
     z-index: 1;
-  }
-
-  @media (max-width: 720px) {
-    .gala-menu-wrapper { padding: 26px 18px 26px; }
+    box-sizing: border-box;
   }
 
   .gala-menu-header {
@@ -454,6 +443,142 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     font-style: italic;
     margin: 0;
   }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+
+    .finano-wrapper {
+      max-width: 100%;
+      width: 100%;
+      margin: 0 auto 28px auto;
+      padding: 16px 10px 24px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    .finano-hero {
+      margin: -4px -4px 18px -4px;
+      border-radius: 18px;
+    }
+
+    .finano-hero-inner {
+      padding: 22px 18px 24px;
+      min-height: auto;
+      gap: 8px;
+    }
+
+    .finano-hero-title {
+      font-size: 22px;
+    }
+
+    .finano-hero-subtitle {
+      font-size: 14px;
+    }
+
+    .finano-hero-meta {
+      font-size: 12px;
+      gap: 6px 8px;
+    }
+
+    .finano-hero-meta-item {
+      padding: 3px 8px;
+    }
+
+    .finano-grid {
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 14px;
+    }
+
+    .finano-intro {
+      font-size: 14px;
+    }
+
+    .finano-card {
+      padding: 14px 14px 16px;
+      font-size: 13px;
+    }
+
+    .finano-card-title h3 {
+      font-size: 16px;
+    }
+
+    .finano-price-pill {
+      font-size: 12px;
+      padding: 3px 10px;
+    }
+
+    .gala-snow-shell {
+      margin-top: 26px;
+    }
+
+    /* Para aligerar en móvil se oculta la nieve animada */
+    .gala-snow-layer {
+      display: none;
+    }
+
+    .gala-menu-wrapper {
+      padding: 24px 16px 22px;
+      border-radius: 16px;
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.10);
+    }
+
+    .gala-menu-title {
+      font-size: 18px;
+      letter-spacing: 0.16em;
+    }
+
+    .gala-menu-subtitle {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+    }
+
+    .gala-section-title {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      margin: 20px 0 6px;
+    }
+
+    .gala-dish {
+      padding: 8px 0 10px;
+    }
+
+    .gala-dish-name {
+      font-size: 14px;
+      letter-spacing: 0.09em;
+    }
+
+    .gala-dish-desc {
+      font-size: 13px;
+    }
+
+    .gala-menu-note,
+    .gala-menu-price {
+      font-size: 12px;
+    }
+
+    .gala-child-block {
+      padding: 14px 14px 16px;
+      margin-top: 16px;
+    }
+
+    .gala-child-title {
+      font-size: 13px;
+      letter-spacing: 0.18em;
+    }
+
+    .gala-child-note {
+      font-size: 12px;
+    }
+
+    .gala-allergens {
+      font-size: 11px;
+    }
+
+    .gala-allergens p {
+      font-size: 11px;
+    }
+  }
 </style>
 
 <section class="finano-wrapper">
@@ -520,16 +645,15 @@ IMAGE: img/news/2025/nochevieja-guadiana/banner.png
     <div class="gala-snow-layer gala-snow-layer--back"></div>
     <div class="gala-snow-layer gala-snow-layer--front"></div>
 
-   <div class="gala-menu-logo">
-  <img
-    src="img/logo-guadiana.png"
-    alt="Hotel Sercotel Guadiana"
-    onerror="this.onerror=null;this.src='../img/logo-guadiana.png';"
-  >
-</div>
-
-
-
+    <div class="gala-menu-wrapper">
+      <header class="gala-menu-header">
+        <div class="gala-menu-logo">
+          <img
+            src="img/logo-guadiana.png"
+            alt="Hotel Sercotel Guadiana"
+            onerror="this.onerror=null;this.src='../img/logo-guadiana.png';"
+          >
+        </div>
 
         <div class="gala-menu-icon">❄️</div>
         <h2 class="gala-menu-title">Menú de gala fin de año 2025</h2>
