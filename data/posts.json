@@ -53,7 +53,7 @@
         "image":  "img/turnos_app.png",
         "slug":  "instalar-app-turnos-recepcion.html",
         "url":  "posts/instalar-app-turnos-recepcion.html",
-        "excerpt":  "Instala y utiliza la app de turnos de forma fácil: guía rápida para Android y iPhone."
+        "excerpt":  "Instala y utiliza la app de turnos de forma fácil: guía rápida para Android e iPhone."
     },
     {
         "title":  "Nuevo sistema de llaves electrónicas · Hotel Guadiana",
