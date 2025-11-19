@@ -21,6 +21,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   background: linear-gradient(135deg, #f5f7fb 0%, #f9fbff 40%, #ffffff 100%);
   border-radius: 18px;
   box-shadow: 0 16px 40px rgba(15, 23, 42, 0.14);
+  font-size: 0.95rem;
 }
 
 /* ================== CABECERA ================== */
@@ -279,7 +280,8 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 }
 
 /* ================== RESPONSIVE MÓVIL ================== */
-@media (max-width: 900px) {
+/* Forzamos vista cómoda en móviles */
+@media screen and (max-width: 768px) {
 
   .turnos-app-install {
     width: 100%;
@@ -287,6 +289,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
     padding: 10px 6px 22px 6px;
     border-radius: 0;
     box-shadow: none;
+    font-size: 1rem; /* todo un pelín más grande en móvil */
   }
 
   .app-header {
@@ -300,18 +303,26 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   }
 
   .app-title-row h2 {
-    font-size: 1.45rem;
+    font-size: 1.5rem;
+  }
+
+  .app-subtitle {
+    font-size: 1rem;
   }
 
   .app-main-grid {
-    grid-template-columns: 1fr !important;
+    display: block;          /* una columna */
     padding: 0 8px 8px 8px;
-    gap: 12px;
+  }
+
+  .app-card {
+    padding: 14px 12px;
+    margin-bottom: 10px;
   }
 
   .app-video-card {
     margin: 0 8px 12px 8px;
-    padding: 10px 12px 12px 12px;
+    padding: 10px 10px 12px 10px;
   }
 
   .app-video-wrapper {
@@ -321,8 +332,9 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
     box-shadow: 0 4px 14px rgba(15,23,42,0.18);
   }
 
-  .app-card {
-    padding: 12px 12px;
+  .app-step p,
+  .app-card li {
+    font-size: 0.98rem;
   }
 
   .app-usage-section {
@@ -330,8 +342,21 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   }
 
   .app-usage-grid {
-    grid-template-columns: 1fr !important;
-    gap: 10px;
+    display: block;          /* todas las tarjetas una debajo de otra */
+  }
+
+  .app-usage-card {
+    margin-bottom: 10px;
+    font-size: 0.96rem;
+  }
+
+  .app-usage-card p,
+  .app-usage-card li {
+    font-size: 0.96rem;
+  }
+
+  .app-footer-note {
+    font-size: 0.95rem;
   }
 }
 </style>
@@ -472,7 +497,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   <!-- SECCIÓN DETALLE DE USO -->
   <div class="app-usage-section">
     <div class="app-usage-title">
-      <span class="app-icon-circle">ℹ️</span>
+      <span class="app-icon-circle"ℹ️</span>
       Detalle de lo que ves en la app
     </div>
 
