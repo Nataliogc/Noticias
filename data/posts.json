@@ -15,7 +15,7 @@
         "image":  "img/news/2025/nochevieja-guadiana/banner.png",
         "slug":  "Cena de Fin de Año 2025.html",
         "url":  "posts/Cena de Fin de Año 2025.html",
-        "excerpt":  "🎆 Cena de Fin de Año · 2025\n    \n    Noche de Fin de Año en el Hotel Sercotel Guadiana\n    \n      Cena de gala, cotillón y DJ para despedir 2025 con una experiencia gastronómica yâ€¦"
+        "excerpt":  "🎆 Cena de Fin de Año · 2025\n      \n      Noche de Fin de Año en el Hotel Sercotel Guadiana\n      \n        Cena de gala, cotillón y DJ para despedir 2025 con una experiencia gastroâ€¦"
     },
     {
         "title":  "Escapada Navidad \u0026 Spa · Cumbria",

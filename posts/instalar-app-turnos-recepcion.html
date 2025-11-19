@@ -279,20 +279,24 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
 }
 
 /* ================== RESPONSIVE MÓVIL ================== */
-@media (max-width: 720px) {
+@media (max-width: 900px) {
+
   .turnos-app-install {
-    padding: 12px 8px 26px 8px;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px 6px 22px 6px;
     border-radius: 0;
     box-shadow: none;
   }
 
   .app-header {
-    padding: 12px 10px 4px 10px;
+    padding: 10px 8px 4px 8px;
   }
 
   .app-title-row {
     flex-direction: column;
     align-items: flex-start;
+    gap: 4px;
   }
 
   .app-title-row h2 {
@@ -300,18 +304,20 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   }
 
   .app-main-grid {
-    grid-template-columns: 1fr;
-    padding: 0 10px 10px 10px;
-    gap: 10px;
+    grid-template-columns: 1fr !important;
+    padding: 0 8px 8px 8px;
+    gap: 12px;
   }
 
   .app-video-card {
-    margin: 0 10px 14px 10px;
+    margin: 0 8px 12px 8px;
     padding: 10px 12px 12px 12px;
   }
 
   .app-video-wrapper {
     max-width: 100%;
+    border-radius: 10px;
+    aspect-ratio: 16/9;
     box-shadow: 0 4px 14px rgba(15,23,42,0.18);
   }
 
@@ -320,11 +326,12 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
   }
 
   .app-usage-section {
-    padding: 0 10px 6px 10px;
+    padding: 0 8px 6px 8px;
   }
 
   .app-usage-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr !important;
+    gap: 10px;
   }
 }
 </style>
@@ -341,7 +348,7 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
       <h2>📱 App de Turnos de Recepción</h2>
       <div class="app-badges">
         <span class="app-badge">🏨 Guadiana &amp; Cumbria</span>
-        <span class="app-badge">📲 Android &amp; iPhone</span>
+        <span classapp-badge">📲 Android &amp; iPhone</span>
         <span class="app-badge">✅ Instalación &amp; uso</span>
       </div>
     </div>
@@ -514,11 +521,11 @@ EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para 
       </div>
 
       <div class="app-usage-card">
-  <div class="app-usage-card-title">🛠 Si algo no cuadra</div>
-  <p>
-    Si notáis que algo falla o veis algún turno raro, avisadme sin miedo; lo reviso encantado y lo dejamos bien.
-  </p>
-</div>
+        <div class="app-usage-card-title">🛠 Si algo no cuadra</div>
+        <p>
+          Si notáis que algo falla o veis algún turno raro, avisadme sin miedo; lo reviso encantado y lo dejamos bien.
+        </p>
+      </div>
 
     </div>
   </div>
