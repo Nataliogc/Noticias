@@ -37,8 +37,17 @@
     />
 
     <div class="search-toolbar-right">
-      <button class="pill-button" type="button">Año</button>
-      <button class="pill-button" type="button">Etiqueta</button>
+      <label class="sr-only" for="filter-year">Filtrar por año</label>
+      <select id="filter-year" class="pill-select">
+        <option value="">Todos los años</option>
+      </select>
+
+      <label class="sr-only" for="filter-tag">Filtrar por etiqueta</label>
+      <select id="filter-tag" class="pill-select">
+        <option value="">Todas las etiquetas</option>
+      </select>
+
+      <span id="results-count" class="results-count" aria-live="polite"></span>
     </div>
   </section>
 
@@ -58,30 +67,46 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-  const app = document.getElementById("app");
-  const postsRaw = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
+      const app = document.getElementById("app");
+      const postsRaw = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
 
-  if (!postsRaw.length) {
-    app.innerHTML = `
-      <section class="loading-state">
-        <h2>Últimas noticias</h2>
-        <p>No hay noticias publicadas todavía.</p>
-      </section>`;
-    return;
-  }
+      if (!postsRaw.length) {
+        app.innerHTML = `
+          <section class="loading-state">
+            <h2>Últimas noticias</h2>
+            <p>No hay noticias publicadas todavía.</p>
+          </section>`;
+        return;
+      }
 
-  // Ordenar por fecha (descendente)
-  postsRaw.sort((a, b) => new Date(b.date) - new Date(a.date));
+      // Ordenar por fecha (descendente)
+      postsRaw.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-  // 👇 AQUÍ SE ELIGEN LAS DESTACADAS
-  const heroPosts  = postsRaw.slice(0, 3);  // 3 últimas noticias
-  const otherPosts = postsRaw.slice(3);     // el resto para el grid
+      // 👇 AQUÍ SE ELIGEN LAS DESTACADAS
+      const heroPosts  = postsRaw.slice(0, 3);  // 3 últimas noticias
+      const otherPosts = postsRaw.slice(3);     // el resto para el grid
 
-  app.innerHTML = renderLayout(heroPosts, otherPosts);
+      const years = Array.from(new Set(
+        postsRaw
+          .map((p) => p.date)
+          .filter(Boolean)
+          .map((iso) => new Date(iso).getFullYear())
+      ))
+        .filter((year) => !Number.isNaN(year))
+        .sort((a, b) => b - a);
 
-  setupHeroSlider();
-  setupSearch();
-});
+      const tags = Array.from(new Set(
+        postsRaw
+          .flatMap((p) => Array.isArray(p.tags) ? p.tags : [])
+          .filter(Boolean)
+      ))
+        .sort((a, b) => a.localeCompare(b, "es"));
+
+      app.innerHTML = renderLayout(heroPosts, otherPosts);
+
+      setupHeroSlider();
+      setupFilters({ years, tags });
+    });
 
 
     function renderLayout(heroPosts, otherPosts) {
@@ -154,15 +179,24 @@
       `;
 
       otherPosts.forEach((post) => {
+        const tagList = Array.isArray(post.tags) ? post.tags : [];
         const searchText = (
           (post.title || "") + " " +
           (post.excerpt || "") + " " +
-          (post.tags || "") + " " +
+          tagList.join(" ") + " " +
           (post.hotel || "")
         ).toLowerCase();
 
+        const tags = tagList.join("|");
+        const year = post.date ? new Date(post.date).getFullYear() : "";
+
         gridHtml += `
-          <article class="news-card" data-search="${escapeAttr(searchText)}">
+          <article
+            class="news-card"
+            data-search="${escapeAttr(searchText)}"
+            data-year="${escapeAttr(year)}"
+            data-tags="${escapeAttr(tags)}"
+          >
             ${
               post.image
                 ? `<a class="news-card-thumb" href="${post.url || ('posts/' + post.slug)}">
@@ -230,27 +264,75 @@
       setInterval(() => goTo(current + 1), 8000);
     }
 
-    function setupSearch() {
+    function setupFilters({ years, tags }) {
       const input = document.getElementById("search-main");
-      if (!input) return;
+      const yearSelect = document.getElementById("filter-year");
+      const tagSelect = document.getElementById("filter-tag");
+      const resultBadge = document.getElementById("results-count");
+      const cards = Array.from(document.querySelectorAll(".news-card"));
 
-      input.addEventListener("input", () => {
-        const query = input.value.trim().toLowerCase();
-        const cards = document.querySelectorAll(".news-card");
+      if (!cards.length) return;
 
-        cards.forEach(card => {
+      populateSelect(yearSelect, "Todos los años", years.map((year) => ({
+        value: String(year),
+        label: String(year),
+      })));
+
+      populateSelect(tagSelect, "Todas las etiquetas", tags.map((tag) => ({
+        value: tag,
+        label: tag,
+      })));
+
+      const applyFilters = () => {
+        const query = (input?.value || "").trim().toLowerCase();
+        const year = yearSelect?.value || "";
+        const tag = tagSelect?.value || "";
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
           const haystack = (card.getAttribute("data-search") || "").toLowerCase();
-          const visible = !query || haystack.includes(query);
+          const cardYear = card.getAttribute("data-year") || "";
+          const cardTags = (card.getAttribute("data-tags") || "")
+            .split("|")
+            .filter(Boolean);
+
+          const matchesSearch = !query || haystack.includes(query);
+          const matchesYear = !year || cardYear === year;
+          const matchesTag = !tag || cardTags.includes(tag);
+
+          const visible = matchesSearch && matchesYear && matchesTag;
           card.style.display = visible ? "" : "none";
+          if (visible) visibleCount += 1;
         });
+
+        if (resultBadge) {
+          const total = cards.length;
+          const label = visibleCount === total
+            ? `${visibleCount} noticias`
+            : `${visibleCount} resultado${visibleCount === 1 ? "" : "s"}`;
+          resultBadge.textContent = label;
+        }
+      };
+
+      [input, yearSelect, tagSelect].forEach((el) => {
+        el?.addEventListener("input", applyFilters);
+        el?.addEventListener("change", applyFilters);
       });
+
+      applyFilters();
 
       document.addEventListener("keydown", (ev) => {
         if ((ev.ctrlKey || ev.metaKey) && ev.key === "/") {
           ev.preventDefault();
-          input.focus();
+          input?.focus();
         }
       });
+    }
+
+    function populateSelect(selectEl, defaultLabel, options) {
+      if (!selectEl) return;
+      selectEl.innerHTML = `<option value="">${escapeHtml(defaultLabel)}</option>` +
+        options.map((opt) => `<option value="${escapeAttr(opt.value)}">${escapeHtml(opt.label)}</option>`).join("");
     }
 
     function formatDate(iso) {
