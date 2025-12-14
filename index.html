@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8" />
   <title>Noticias · Hoteles de Calidad en Ciudad Real</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Últimas noticias y novedades del Hotel Sercotel Guadiana y Cumbria Spa & Hotel en Ciudad Real. Eventos, promociones y actualidad." />
+  <meta name="keywords" content="Hotel Guadiana, Cumbria Spa, Ciudad Real, Noticias, Eventos, Spa" />
+  <meta name="author" content="Hoteles de Calidad en Ciudad Real" />
+
+  <!-- Typography: Outfit for Premium Modern Look -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
 
   <!-- ======= CABECERA PRINCIPAL ======= -->
@@ -29,12 +41,7 @@
 
   <!-- ======= BARRA BUSCADOR PRINCIPAL ======= -->
   <section class="search-toolbar">
-    <input
-      id="search-main"
-      class="search-main"
-      type="search"
-      placeholder="Buscar noticias, lugares o etiquetas..."
-    />
+    <input id="search-main" class="search-main" type="search" placeholder="Buscar noticias, lugares o etiquetas..." />
 
     <div class="search-toolbar-right">
       <button class="pill-button" type="button">Año</button>
@@ -55,226 +62,8 @@
 
   <!-- Datos generados por PowerShell -->
   <script src="data/posts.js"></script>
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  const app = document.getElementById("app");
-  const postsRaw = Array.isArray(window.POSTS_DATA) ? window.POSTS_DATA.slice() : [];
-
-  if (!postsRaw.length) {
-    app.innerHTML = `
-      <section class="loading-state">
-        <h2>Últimas noticias</h2>
-        <p>No hay noticias publicadas todavía.</p>
-      </section>`;
-    return;
-  }
-
-  // Ordenar por fecha (descendente)
-  postsRaw.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-  // 👇 AQUÍ SE ELIGEN LAS DESTACADAS
-  const heroPosts  = postsRaw.slice(0, 3);  // 3 últimas noticias
-  const otherPosts = postsRaw.slice(3);     // el resto para el grid
-
-  app.innerHTML = renderLayout(heroPosts, otherPosts);
-
-  setupHeroSlider();
-  setupSearch();
-});
-
-
-    function renderLayout(heroPosts, otherPosts) {
-      let heroHtml = "";
-
-      // === Carrusel de las últimas noticias ===
-      if (heroPosts.length) {
-        heroHtml += `
-          <section class="hero">
-            <div class="hero-slides">
-        `;
-
-        heroPosts.forEach((post, index) => {
-          const activeClass = index === 0 ? " hero-slide--active" : "";
-          heroHtml += `
-            <article class="hero-slide${activeClass}" data-index="${index}">
-              <div class="hero-slide-left">
-                ${
-                  post.image
-                    ? `<img src="${post.image}" alt="${escapeHtml(post.title || "")}" class="hero-image">`
-                    : `<h2 class="hero-slide-title">${escapeHtml(post.title || "")}</h2>`
-                }
-              </div>
-              <div class="hero-slide-right">
-                <p class="hero-badge">DESTACADO</p>
-                <h3 class="hero-headline">${escapeHtml(post.title || "")}</h3>
-                <p class="hero-meta">
-                  <span class="hero-date">${formatDate(post.date)}</span>
-                  ${
-                    post.hotel
-                      ? `<span class="hero-hotel">${escapeHtml(post.hotel)}</span>`
-                      : ""
-                  }
-                </p>
-                <p class="hero-excerpt">${escapeHtml(post.excerpt || "")}</p>
-                <a class="hero-button" href="${post.url || ('posts/' + post.slug)}">Leer completa ↗</a>
-
-                <button class="hero-next-btn" type="button" aria-label="Siguiente noticia">
-                  &#x25B6;
-                </button>
-              </div>
-            </article>
-          `;
-        });
-
-        heroHtml += `
-            </div>
-            <div class="hero-dots">
-        `;
-
-        heroPosts.forEach((_, index) => {
-          const activeClass = index === 0 ? " hero-dot--active" : "";
-          heroHtml += `
-            <button class="hero-dot${activeClass}" data-index="${index}"
-                    aria-label="Ver noticia ${index + 1}"></button>
-          `;
-        });
-
-        heroHtml += `
-            </div>
-          </section>
-        `;
-      }
-
-      // === Rejilla 2×N con el resto de noticias ===
-      let gridHtml = `
-        <section class="news-grid-section">
-          <h2 class="section-title">Todas las noticias</h2>
-          <div class="news-grid">
-      `;
-
-      otherPosts.forEach((post) => {
-        const searchText = (
-          (post.title || "") + " " +
-          (post.excerpt || "") + " " +
-          (post.tags || "") + " " +
-          (post.hotel || "")
-        ).toLowerCase();
-
-        gridHtml += `
-          <article class="news-card" data-search="${escapeAttr(searchText)}">
-            ${
-              post.image
-                ? `<a class="news-card-thumb" href="${post.url || ('posts/' + post.slug)}">
-
-                     <img src="${post.image}" alt="${escapeHtml(post.title || "")}">
-                   </a>`
-                : ""
-            }
-            <div class="news-card-body">
-              <header class="news-card-header">
-                <p class="news-card-date">${formatDate(post.date)}</p>
-                ${
-                  post.hotel
-                    ? `<span class="news-card-hotel">${escapeHtml(post.hotel)}</span>`
-                    : ""
-                }
-              </header>
-              <h3 class="news-card-title">
-                <a href="${post.url || ('posts/' + post.slug)}">${escapeHtml(post.title || "")}</a>
-
-              </h3>
-              <p class="news-card-excerpt">${escapeHtml(post.excerpt || "")}</p>
-              <a class="news-card-link" href="${post.url || ('posts/' + post.slug)}">Leer más</a>
-
-            </div>
-          </article>
-        `;
-      });
-
-      gridHtml += `
-          </div>
-        </section>
-      `;
-
-      return heroHtml + gridHtml;
-    }
-
-    function setupHeroSlider() {
-      const slides = Array.from(document.querySelectorAll(".hero-slide"));
-      const dots = Array.from(document.querySelectorAll(".hero-dot"));
-      const nextButtons = Array.from(document.querySelectorAll(".hero-next-btn"));
-      if (!slides.length) return;
-
-      let current = 0;
-
-      const goTo = (index) => {
-        current = (index + slides.length) % slides.length;
-        slides.forEach((s, i) => s.classList.toggle("hero-slide--active", i === current));
-        dots.forEach((d, i) => d.classList.toggle("hero-dot--active", i === current));
-      };
-
-      dots.forEach(dot => {
-        dot.addEventListener("click", () => {
-          const idx = parseInt(dot.dataset.index, 10) || 0;
-          goTo(idx);
-        });
-      });
-
-      nextButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          goTo(current + 1);
-        });
-      });
-
-      setInterval(() => goTo(current + 1), 8000);
-    }
-
-    function setupSearch() {
-      const input = document.getElementById("search-main");
-      if (!input) return;
-
-      input.addEventListener("input", () => {
-        const query = input.value.trim().toLowerCase();
-        const cards = document.querySelectorAll(".news-card");
-
-        cards.forEach(card => {
-          const haystack = (card.getAttribute("data-search") || "").toLowerCase();
-          const visible = !query || haystack.includes(query);
-          card.style.display = visible ? "" : "none";
-        });
-      });
-
-      document.addEventListener("keydown", (ev) => {
-        if ((ev.ctrlKey || ev.metaKey) && ev.key === "/") {
-          ev.preventDefault();
-          input.focus();
-        }
-      });
-    }
-
-    function formatDate(iso) {
-      if (!iso) return "";
-      const d = new Date(iso);
-      if (isNaN(d)) return iso;
-      const meses = [
-        "enero","febrero","marzo","abril","mayo","junio",
-        "julio","agosto","septiembre","octubre","noviembre","diciembre"
-      ];
-      return `${d.getDate()} de ${meses[d.getMonth()]} de ${d.getFullYear()}`;
-    }
-
-    function escapeHtml(str) {
-      return String(str)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    function escapeAttr(str) {
-      return escapeHtml(str).replace(/'/g, "&#39;");
-    }
-  </script>
+  <!-- Lógica de la aplicación -->
+  <script src="app.js"></script>
 </body>
+
 </html>

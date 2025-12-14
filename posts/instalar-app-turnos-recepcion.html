@@ -8,600 +8,219 @@ FEATURED: true
 IMAGE: img/turnos_app.png
 EXCERPT: Instala y utiliza la app de turnos de forma fácil: guía rápida para Android e iPhone.
 -->
-
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>App de Turnos de Recepción</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Global Styles -->
+  <link rel="stylesheet" href="../styles.css">
   <style>
-    /* ==========================
-       ESTILOS BÁSICOS
-       ========================== */
-    :root {
-      --bg-page: #eef2f7;
-      --bg-card: #ffffff;
-      --accent: #0f766e;
-      --accent-soft: #ecfdf5;
-      --accent-strong: #0d9488;
-      --accent-blue: #2563eb;
-      --accent-blue-soft: #eff6ff;
-      --text-main: #111827;
-      --text-muted: #4b5563;
-      --border-soft: #e5e7eb;
-      --pill-new: #f97316;
-      --pill-new-soft: #fff7ed;
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 24px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
-      background: var(--bg-page);
-      color: var(--text-main);
-      font-size: 18px; /* 🔎 Letra general algo más grande */
-    }
-
-    a {
-      color: var(--accent-blue);
-    }
-
-    .tap-link {
-      color: var(--accent-blue);
-      text-decoration: underline;
-      word-break: break-all;
-    }
-
-    .turnos-app-page {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 12px 0 24px;
-    }
-
-    .tap-container {
-      width: 100%;
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 12px;
-    }
-
-    .tap-card {
-      background: var(--bg-card);
-      border-radius: 18px;
-      box-shadow: 0 16px 40px rgba(15, 23, 42, 0.08);
-      padding: 16px;
-    }
-
-    /* ==========================
-       CABECERA
-       ========================== */
-    .tap-top-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-      font-size: 0.9rem;
-    }
-
-    .tap-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border-soft);
-      background: #f9fafb;
-      color: var(--text-muted);
-    }
-
-    .tap-pill--new {
-      background: var(--pill-new-soft);
-      border-color: #fed7aa;
-      color: var(--pill-new);
-      font-weight: 600;
-    }
-
-    .tap-pill--green {
-      background: var(--accent-soft);
-      border-color: #a7f3d0;
-      color: var(--accent-strong);
-    }
-
-    .tap-pill--blue {
-      background: var(--accent-blue-soft);
-      border-color: #bfdbfe;
-      color: var(--accent-blue);
-    }
-
-    .tap-title {
-      font-size: 1.7rem;
-      margin: 4px 0 4px;
-      line-height: 1.2;
-    }
-
-    .tap-subtitle {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    /* ==========================
-       VIDEO
-       ========================== */
-    .tap-section {
-      margin-bottom: 18px;
-    }
-
-    .tap-section-title {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin: 0 0 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tap-section-title span.emoji {
-      font-size: 1.3rem;
-    }
-
-    .tap-video-card {
-      border-radius: 14px;
-      border: 1px solid var(--border-soft);
-      background: #f9fafb;
-      padding: 11px;
-    }
-
-    .tap-video-caption {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .tap-video-frame {
-      position: relative;
-      width: 100%;
-      padding-top: 56.25%; /* 16:9 */
+    .detail-item {
+      background: #f8fafc;
       border-radius: 12px;
-      overflow: hidden;
-      background: #000;
+      padding: 20px;
+      border: 1px solid #e2e8f0;
     }
 
-    .tap-video-frame iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    /* ==========================
-       BLOQUES DE CONTENIDO
-       ========================== */
-    .tap-block {
-      border-radius: 14px;
-      border: 1px solid var(--border-soft);
-      padding: 13px;
+    .detail-icon {
+      font-size: 24px;
       margin-bottom: 12px;
-      background: #f9fafb;
-    }
-
-    .tap-block-header {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 8px;
-      font-weight: 600;
-      font-size: 1.05rem;
-    }
-
-    .tap-block-badge {
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      background: var(--accent-blue-soft);
-      color: var(--accent-blue);
-      flex-shrink: 0;
-    }
-
-    .tap-block-title {
-      font-size: 1.05rem;
-    }
-
-    .tap-block p {
-      margin: 6px 0;
-      font-size: 1.02rem;
-      color: var(--text-main);
-    }
-
-    .tap-block ul,
-    .tap-block ol {
-      margin: 6px 0 4px;
-      padding-left: 20px;
-      font-size: 1.02rem;
-      color: var(--text-main);
-    }
-
-    .tap-block li + li {
-      margin-top: 3px;
-    }
-
-    .tap-note {
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* ==========================
-       LISTAS NUMERADAS
-       ========================== */
-    .tap-steps-list {
-      list-style: none;
-      padding: 0;
-      margin: 6px 0 0;
-    }
-
-    .tap-steps-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 6px;
-      font-size: 1.02rem;
-    }
-
-    .tap-step-number {
-      width: 20px;
-      height: 20px;
-      border-radius: 999px;
-      background: var(--accent-blue-soft);
-      color: var(--accent-blue);
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    /* ==========================
-       DETALLE DE LO QUE SE VE EN LA APP
-       ========================== */
-    .tap-detail-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 11px;
-      border-radius: 12px;
-      border: 1px solid var(--border-soft);
-      background: #f9fafb;
-      font-size: 1.02rem;
-      margin-bottom: 8px;
-    }
-
-    .tap-detail-icon {
-      font-size: 1.25rem;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .tap-detail-content strong {
       display: block;
-      margin-bottom: 2px;
     }
 
-    /* ==========================
-       CARD "SI ALGO NO ENCAJA"
-       ========================== */
-    .app-usage-card {
-      margin-top: 10px;
-      padding: 12px;
-      border-radius: 14px;
-      border: 1px dashed #fecaca;
-      background: #fef2f2;
-      font-size: 1.02rem;
-    }
-
-    .app-usage-card-title {
-      font-weight: 600;
-      margin-bottom: 4px;
-      font-size: 1.08rem;
-    }
-
-    /* ==========================
-       PIE
-       ========================== */
-    .tap-footer-note {
-      margin-top: 14px;
-      font-size: 0.98rem;
-      color: var(--text-muted);
-      text-align: center;
-    }
-
-    /* ==========================
-       AJUSTES EXTRA PARA MÓVIL
-       ========================== */
-    @media (max-width: 480px) {
-      .tap-card {
-        padding: 14px;
-        border-radius: 16px;
-      }
-
-      .tap-title {
-        font-size: 1.6rem;
-      }
-
-      .tap-subtitle {
-        font-size: 1.05rem;
-      }
-
-      .tap-block,
-      .tap-detail-item,
-      .tap-video-card {
-        padding: 11px;
-      }
-
-      .tap-block p,
-      .tap-block li,
-      .tap-detail-item {
-        font-size: 1rem;
-      }
+    .detail-title {
+      font-weight: 700;
+      color: var(--c-navy-primary);
+      margin-bottom: 8px;
+      display: block;
     }
   </style>
 </head>
 
 <body>
-  <main class="turnos-app-page">
-    <div class="tap-container">
-      <article class="tap-card">
-        <!-- CABECERA -->
-        <div class="tap-top-tags">
-          <span class="tap-pill tap-pill--new">NOVEDAD</span>
-          <span class="tap-pill">Guía rápida para el equipo</span>
-          <span class="tap-pill tap-pill--green">Guadiana &amp; Cumbria</span>
-          <span class="tap-pill tap-pill--blue">Android &amp; iPhone</span>
-          <span class="tap-pill tap-pill--green">Instalación &amp; uso</span>
+  <!-- Helper Nav -->
+  <div style="max-width:800px; margin:40px auto 20px; padding:0 24px;">
+    <a href="../index.html" class="news-card-link">← Volver a Noticias</a>
+  </div>
+
+  <main class="page-main" style="margin-top:0; min-height:auto;">
+    <article class="hero" style="margin-bottom:40px; display:block; padding:40px;">
+      <header>
+        <div style="margin-bottom:16px;">
+          <span class="badge badge-gold">NOVEDAD</span>
+          <span class="badge badge-green">Guadiana &amp; Cumbria</span>
+        </div>
+        <h1 class="hero-headline" style="font-size:36px;">App de Turnos de Recepción</h1>
+        <p class="hero-excerpt">
+          Os damos la bienvenida a la nueva App de Turnos, un paso más para trabajar con más comodidad y tener siempre a
+          mano los horarios actualizados. Aquí tenéis la guía completa de instalación y uso.
+        </p>
+      </header>
+
+      <div class="article-content">
+
+        <!-- VIDEO -->
+        <div class="video-card">
+          <div class="video-card-header">
+            <span class="video-card-icon">🎬</span>
+            <h3 class="video-card-title">Vídeo corto</h3>
+          </div>
+          <div class="video-card-body">
+            <p class="video-card-description">
+              Vista general de cómo instalar la app en el móvil y cómo usarla después con vuestros turnos.
+            </p>
+            <div class="video-responsive">
+              <iframe src="https://drive.google.com/file/d/1WY4KGxWuBth8sayw_9xBKmb7Bc0rbZRk/preview"
+                allow="autoplay; fullscreen" allowfullscreen>
+              </iframe>
+            </div>
+            <!-- Fallback link -->
+            <div style="text-align:center; margin-top:16px;">
+              <a href="https://drive.google.com/file/d/1WY4KGxWuBth8sayw_9xBKmb7Bc0rbZRk/view?usp=sharing"
+                target="_blank" class="news-card-link">
+                ¿No carga el vídeo? Ver directamente en Google Drive ↗
+              </a>
+            </div>
+          </div>
         </div>
 
-        <h1 class="tap-title">App de Turnos de Recepción</h1>
-        <p class="tap-subtitle">
-          Os damos la bienvenida a la nueva App de Turnos, un paso más para
-          trabajar con más comodidad y tener siempre a mano los horarios
-          actualizados. Aquí tenéis la guía de instalación y de uso día a día.
-        </p>
+        <!-- Section: Install -->
+        <h2>📲 Instalación en Android e iPhone</h2>
 
-        <!-- SECCIÓN VIDEO -->
-        <section class="tap-section" id="video">
-          <h2 class="tap-section-title">
-            <span class="emoji">🎬</span> Vídeo corto
-          </h2>
-          <div class="tap-video-card">
-            <p class="tap-video-caption">
-              Vista general de cómo instalar la app en el móvil y cómo usarla
-              después con vuestros turnos.
-            </p>
-            <div class="tap-video-frame">
-              <!-- Sustituye el src por tu vídeo real de Drive o YouTube -->
-              <iframe
-                src="https://drive.google.com/file/d/1WY4KGxWuBth8sayw_9xBKmb7Bc0rbZRk/preview"
-                allowfullscreen
-              ></iframe>
-            </div>
-          </div>
-        </section>
+        <div class="note-box">
+          <strong>1. Acceder a la web desde tu móvil:</strong><br>
+          <a href="https://nataliogc.github.io/turnosweb/live.mobile.html" target="_blank"
+            style="color:var(--c-navy-primary); font-weight:700; word-break:break-all;">
+            https://nataliogc.github.io/turnosweb/live.mobile.html
+          </a>
+        </div>
 
-        <!-- SECCIÓN INSTALACIÓN -->
-        <section class="tap-section" id="instalacion">
-          <h2 class="tap-section-title">
-            <span class="emoji">📲</span> Instalación en Android e iPhone
-          </h2>
-
-          <!-- ANDROID -->
-          <div class="tap-block">
-            <div class="tap-block-header">
-              <div class="tap-block-badge">A</div>
-              <div class="tap-block-title">Instalar en Android (Chrome)</div>
-            </div>
-            <p>
-              1. Abre Chrome en tu móvil y entra en:
-              <br>
-              <a class="tap-link"
-                 href="https://nataliogc.github.io/turnosweb/live.mobile.html"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                https://nataliogc.github.io/turnosweb/live.mobile.html
-              </a>
-            </p>
-            <ol class="tap-steps-list">
-              <li>
-                <span class="tap-step-number">2</span>
-                <span>Pulsa el menú ⋮ (arriba a la derecha).</span>
+        <div class="detail-grid">
+          <!-- Android -->
+          <div class="detail-item">
+            <h3 style="margin-top:0; color:var(--c-navy-primary);">Android (Chrome)</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <span class="step-number">2</span>
+                <span>Pulsa el menú de opciones (tres puntos ⋮ arriba a la derecha).</span>
               </li>
-              <li>
-                <span class="tap-step-number">3</span>
-                <span>Elige <strong>"Instalar aplicación"</strong> o <strong>"Añadir a pantalla principal"</strong>.</span>
+              <li class="step-item">
+                <span class="step-number">3</span>
+                <span>Elige la opción <strong>"Instalar aplicación"</strong> o "Añadir a pantalla de inicio".</span>
               </li>
-              <li>
-                <span class="tap-step-number">4</span>
-                <span>Confirma cuando el móvil te lo pida. Se creará el icono en la pantalla.</span>
-              </li>
-            </ol>
-            <p class="tap-note">
-              A partir de ahí la app se abrirá a pantalla completa, como una app
-              normal.
-            </p>
-          </div>
-
-          <!-- IPHONE -->
-          <div class="tap-block">
-            <div class="tap-block-header">
-              <div class="tap-block-badge">B</div>
-              <div class="tap-block-title">Instalar en iPhone (Safari)</div>
-            </div>
-            <p>
-              1. Abre Safari y entra en:
-              <br>
-              <a class="tap-link"
-                 href="https://nataliogc.github.io/turnosweb/live.mobile.html"
-                 target="_blank"
-                 rel="noopener noreferrer">
-                https://nataliogc.github.io/turnosweb/live.mobile.html
-              </a>
-            </p>
-            <ol class="tap-steps-list">
-              <li>
-                <span class="tap-step-number">2</span>
-                <span>Pulsa el icono de <strong>Compartir</strong> (cuadrado con flecha).</span>
-              </li>
-              <li>
-                <span class="tap-step-number">3</span>
-                <span>Elige <strong>"Añadir a pantalla de inicio"</strong>.</span>
-              </li>
-              <li>
-                <span class="tap-step-number">4</span>
-                <span>Espera a que se cree el icono y confirma con <strong>Añadir</strong>.</span>
-              </li>
-            </ol>
-            <p class="tap-note">
-              Verás el icono <strong>Turnos Recepción</strong> en tu móvil y se
-              abrirá a pantalla completa como una app.
-            </p>
-          </div>
-        </section>
-
-        <!-- SECCIÓN USO DÍA A DÍA -->
-        <section class="tap-section" id="uso">
-          <h2 class="tap-section-title">
-            <span class="emoji">📆</span> Cómo usar la app en el día a día
-          </h2>
-
-          <div class="tap-block">
-            <div class="tap-block-header">
-              <div class="tap-block-badge">1</div>
-              <div class="tap-block-title">Semana actual al abrir</div>
-            </div>
-            <p>
-              Al abrir la app se cargará automáticamente la
-              <strong>semana en curso</strong> con tus turnos, igual que en el
-              cuadrante oficial.
-            </p>
-          </div>
-
-          <div class="tap-block">
-            <div class="tap-block-header">
-              <div class="tap-block-badge">2</div>
-              <div class="tap-block-title">Moverte entre semanas</div>
-            </div>
-            <ul>
-              <li><strong>Semana anterior:</strong> botón ◀︎ semana anterior.</li>
-              <li><strong>Semana siguiente:</strong> botón ▶︎ semana siguiente.</li>
-              <li>
-                <strong>Calendario:</strong> selecciona la fecha que quieras para
-                saltar a una semana concreta.
+              <li class="step-item">
+                <span class="step-number">4</span>
+                <span>Confirma la instalación. Aparecerá el icono en tu menú de apps.</span>
               </li>
             </ul>
           </div>
 
-          <div class="tap-block">
-            <div class="tap-block-header">
-              <div class="tap-block-badge">3</div>
-              <div class="tap-block-title">Guadiana &amp; Cumbria</div>
+          <!-- iPhone -->
+          <div class="detail-item">
+            <h3 style="margin-top:0; color:var(--c-navy-primary);">iPhone (Safari)</h3>
+            <ul class="step-list">
+              <li class="step-item">
+                <span class="step-number">2</span>
+                <span>Pulsa el icono <strong>Compartir</strong> (cuadrado con flecha hacia arriba).</span>
+              </li>
+              <li class="step-item">
+                <span class="step-number">3</span>
+                <span>Busca y selecciona <strong>"Añadir a pantalla de inicio"</strong>.</span>
+              </li>
+              <li class="step-item">
+                <span class="step-number">4</span>
+                <span>Pulsa "Añadir". Verás el icono de la App en tu pantalla principal.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section: Usage -->
+        <h2>📆 Cómo usar la app día a día</h2>
+
+        <div class="detail-grid">
+          <div class="detail-item">
+            <span class="badge badge-blue">1</span>
+            <span class="detail-title">Semana actual automática</span>
+            <p style="font-size:14px; margin:0;">Al abrir la app, siempre cargará la <strong>semana en curso</strong>
+              automáticamente, sincronizada con el cuadrante oficial.</p>
+          </div>
+
+          <div class="detail-item">
+            <span class="badge badge-blue">2</span>
+            <span class="detail-title">Navegación fácil</span>
+            <p style="font-size:14px; margin:0;">Usa los botones grandes ◀︎ y ▶︎ para moverte a la semana anterior o
+              siguiente.</p>
+          </div>
+
+          <div class="detail-item">
+            <span class="badge badge-blue">3</span>
+            <span class="detail-title">Dos Hoteles</span>
+            <p style="font-size:14px; margin:0;">Guadiana y Cumbria aparecen diferenciados, manteniendo el <strong>mismo
+                orden de compañeros</strong> que en el papel.</p>
+          </div>
+        </div>
+
+        <!-- Section: Details -->
+        <h2>🧭 Detalle de lo que ves</h2>
+
+        <ul class="step-list">
+          <li class="step-item">
+            <span class="step-number" style="background:#e0f2fe; color:#0284c7;">📅</span>
+            <div>
+              <strong>Fechas Claras:</strong> En la cabecera verás siempre el rango de fechas (Lunes - Domingo) de la
+              semana que estás consultando.
             </div>
-            <p>
-              Los turnos de <strong>Sercotel Guadiana</strong> y
-              <strong>Cumbria Spa&amp;Hotel</strong> aparecen en bloques separados,
-              manteniendo el mismo <strong>orden de empleados</strong> que en la
-              versión de escritorio.
-            </p>
-          </div>
-        </section>
-
-        <!-- SECCIÓN DETALLE -->
-        <section class="tap-section" id="detalle">
-          <h2 class="tap-section-title">
-            <span class="emoji">🧭</span> Detalle de lo que ves en la app
-          </h2>
-
-          <div class="tap-detail-item">
-            <div class="tap-detail-icon">📅</div>
-            <div class="tap-detail-content">
-              <strong>Semana y fechas</strong>
-              En la cabecera se muestra el rango de la semana (de lunes a domingo)
-              y la fecha seleccionada. Siempre coincide con el cuadrante generado.
+          </li>
+          <li class="step-item">
+            <span class="step-number" style="background:#e0f2fe; color:#0284c7;">🔁</span>
+            <div>
+              <strong>Sustituciones y Cambios:</strong>
+              <br>Las bajas aparecen indicadas. Los cambios de turno se marcan con el icono 🔄. Si hay una sustitución,
+              verás (Titular ↔ Sustituto).
             </div>
-          </div>
-
-          <div class="tap-detail-item">
-            <div class="tap-detail-icon">📋</div>
-            <div class="tap-detail-content">
-              <strong>Mismo orden que el cuadrante</strong>
-              El orden de personas es exactamente el mismo que en la versión web,
-              en Guadiana y en Cumbria, para que lo reconozcas de un vistazo.
+          </li>
+          <li class="step-item">
+            <span class="step-number" style="background:#e0f2fe; color:#0284c7;">🎨</span>
+            <div>
+              <strong>Código de Colores:</strong>
+              <br>☀️ <strong>Mañana:</strong> Claro con texto oscuro.
+              <br>🌤 <strong>Tarde:</strong> Tono medio azulado.
+              <br>🌙 <strong>Noche:</strong> Oscuro con luna.
+              <br>🔴 <strong>Descanso:</strong> Rojo/Salmón para destacar rápido.
             </div>
-          </div>
+          </li>
+        </ul>
 
-          <div class="tap-detail-item">
-            <div class="tap-detail-icon">🔁</div>
-            <div class="tap-detail-content">
-              <strong>Sustituciones y bajas</strong>
-              Las <strong>bajas</strong> aparecen con el texto del tipo de ausencia.
-              Las <strong>sustituciones</strong> se marcan con ↔ entre titular y
-              sustituto. Los <strong>cambios de turno</strong> se muestran con el
-              icono 🔄.
-            </div>
-          </div>
+        <div class="note-box" style="background:#fef2f2; border-color:#ef4444;">
+          <h3 style="margin-top:0; color:#b91c1c; font-size:18px;">🛠 ¿Algo no encaja?</h3>
+          <p style="margin-bottom:0;">
+            Si ves algún turno que no te cuadra o algún error respecto al cuadrante oficial, avísanos para corregirlo de
+            inmediato.
+          </p>
+        </div>
 
-          <div class="tap-detail-item">
-            <div class="tap-detail-icon">🎨</div>
-            <div class="tap-detail-content">
-              <strong>Colores de turnos</strong>
-              <ul>
-                <li><strong>Mañana:</strong> cápsula clara.</li>
-                <li><strong>Tarde:</strong> cápsula algo más oscura.</li>
-                <li><strong>Noche:</strong> fondo gris con icono 🌙.</li>
-                <li><strong>Descanso:</strong> fondo rojo para que destaque.</li>
-              </ul>
-            </div>
-          </div>
+      </div>
+    </article>
 
-          <div class="tap-detail-item">
-            <div class="tap-detail-icon">🔄</div>
-            <div class="tap-detail-content">
-              <strong>Actualizaciones automáticas</strong>
-              Cada vez que se genera un nuevo cuadrante, la app usará los datos
-              actualizados al volver a abrirla o al refrescar la página.
-            </div>
-          </div>
-
-          <div class="app-usage-card">
-            <div class="app-usage-card-title">🛠 Si algo no encaja</div>
-            <p>
-              Si ves algún turno raro, notas algo diferente al cuadrante
-              o simplemente hay algo que no te cuadra, avísame sin problema.
-              Lo reviso contigo y lo dejamos perfecto.
-            </p>
-          </div>
-        </section>
-
-        <!-- PIE -->
-        <p class="tap-footer-note">
-          App interna de turnos · Uso exclusivo del equipo de recepción de
-          Sercotel Guadiana y Cumbria Spa&amp;Hotel.
-        </p>
-      </article>
-    </div>
+    <footer class="page-footer" style="margin-top:0;">
+      App interna de turnos · Uso exclusivo del equipo de recepción.
+    </footer>
   </main>
 </body>
-</html>
 
+</html>

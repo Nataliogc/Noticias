@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Noticias</title>
+    <style>
+        :root {
+            --c-navy: #0f172a;
+            --c-gold: #bfa15f;
+        }
+
+        body {
+            font-family: system-ui, sans-serif;
+            background: #f1f5f9;
+            padding: 40px;
+            color: #334155;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: var(--c-navy);
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-family: inherit;
+        }
+
+        textarea {
+            height: 120px;
+        }
+
+        .btn {
+            background: var(--c-navy);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #020617;
+        }
+
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .output-section {
+            margin-top: 40px;
+            border-top: 2px solid #f1f5f9;
+            padding-top: 40px;
+            display: none;
+        }
+
+        .output-section.active {
+            display: block;
+        }
+
+        .copy-btn {
+            background: var(--c-gold);
+            margin-top: 10px;
+            font-size: 14px;
+            padding: 8px 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Generador de Noticias</h1>
+        <p>Rellena los datos para generar el código de una nueva noticia.</p>
+
+        <form id="newsForm">
+            <div class="form-group">
+                <label>Título</label>
+                <input type="text" id="title" required placeholder="Ej: Cena de Navidad 2025">
+            </div>
+
+            <div class="form-group grid-2">
+                <div>
+                    <label>Fecha</label>
+                    <input type="date" id="date" required>
+                </div>
+                <div>
+                    <label>Hotel</label>
+                    <select id="hotel">
+                        <option value="Guadiana">Guadiana</option>
+                        <option value="Cumbria">Cumbria</option>
+                        <option value="Guadiana & Cumbria">Ambos</option>
+                        <option value="">Ninguno / General</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Imagen (Ruta relativa, e.g., img/news/foto.jpg)</label>
+                <input type="text" id="image" placeholder="img/placeholder.jpg">
+            </div>
+
+            <div class="form-group">
+                <label>Etiquetas (Separadas por coma)</label>
+                <input type="text" id="tags" placeholder="Ej: Eventos, Navidad, Spa">
+            </div>
+
+            <div class="form-group">
+                <label>Resumen (Excerpt)</label>
+                <textarea id="excerpt" placeholder="Breve descripción para la tarjeta..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Video Embed (Opcional - HTML iframe)</label>
+                <input type="text" id="video" placeholder='<iframe src="..."></iframe>'>
+            </div>
+
+            <button type="button" class="btn" onclick="generate()">Generar Código</button>
+        </form>
+
+        <div id="output" class="output-section">
+            <h3>1. Copia esto en <code>data/posts.js</code> (al principio del array):</h3>
+            <pre id="jsonOutput"></pre>
+            <button class="btn copy-btn" onclick="copyToClipboard('jsonOutput')">Copiar JSON</button>
+
+            <h3 style="margin-top:40px;">2. (Opcional) Crea un archivo en <code>posts/</code> si necesitas contenido
+                largo:</h3>
+            <p>Nombre sugerido: <strong id="filenameOutput"></strong></p>
+            <pre id="htmlOutput"></pre>
+            <button class="btn copy-btn" onclick="copyToClipboard('htmlOutput')">Copiar HTML</button>
+        </div>
+    </div>
+
+    <script>
+        function generate() {
+            const title = document.getElementById('title').value;
+            const date = document.getElementById('date').value || new Date().toISOString().split('T')[0];
+            const hotel = document.getElementById('hotel').value;
+            const image = document.getElementById('image').value;
+            const tags = document.getElementById('tags').value.split(',').map(t => t.trim()).filter(Boolean);
+            const excerpt = document.getElementById('excerpt').value;
+            const video = document.getElementById('video').value;
+
+            // Slug generation
+            const slug = title.toLowerCase()
+                .replace(/[áäàâ]/g, 'a')
+                .replace(/[éëèê]/g, 'e')
+                .replace(/[íïìî]/g, 'i')
+                .replace(/[óöòô]/g, 'o')
+                .replace(/[úüùû]/g, 'u')
+                .replace(/ñ/g, 'n')
+                .replace(/[^a-z0-9 -]/g, '')
+                .replace(/\s+/g, '-') + '.html';
+
+            // JSON Object
+            const postObj = {
+                title,
+                date,
+                hotel: hotel || null,
+                categories: {}, // Legacy
+                tags,
+                featured: false,
+                image: image || null,
+                slug,
+                url: 'posts/' + slug,
+                excerpt
+            };
+
+            // HTML Template
+            const htmlTemplate = `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <title>${title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body style="background: white; color: #334155; padding: 40px; max-width: 800px; margin: 0 auto;">
+    <a href="../index.html" style="display:inline-block; margin-bottom:20px; color:#bfa15f; text-decoration:none;">← Volver a Noticias</a>
+    
+    <article>
+        <header style="margin-bottom: 40px;">
+            <p style="color:#64748b; font-size:14px;">${date} · ${hotel || 'General'}</p>
+            <h1 style="color:#0f172a; font-size: 32px; margin: 10px 0;">${title}</h1>
+            ${tags.map(t => `<span style="background:#f1f5f9; padding:4px 8px; border-radius:4px; font-size:12px; margin-right:8px;">${t}</span>`).join('')}
+        </header>
+
+        ${image ? `<img src="../${image}" alt="${title}" style="width:100%; border-radius:16px; margin-bottom:40px;">` : ''}
+
+        <div class="content" style="line-height: 1.8; font-size: 18px;">
+            <p>${excerpt}</p>
+            
+            ${video ? `
+            <!-- Video Card -->
+            <div class="video-card">
+                <div class="video-card-header">
+                    <span class="video-card-icon">🎬</span>
+                    <h3 class="video-card-title">Vídeo relacionado</h3>
+                </div>
+                <div class="video-card-body">
+                    <div class="video-responsive">
+                       ${video}
+                    </div>
+                </div>
+            </div>
+            ` : ''}
+
+            <p>Aquí puedes escribir el resto del contenido de la noticia...</p>
+        </div>
+    </article>
+</body>
+</html>`;
+
+            document.getElementById('jsonOutput').textContent = JSON.stringify(postObj, null, 4) + ',';
+            document.getElementById('htmlOutput').textContent = htmlTemplate;
+            document.getElementById('filenameOutput').textContent = slug;
+            document.getElementById('output').classList.add('active');
+        }
+
+        function copyToClipboard(id) {
+            const range = document.createRange();
+            range.selectNode(document.getElementById(id));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            alert('Copiado al portapapeles');
+        }
+    </script>
+</body>
+
+</html>
